@@ -20,24 +20,24 @@ const imgAlt = `${project.title}${projectImageAltSuffix}`;
 >
 	<div class="case__main">
 		<header class="case__top">
-			<div class="case__title-row">
-				<h3 class="case__title">
+			<h3 class="case__title">
+				<span class="case__title-start">
 					<a class="case__title-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
 						{project.title}
 					</a>
-					<span class="case__title-sep" aria-hidden="true"> | </span>
-					<span class="case__tech">{project.tech}</span>
-				</h3>
-				<a
-					class="case__github-btn"
-					href={project.repoUrl}
-					target="_blank"
-					rel="noopener noreferrer"
-					aria-label={githubCta}
-				>
-					<GitHubIcon class="case__github-icon" />
-				</a>
-			</div>
+					<a
+						class="case__github-btn"
+						href={project.repoUrl}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label={githubCta}
+					>
+						<GitHubIcon class="case__github-icon" />
+					</a>
+				</span>
+				<span class="case__title-sep" aria-hidden="true"> | </span>
+				<span class="case__tech">{project.tech}</span>
+			</h3>
 		</header>
 		<p class="case__why">{project.why}</p>
 		<ul class="case__how">
