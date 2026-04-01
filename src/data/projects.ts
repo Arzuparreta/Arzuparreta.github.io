@@ -22,7 +22,8 @@ export type PrimaryProject = {
 	why: string;
 	/** One or two concrete technical or operational details. */
 	how: [string] | [string, string];
-	repoUrl: string;
+	/** Public repo URL; omit when the entry is not tied to a GitHub project (no title link or repo button). */
+	repoUrl?: string;
 	tier: 'primary';
 	/** Optional screenshot path under site root. */
 	imageSrc?: string;
@@ -54,7 +55,6 @@ const projectsEn: Project[] = [
 			'No public SSH: Tailscale is the only path in, which keeps the attack surface small.',
 		],
 		tier: 'primary',
-		repoUrl: 'https://github.com/Arzuparreta',
 	},
 	{
 		slug: 'soundsible',
@@ -128,7 +128,6 @@ const projectsEs: Project[] = [
 			'Configuración de filtrado DNS a nivel de red (Pi-hole) y optimización de hardware para cargas de trabajo sostenidas.',
 		],
 		tier: 'primary',
-		repoUrl: 'https://github.com/Arzuparreta',
 	},
 	{
 		slug: 'soundsible',

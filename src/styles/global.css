@@ -561,6 +561,11 @@ a.case__github-btn:focus-visible {
 	display: block;
 }
 
+.case__title-text {
+	color: var(--text-muted);
+	font-weight: 600;
+}
+
 .case__title-link {
 	color: var(--text-muted);
 	text-decoration: none;

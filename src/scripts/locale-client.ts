@@ -91,6 +91,7 @@ function applyPrimaryCase(
 	projectImageAltSuffix: string,
 ): void {
 	const titleLink = article.querySelector<HTMLAnchorElement>('.case__title-link');
+	const titleText = article.querySelector('.case__title-text');
 	const tech = article.querySelector('.case__tech');
 	const why = article.querySelector('.case__why');
 	const how = article.querySelector('.case__how');
@@ -98,7 +99,11 @@ function applyPrimaryCase(
 	const demoLink = article.querySelector<HTMLAnchorElement>('.case__cta-demo');
 	const img = article.querySelector<HTMLImageElement>('.case__img');
 
-	if (titleLink) titleLink.textContent = project.title;
+	if (titleLink && project.repoUrl) {
+		titleLink.textContent = project.title;
+		titleLink.href = project.repoUrl;
+	}
+	if (titleText) titleText.textContent = project.title;
 	if (tech) tech.textContent = project.tech;
 	if (why) why.textContent = project.why;
 	if (how) {
@@ -110,11 +115,10 @@ function applyPrimaryCase(
 			}),
 		);
 	}
-	if (githubLink) {
+	if (githubLink && project.repoUrl) {
 		githubLink.setAttribute('aria-label', githubCta);
 		githubLink.href = project.repoUrl;
 	}
-	if (titleLink) titleLink.href = project.repoUrl;
 
 	if (demoLink) {
 		if (project.demoUrl) {

@@ -11,6 +11,7 @@ interface Props {
 
 const { project, githubCta, demoYoutubeCta, projectImageAltSuffix } = Astro.props;
 const imgAlt = `${project.title}${projectImageAltSuffix}`;
+const repoUrl = project.repoUrl;
 ---
 
 <article
@@ -22,18 +23,26 @@ const imgAlt = `${project.title}${projectImageAltSuffix}`;
 		<header class="case__top">
 			<h3 class="case__title">
 				<span class="case__title-start">
-					<a class="case__title-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-						{project.title}
-					</a>
-					<a
-						class="case__github-btn"
-						href={project.repoUrl}
-						target="_blank"
-						rel="noopener noreferrer"
-						aria-label={githubCta}
-					>
-						<GitHubIcon class="case__github-icon" />
-					</a>
+					{
+						repoUrl ? (
+							<>
+								<a class="case__title-link" href={repoUrl} target="_blank" rel="noopener noreferrer">
+									{project.title}
+								</a>
+								<a
+									class="case__github-btn"
+									href={repoUrl}
+									target="_blank"
+									rel="noopener noreferrer"
+									aria-label={githubCta}
+								>
+									<GitHubIcon class="case__github-icon" />
+								</a>
+							</>
+						) : (
+							<span class="case__title-text">{project.title}</span>
+						)
+					}
 				</span>
 				<span class="case__title-sep" aria-hidden="true"> | </span>
 				<span class="case__tech">{project.tech}</span>
