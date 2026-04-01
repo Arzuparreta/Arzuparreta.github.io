@@ -14,16 +14,16 @@ Self-taught systems enthusiast with a decade of hardware tinkering and two years
 ## Projects
 
 **Remote administration & homelab | Debian, Tailscale, Pi-hole, SSH, Mosh**  
-Headless home server in Seville with remote ops via Tailscale and Mosh, Pi-hole on the mesh, and no public SSH.
+Headless home server in Seville for daily ops: Tailscale and Mosh in, Pi-hole on the mesh, no SSH exposed to the internet.
 
 **soundsible | JavaScript, Node, SQLite, Docker, Python**  
-Self-hosted music library and streaming on a Linux host; SQLite catalog, split services, documented in the repo.
+Self-hosted music environment with a streaming-style web app: Python launcher, Station UI, SQLite catalog, synced playback—daily-use home stack; Tailscale for remote access.
 
 **synesthetic-visualizer | Rust, real-time audio, GPU-oriented graphics**  
-Live audio mapped to a 3D Tonnetz in Rust for low-latency capture and render.
+Desktop app that visualizes harmony in 3D on a Tonnetz-style spiral—not a generic spectrum bar; Rust for low-latency audio capture and GPU render.
 
 **docker-reader | Docker, Docker Compose, JavaScript**  
-Ebook reader packaged with Docker and Compose for repeatable deploys and volume layout.
+Dockerized PDF library: upload, read in the browser, resume on any device; multi-user with per-account progress; Compose and config for repeatable deploys.
 
 **brain | Python**  
 Minimal CLI to manage Markdown notes in one folder from the terminal—add, edit, list; pure Python, no extra packages.

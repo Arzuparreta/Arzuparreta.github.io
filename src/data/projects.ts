@@ -49,10 +49,10 @@ const projectsEn: Project[] = [
 		title: 'Remote administration & homelab',
 		tech: 'Debian, Tailscale, Pi-hole, SSH, Mosh',
 		why:
-			'A headless home server in Seville is my day-to-day ops base: I need reliable remote access, sane DNS, and ad blocking across the network without opening SSH to the whole internet.',
+			'A headless home server in Seville I use every day for reliable remote access, DNS filtering, and network-wide ad blocking—without exposing SSH to the public internet.',
 		how: [
-			'I administer it from a ThinkPad over Tailscale with Mosh for resilient sessions; Pi-hole sits on the mesh for network-wide filtering.',
-			'No public SSH: Tailscale is the only path in, which keeps the attack surface small.',
+			'I reach it from a ThinkPad over Tailscale with Mosh for resilient sessions; Pi-hole runs on the mesh for whole-network filtering.',
+			'Tailscale is the only way in—no open SSH port on the router.',
 		],
 		tier: 'primary',
 	},
@@ -61,10 +61,10 @@ const projectsEn: Project[] = [
 		title: 'soundsible',
 		tech: 'JavaScript, Node, SQLite, Docker, Python',
 		why:
-			'Self-hosted music library and streaming so my collection lives on hardware I control, with a web client and indexing that stay in sync.',
+			'Self-hosted music environment aimed at a full streaming-style experience: search and manage your library, play from any device, and keep queues and settings in sync—your files, your infrastructure.',
 		how: [
-			'SQLite holds the catalog on a headless Linux host; services split between indexing, streaming, and the web UI, all documented in the repo.',
-			'It runs as daily-use infrastructure with stable uptime on that box.',
+			'Python launcher and browser-based Station on a headless Linux host; SQLite backs the catalog and metadata.',
+			'I run it as everyday home infrastructure; remote access works cleanly over Tailscale when I need it off-LAN.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
@@ -75,9 +75,9 @@ const projectsEn: Project[] = [
 		title: 'synesthetic-visualizer',
 		tech: 'Rust, real-time audio, GPU-oriented graphics',
 		why:
-			'A desktop app that maps live audio into a 3D Tonnetz so harmonic relationships are visible in real time—useful for ear training and experimentation.',
+			'Desktop visualizer that shows harmony and musical form in 3D—consonance and movement read as geometry on a Tonnetz-style spiral, not a plain volume or spectrum bar.',
 		how: [
-			'Rust owns the low-latency capture and render path so the picture stays locked to the signal.',
+			'Rust handles capture and GPU rendering end to end so the image stays tight to the audio with minimal delay.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
@@ -88,9 +88,9 @@ const projectsEn: Project[] = [
 		title: 'docker-reader',
 		tech: 'Docker, Docker Compose, JavaScript',
 		why:
-			'A personal ebook reader I can run anywhere Docker runs, with the same layout of volumes and config on every machine.',
+			'PDF library in Docker: upload books, read in the browser, and resume on any device—multi-user so each account keeps its own progress.',
 		how: [
-			'Dockerfile and Compose pin how the app starts, mounts data, and picks up settings—no one-off server setup.',
+			'Docker Compose plus a small config file set users, port, and volumes—the same deploy on every host.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
@@ -122,10 +122,10 @@ const projectsEs: Project[] = [
 		title: 'Administración remota y homelab',
 		tech: 'Debian, Tailscale, Pi-hole, SSH, Mosh',
 		why:
-			'Servidor Linux en remoto que actúa como infraestructura principal para mis despliegues y servicios de uso diario.',
+			'Servidor casero sin monitor en Sevilla que uso a diario: acceso remoto fiable, filtrado DNS y bloqueo de anuncios en toda la red, sin abrir SSH a internet.',
 		how: [
-			'Administrado íntegramente desde un ThinkPad mediante Mosh a través de una red Tailscale (Zero-Trust), sin exponer puertos SSH a internet.',
-			'Configuración de filtrado DNS a nivel de red (Pi-hole) y optimización de hardware para cargas de trabajo sostenidas.',
+			'Acceso desde un ThinkPad por Tailscale y Mosh; Pi-hole en la malla para filtrar a nivel de red.',
+			'Solo entro por Tailscale—no hay SSH expuesto al router.',
 		],
 		tier: 'primary',
 	},
@@ -133,10 +133,11 @@ const projectsEs: Project[] = [
 		slug: 'soundsible',
 		title: 'Soundsible',
 		tech: 'JavaScript, Node, SQLite, Docker, Python',
-		why: 'Plataforma musical autoalojada para streaming y gestión de biblioteca propia.',
+		why:
+			'Entorno musical autoalojado pensado como un servicio de streaming completo: buscar y gestionar tu biblioteca, escuchar desde cualquier dispositivo y mantener cola y ajustes sincronizados—tus archivos, tu servidor.',
 		how: [
-			'Despliegue mediante contenedores en servidor Linux, utilizando SQLite para el almacenamiento persistente del catálogo.',
-			'Arquitectura dividida en microservicios (indexación, streaming, cliente web) orientada a mantener una alta disponibilidad (99% uptime).',
+			'Lanzador en Python e interfaz web “Station” en un Linux sin monitor; SQLite guarda catálogo y metadatos.',
+			'Lo uso como infraestructura diaria en casa; con Tailscale el acceso remoto fuera de la LAN es directo.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
@@ -147,9 +148,9 @@ const projectsEs: Project[] = [
 		title: 'Synesthetic-visualizer',
 		tech: 'Rust, Audio en tiempo real, Renderizado GPU',
 		why:
-			'Aplicación de escritorio nativa que mapea audio en vivo a un espacio 3D (Tonnetz) para visualizar relaciones armónicas.',
+			'Visualizador de escritorio que muestra armonía y forma musical en 3D: la consonancia y el movimiento se leen como geometría en una espiral tipo Tonnetz, no como una barra de volumen o un espectro genérico.',
 		how: [
-			'Desarrollo en Rust para garantizar baja latencia en el procesamiento de audio y renderizado gráfico simultáneo.',
+			'Rust de punta a punta en captura y renderizado GPU para que la imagen vaya al ritmo del audio con poco retraso.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
@@ -159,9 +160,10 @@ const projectsEs: Project[] = [
 		slug: 'docker-reader',
 		title: 'Docker-reader',
 		tech: 'Docker, Docker Compose, JavaScript',
-		why: 'Lector de libros electrónicos empaquetado y distribuido mediante Docker.',
+		why:
+			'Biblioteca de PDFs en Docker: subes libros, lees en el navegador y retomas en cualquier dispositivo; varios usuarios, cada uno con su progreso.',
 		how: [
-			'Entorno de despliegue estandarizado con configuración explícita de volúmenes, garantizando una ejecución idéntica en cualquier máquina anfitriona.',
+			'Docker Compose y un `config.json` pequeño definen usuarios, puerto y volúmenes—el mismo despliegue en cualquier máquina.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
