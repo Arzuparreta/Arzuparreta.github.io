@@ -52,6 +52,7 @@ const localeBundleJson = JSON.stringify({
 	lang={locale}
 	skipToContent={t.a11y.skipToContent}
 	alternates={alternates}
+	localeBundleJson={localeBundleJson}
 >
 	<div class="page">
 		<aside class="site-sidebar" aria-label={t.a11y.siteAside}>
@@ -179,15 +180,4 @@ const localeBundleJson = JSON.stringify({
 			</div>
 		</main>
 	</div>
-	<script type="application/json" id="locale-bundle" set:html={localeBundleJson} />
-	<script type="module">
-		import { initLocaleClient } from '../scripts/locale-client.ts';
-		import { initInPageNav } from '../scripts/in-page-nav.ts';
-
-		const el = document.getElementById('locale-bundle');
-		if (el?.textContent) {
-			initLocaleClient(JSON.parse(el.textContent));
-		}
-		initInPageNav();
-	</script>
 </BaseLayout>

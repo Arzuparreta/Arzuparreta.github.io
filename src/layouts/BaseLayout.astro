@@ -14,6 +14,8 @@ interface Props {
 	skipToContent: string;
 	/** Optional `hreflang` alternates (e.g. en/es + x-default). */
 	alternates?: HreflangAlternate[];
+	/** Serialized locale bundle for client-side switching (scripts must live in this layout file to be bundled). */
+	localeBundleJson?: string;
 }
 
 const {
@@ -23,6 +25,7 @@ const {
 	lang = 'en',
 	skipToContent,
 	alternates,
+	localeBundleJson,
 } = Astro.props;
 const canonical = new URL(canonicalPath, site.url).href;
 const ogLocale = lang === 'es' ? 'es_ES' : 'en_GB';
@@ -63,5 +66,16 @@ const ogLocale = lang === 'es' ? 'es_ES' : 'en_GB';
 	<body>
 		<a class="skip" href="#main" data-i18n="a11y.skipToContent">{skipToContent}</a>
 		<slot />
+		{
+			localeBundleJson ? (
+				<>
+					<script type="application/json" id="locale-bundle" set:html={localeBundleJson} />
+					<script>
+						import { initHomePageLocaleAndNav } from '../scripts/page-init.ts';
+						initHomePageLocaleAndNav();
+					</script>
+				</>
+			) : null
+		}
 	</body>
 </html>
