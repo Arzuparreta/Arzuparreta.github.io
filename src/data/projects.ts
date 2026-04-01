@@ -108,9 +108,9 @@ const projectsEs: Project[] = [
 		title: 'Administración remota y homelab',
 		tech: 'Debian, Tailscale, Pi-hole, SSH, Mosh',
 		why:
-			'Un servidor casero sin interfaz gráfica en Sevilla es mi base operativa: necesito acceso remoto fiable, DNS razonable y bloqueo de anuncios en toda la red sin exponer SSH a internet.',
+			'En casa tengo un servidor en Sevilla (solo consola, sin interfaz gráfica) que es mi base del día a día: necesito acceso remoto fiable, DNS estable y bloqueo de anuncios en toda la red sin exponer SSH a internet.',
 		how: [
-			'Lo administro desde un ThinkPad por Tailscale con Mosh para sesiones resilientes; Pi-hole en la malla para filtrado en toda la red.',
+			'Lo administro desde un ThinkPad por Tailscale con Mosh para sesiones que aguanten cortes; Pi-hole en la malla para filtrado en toda la red.',
 			'Sin SSH público: Tailscale es la única entrada, lo que mantiene la superficie de ataque pequeña.',
 		],
 		tier: 'primary',
@@ -121,10 +121,10 @@ const projectsEs: Project[] = [
 		title: 'soundsible',
 		tech: 'JavaScript, Node, SQLite, Docker, Python',
 		why:
-			'Biblioteca musical autoalojada y streaming para que mi colección viva en hardware que controlo, con cliente web e indexación sincronizados.',
+			'Biblioteca musical en servidor propio y streaming para tener la colección en hardware que controlo, con cliente web e indexación al día.',
 		how: [
-			'SQLite guarda el catálogo en un host Linux sin cabeza; servicios separados para indexación, streaming e interfaz web, todo documentado en el repositorio.',
-			'Funciona como infraestructura de uso diario con buen tiempo activo en esa máquina.',
+			'SQLite guarda el catálogo en un equipo Linux que solo administro por consola; servicios separados para indexación, streaming e interfaz web, todo documentado en el repositorio.',
+			'Es infraestructura de cada día; en ese equipo el servicio va con buen tiempo de actividad.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
@@ -134,9 +134,9 @@ const projectsEs: Project[] = [
 		title: 'synesthetic-visualizer',
 		tech: 'Rust, audio en tiempo real, gráficos orientados a GPU',
 		why:
-			'Una aplicación de escritorio que mapea audio en vivo a un Tonnetz 3D para que las relaciones armónicas se vean en tiempo real: útil para entrenamiento auditivo y experimentación.',
+			'Una aplicación de escritorio que convierte audio en vivo en un Tonnetz 3D para ver las relaciones armónicas al momento: útil para entrenamiento auditivo y experimentación.',
 		how: [
-			'Rust controla la captura y el renderizado de baja latencia para que la imagen vaya al unísono con la señal.',
+			'Rust se encarga de la captura y el renderizado con baja latencia para que la imagen vaya sincronizada con la señal.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
@@ -146,9 +146,9 @@ const projectsEs: Project[] = [
 		title: 'docker-reader',
 		tech: 'Docker, Docker Compose, JavaScript',
 		why:
-			'Un lector de libros electrónicos personal que puedo ejecutar donde haya Docker, con el mismo esquema de volúmenes y configuración en cada máquina.',
+			'Un lector de libros electrónicos que puedo levantar donde haya Docker, con el mismo esquema de volúmenes y configuración en cada máquina.',
 		how: [
-			'Dockerfile y Compose fijan cómo arranca la aplicación, monta datos y lee ajustes, sin instalaciones ad hoc en servidores.',
+			'Dockerfile y Compose dejan fijado cómo arranca la aplicación, monta datos y carga ajustes, sin montar el servidor a mano en cada sitio.',
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
@@ -158,7 +158,7 @@ const projectsEs: Project[] = [
 		title: 'brain',
 		tech: 'Python',
 		summary:
-			'Monorepo público de CLIs y experimentos en Python: el historial de commits cuenta cómo convertir pruebas en herramientas reutilizables.',
+			'Monorepo público de CLIs y experimentos en Python: el historial de commits cuenta cómo convertir experimentos sueltos en herramientas reutilizables.',
 		repoUrl: 'https://github.com/Arzuparreta/brain',
 		tier: 'secondary',
 	},
@@ -167,7 +167,7 @@ const projectsEs: Project[] = [
 		title: 'remove-multi-titles-yt',
 		tech: 'JavaScript, WebExtensions',
 		summary:
-			'Extensión para Chrome/Firefox que elimina basura duplicada en títulos de YouTube: un arreglo DOM acotado, sin servicios adicionales.',
+			'Extensión para Chrome/Firefox que quita repeticiones y ruido en títulos de YouTube: un cambio muy acotado en el DOM, sin servicios de terceros.',
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
 		tier: 'secondary',
 	},

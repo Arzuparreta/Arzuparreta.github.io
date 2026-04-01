@@ -4,7 +4,7 @@ export const es: Messages = {
 	meta: {
 		title: 'Rubén Peña Rubio — Administrador de sistemas Linux junior · DevOps',
 		description:
-			'Linux e infraestructura autodidacta en Sevilla: homelab, Docker, automatización con Python, Debian. Músico clásico en transición a administración de sistemas / operaciones.',
+			'Linux e infraestructura autodidacta en Sevilla: homelab, Docker, automatización con Python, Debian. Trayectoria en interpretación musical clásica; foco actual en administración de sistemas y operaciones.',
 	},
 	a11y: {
 		skipToContent: 'Saltar al contenido',
@@ -46,7 +46,7 @@ export const es: Messages = {
 		},
 	},
 	profileLead:
-		'Autodidacta en sistemas: una década trasteando hardware y dos años muy enfocados en Linux, Docker y automatización con Python. Monto y mantengo un homelab fiable y servicios en contenedores. Paso de la interpretación musical clásica a operaciones TI.',
+		'Autodidacta en sistemas: una década trasteando hardware y dos años muy enfocados en Linux, Docker y automatización con Python. Monto y mantengo un homelab fiable y servicios en contenedores. En transición desde la interpretación musical clásica hacia operaciones TI.',
 	technicalSkills: [
 		'Sistemas operativos: UNIX/Linux (Arch, Debian, Ubuntu)',
 		'Infraestructura: Docker, Docker Compose, Portainer',
