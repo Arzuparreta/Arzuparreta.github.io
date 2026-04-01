@@ -495,7 +495,7 @@ h3 {
 	line-height: 1.55;
 }
 
-/* Résumé / download block */
+/* CV / download block */
 .cv-summary {
 	font-size: var(--text-base);
 	color: var(--text-muted);
