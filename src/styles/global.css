@@ -299,18 +299,14 @@ h3 {
 	color: var(--text-muted);
 	cursor: pointer;
 	font: inherit;
+	-webkit-tap-highlight-color: transparent;
 }
 
-.theme-toggle:hover,
-.lang-toggle:hover {
-	color: var(--accent);
-	border-color: var(--accent);
-}
-
+.theme-toggle:focus,
 .theme-toggle:focus-visible,
+.lang-toggle:focus,
 .lang-toggle:focus-visible {
-	outline: 2px solid var(--focus-ring);
-	outline-offset: 2px;
+	outline: none;
 }
 
 .theme-toggle__icon,
