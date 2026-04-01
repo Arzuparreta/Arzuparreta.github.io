@@ -23,7 +23,8 @@
 
 	--content-max: 45rem; /* ~720px */
 	--page-pad-x: var(--s-3);
-	--section-pad-y: var(--s-7);
+	/* Section vertical rhythm: was 64px top+bottom per section (128px between content + border). */
+	--section-pad-y: var(--s-5);
 	--stack-gap: var(--s-4);
 	--prose-gap: var(--s-3);
 
@@ -253,7 +254,8 @@ h3 {
 }
 
 .section:first-of-type {
-	padding-top: var(--s-6);
+	/* Match gap under the site header to intro (same token as section rhythm). */
+	padding-top: var(--section-pad-y);
 }
 
 .intro__title {

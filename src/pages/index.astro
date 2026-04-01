@@ -9,6 +9,8 @@ import {
 	cvWorkSamples,
 	education,
 } from '../data/site';
+
+const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`;
 ---
 
 <BaseLayout title={site.title} description={site.description} canonicalPath="/">
@@ -110,11 +112,7 @@ import {
 				<section id="contact" class="section" aria-labelledby="contact-heading">
 					<h2 id="contact-heading">Contact</h2>
 					<p>
-						<a href={`mailto:${site.email}`}>{site.email}</a>
-						{' · '}
-						<a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-						{' · '}
-						<a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+						<a href={gmailComposeUrl} target="_blank" rel="noopener noreferrer">{site.email}</a>
 					</p>
 				</section>
 			</div>
