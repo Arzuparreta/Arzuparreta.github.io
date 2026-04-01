@@ -208,7 +208,18 @@ h3 {
 	margin: 0;
 	font-size: var(--text-sm);
 	color: var(--text-muted);
-	line-height: 1.4;
+	line-height: 1.45;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--s-1);
+}
+
+.identity__role,
+.identity__location {
+	display: block;
+	max-width: 100%;
+	text-wrap: balance;
 }
 
 .nav {

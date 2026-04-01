@@ -22,10 +22,18 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 				<div class="identity">
 					<p class="identity__name">{site.name}</p>
 					<p class="identity__meta">
-						{t.identity.headline}
-						{' · '}
-						{t.identity.location}
-						{site.openToRelocation ? t.identity.openToRelocation : ''}
+						<span class="identity__role">{t.identity.headline}</span>
+						<span class="identity__location">
+							{t.identity.location}
+							{site.openToRelocation ? (
+								<>
+									<span class="identity__sep" aria-hidden="true">
+										{'\u00a0·\u00a0'}
+									</span>
+									{t.identity.openToRelocation}
+								</>
+							) : null}
+						</span>
 					</p>
 				</div>
 				<nav class="nav" aria-label={t.nav.ariaLabel}>

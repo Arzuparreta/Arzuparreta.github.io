@@ -25,9 +25,9 @@ export const es: Messages = {
 		github: 'GitHub',
 	},
 	identity: {
-		headline: 'Administrador de sistemas Linux junior | Entusiasta de DevOps',
-		location: 'Sevilla, España',
-		openToRelocation: ' · Dispuesto a mudarme',
+		headline: 'Administrador de sistemas Linux junior\u00a0|\u00a0Entusiasta de DevOps',
+		location: 'Sevilla,\u00a0España',
+		openToRelocation: 'Dispuesto a mudarme',
 	},
 	sections: {
 		skills: {

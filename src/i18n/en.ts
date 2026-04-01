@@ -22,9 +22,9 @@ export const en: Messages = {
 		github: 'GitHub',
 	},
 	identity: {
-		headline: 'Junior Linux Systems Administrator | DevOps Enthusiast',
-		location: 'Seville, Spain',
-		openToRelocation: ' · Open to relocation',
+		headline: 'Junior Linux Systems Administrator\u00a0|\u00a0DevOps Enthusiast',
+		location: 'Seville,\u00a0Spain',
+		openToRelocation: 'Open to relocation',
 	},
 	sections: {
 		skills: {
