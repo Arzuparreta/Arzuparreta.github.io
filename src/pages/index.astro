@@ -40,7 +40,6 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 					<a href="#intro-heading">{t.nav.intro}</a>
 					<a href="#skills-heading">{t.nav.skills}</a>
 					<a href="#projects-heading">{t.nav.projects}</a>
-					<a href="#education-heading">{t.nav.education}</a>
 					<a href="#cv-heading">{t.nav.cvFile}</a>
 					<a href="#contact-heading">{t.nav.contact}</a>
 					<a href={site.github} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
@@ -73,15 +72,6 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 						{t.sections.projects.smallerTools}
 					</h3>
 					{secondaryProjects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
-				</section>
-
-				<section id="education" class="section" aria-labelledby="education-heading">
-					<h2 id="education-heading">{t.sections.education.title}</h2>
-					<div class="education-block">
-						<p class="education-block__title">{t.education.title}</p>
-						<p class="education-block__inst">{t.education.institution}</p>
-						<p class="education-block__note">{t.education.note}</p>
-					</div>
 				</section>
 
 				<section id="cv" class="section" aria-labelledby="cv-heading">

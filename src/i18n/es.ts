@@ -14,7 +14,6 @@ export const es: Messages = {
 		intro: 'Intro',
 		skills: 'Habilidades',
 		projects: 'Proyectos',
-		education: 'Formación',
 		cvFile: 'Currículum',
 		contact: 'Contacto',
 		github: 'GitHub',
@@ -35,9 +34,6 @@ export const es: Messages = {
 				'Cómo se aloja y opera cada cosa, no solo qué hace el código. Cada entrada enlaza el stack con el despliegue y el resultado.',
 			smallerTools: 'Herramientas menores',
 		},
-		education: {
-			title: 'Formación',
-		},
 		cv: {
 			title: 'Currículum',
 			downloadCv: 'Descargar currículum',
@@ -56,14 +52,7 @@ export const es: Messages = {
 		'Redes: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automatización: Python (CLI y desarrollo de APIs), Bash, Git',
 	],
-	education: {
-		title: 'Grado en Música (Interpretación clásica | Trombón)',
-		institution: 'Conservatorio Superior de Música Manuel Castillo',
-		note: 'Formación en pensamiento analítico aplicado a sistemas complejos y disciplina técnica rigurosa bajo presión de interpretación—partituras, conjuntos y control a alto nivel.',
-	},
 	projectCase: {
-		github: 'GitHub',
-		viewLive: 'Ver en vivo',
 		stack: 'El stack',
 		architecture: 'La arquitectura',
 		keyFeature: 'Logro clave',

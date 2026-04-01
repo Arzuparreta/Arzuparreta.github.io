@@ -14,7 +14,6 @@ export const en: Messages = {
 		intro: 'Intro',
 		skills: 'Skills',
 		projects: 'Projects',
-		education: 'Education',
 		cvFile: 'CV',
 		contact: 'Contact',
 		github: 'GitHub',
@@ -35,9 +34,6 @@ export const en: Messages = {
 				'How things are hosted and operated—not only what the code does. Each entry ties stack choices to deployment and outcomes.',
 			smallerTools: 'Smaller tools',
 		},
-		education: {
-			title: 'Education',
-		},
 		cv: {
 			title: 'CV',
 			downloadCv: 'Download CV',
@@ -56,14 +52,7 @@ export const en: Messages = {
 		'Networking: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automation: Python (CLI and API development), Bash, Git',
 	],
-	education: {
-		title: "Bachelor's degree in Music (Classical Performance | Trombone)",
-		institution: 'Manuel Castillo Superior Conservatory of Music',
-		note: 'Training in analytical systems thinking and rigorous technical discipline under performance pressure—reading complex scores, coordinating ensembles, and maintaining control at a high level.',
-	},
 	projectCase: {
-		github: 'GitHub',
-		viewLive: 'View live',
 		stack: 'The stack',
 		architecture: 'The architecture',
 		keyFeature: 'Key feature',
