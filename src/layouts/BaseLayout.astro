@@ -71,8 +71,8 @@ const ogLocale = lang === 'es' ? 'es_ES' : 'en_GB';
 				<>
 					<script type="application/json" id="locale-bundle" set:html={localeBundleJson} />
 					<script>
-						import { initHomePageLocaleAndNav } from '../scripts/page-init.ts';
-						initHomePageLocaleAndNav();
+						import { initHomePageLocale } from '../scripts/page-init.ts';
+						initHomePageLocale();
 					</script>
 				</>
 			) : null

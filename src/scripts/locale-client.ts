@@ -163,8 +163,7 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 		if (val !== undefined) el.textContent = val;
 	});
 
-	document.querySelector('.site-sidebar')?.setAttribute('aria-label', m.a11y.siteAside);
-	document.querySelector('.nav')?.setAttribute('aria-label', m.nav.ariaLabel);
+	document.querySelector('.site-bottom-bar')?.setAttribute('aria-label', m.a11y.siteAside);
 	document.querySelector('.lang-switcher')?.setAttribute('aria-label', m.language.ariaLabel);
 
 	const skillsUl = document.querySelector('ul.skills');

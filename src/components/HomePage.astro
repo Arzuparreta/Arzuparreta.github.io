@@ -56,52 +56,6 @@ const localeBundleJson = JSON.stringify({
 	localeBundleJson={localeBundleJson}
 >
 	<div class="page">
-		<aside class="site-sidebar" aria-label={t.a11y.siteAside}>
-			<div class="site-sidebar__inner">
-				<nav class="nav" aria-label={t.nav.ariaLabel}>
-					<a href="#intro-heading" data-i18n="nav.intro">{t.nav.intro}</a>
-					<a href="#skills-heading" data-i18n="nav.skills">{t.nav.skills}</a>
-					<a href="#projects-heading" data-i18n="nav.projects">{t.nav.projects}</a>
-					<a href="#cv-heading" data-i18n="nav.cvFile">{t.nav.cvFile}</a>
-					<a href="#contact-heading" data-i18n="nav.contact">{t.nav.contact}</a>
-					<a
-						class="nav__github"
-						href={site.github}
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<GitHubIcon class="nav__github-icon" />
-						<span data-i18n="nav.github">{t.nav.github}</span>
-					</a>
-				</nav>
-				<nav class="lang-switcher" aria-label={t.language.ariaLabel}>
-					<a
-						class="lang-switcher__link"
-						href={hrefEn}
-						hreflang="en"
-						lang="en"
-						data-i18n="language.english"
-						data-locale-target="en"
-						aria-current={locale === 'en' ? 'page' : undefined}
-					>
-						{t.language.english}
-					</a>
-					<span class="lang-switcher__sep" aria-hidden="true">·</span>
-					<a
-						class="lang-switcher__link"
-						href={hrefEs}
-						hreflang="es"
-						lang="es"
-						data-i18n="language.spanish"
-						data-locale-target="es"
-						aria-current={locale === 'es' ? 'page' : undefined}
-					>
-						{t.language.spanish}
-					</a>
-				</nav>
-			</div>
-		</aside>
-
 		<main id="main" class="site-main">
 			<div class="site-main__inner site-main__inner--reading">
 				<section id="intro" class="section" aria-labelledby="intro-heading">
@@ -192,5 +146,42 @@ const localeBundleJson = JSON.stringify({
 				</section>
 			</div>
 		</main>
+
+		<footer class="site-bottom-bar" aria-label={t.a11y.siteAside}>
+			<a
+				class="site-bottom-bar__github"
+				href={site.github}
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<GitHubIcon class="site-bottom-bar__github-icon" />
+				<span data-i18n="nav.github">{t.nav.github}</span>
+			</a>
+			<nav class="lang-switcher" aria-label={t.language.ariaLabel}>
+				<a
+					class="lang-switcher__link"
+					href={hrefEn}
+					hreflang="en"
+					lang="en"
+					data-i18n="language.english"
+					data-locale-target="en"
+					aria-current={locale === 'en' ? 'page' : undefined}
+				>
+					{t.language.english}
+				</a>
+				<span class="lang-switcher__sep" aria-hidden="true">·</span>
+				<a
+					class="lang-switcher__link"
+					href={hrefEs}
+					hreflang="es"
+					lang="es"
+					data-i18n="language.spanish"
+					data-locale-target="es"
+					aria-current={locale === 'es' ? 'page' : undefined}
+				>
+					{t.language.spanish}
+				</a>
+			</nav>
+		</footer>
 	</div>
 </BaseLayout>

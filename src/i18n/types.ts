@@ -39,7 +39,7 @@ export type Messages = {
 	};
 	profileLead: string;
 	technicalSkills: string[];
-	/** Language switcher in the sidebar (bottom). */
+	/** Language switcher in the bottom bar. */
 	language: {
 		ariaLabel: string;
 		english: string;
