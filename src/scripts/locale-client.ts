@@ -197,7 +197,18 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 			a.removeAttribute('aria-current');
 		}
 	});
+	refreshLangToggle(bundle, locale);
 	refreshThemeButton(bundle);
+}
+
+function refreshLangToggle(bundle: LocaleBundle, locale: Locale): void {
+	const btn = document.getElementById('lang-toggle');
+	if (!btn) return;
+	const m = bundle.messages[locale];
+	btn.setAttribute(
+		'aria-label',
+		locale === 'en' ? m.language.toggleToSpanish : m.language.toggleToEnglish,
+	);
 }
 
 export function initLocaleClient(bundle: LocaleBundle): void {
@@ -223,6 +234,12 @@ export function initLocaleClient(bundle: LocaleBundle): void {
 			e.preventDefault();
 			applyAndSyncHistory(target);
 		});
+	});
+
+	document.getElementById('lang-toggle')?.addEventListener('click', () => {
+		const current = getLocaleFromPath(window.location.pathname, baseUrl);
+		const next: Locale = current === 'en' ? 'es' : 'en';
+		applyAndSyncHistory(next);
 	});
 
 	window.addEventListener('popstate', () => {

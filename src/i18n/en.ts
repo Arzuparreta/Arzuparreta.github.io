@@ -65,5 +65,7 @@ export const en: Messages = {
 		ariaLabel: 'Language',
 		english: 'English',
 		spanish: 'Español',
+		toggleToEnglish: 'Switch to English',
+		toggleToSpanish: 'Switch to Spanish',
 	},
 };

@@ -49,5 +49,8 @@ export type Messages = {
 		ariaLabel: string;
 		english: string;
 		spanish: string;
+		/** Mobile icon button: switch to the other locale. */
+		toggleToEnglish: string;
+		toggleToSpanish: string;
 	};
 };
