@@ -5,6 +5,7 @@ export type Messages = {
 	};
 	a11y: {
 		skipToContent: string;
+		siteAside: string;
 	};
 	nav: {
 		ariaLabel: string;

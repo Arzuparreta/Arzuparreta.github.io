@@ -196,14 +196,6 @@ h3 {
 	}
 }
 
-.identity__name {
-	font-size: var(--text-lg);
-	font-weight: 700;
-	color: var(--text);
-	margin: 0 0 var(--s-1);
-	line-height: 1.2;
-}
-
 .identity__meta {
 	margin: 0;
 	font-size: var(--text-sm);
@@ -350,6 +342,10 @@ h3 {
 }
 
 .intro__title {
+	margin-bottom: var(--s-2);
+}
+
+.intro__subtitle {
 	margin-bottom: var(--s-3);
 }
 

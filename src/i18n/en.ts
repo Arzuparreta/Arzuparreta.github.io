@@ -8,6 +8,7 @@ export const en: Messages = {
 	},
 	a11y: {
 		skipToContent: 'Skip to content',
+		siteAside: 'Site navigation',
 	},
 	nav: {
 		ariaLabel: 'Primary',

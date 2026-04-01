@@ -18,25 +18,8 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 	skipToContent={t.a11y.skipToContent}
 >
 	<div class="page">
-		<aside class="site-sidebar" aria-label={site.name}>
+		<aside class="site-sidebar" aria-label={t.a11y.siteAside}>
 			<div class="site-sidebar__inner">
-				<div class="identity">
-					<p class="identity__name">{site.name}</p>
-					<p class="identity__meta">
-						<span class="identity__role">{t.identity.headline}</span>
-						<span class="identity__location">
-							{t.identity.location}
-							{site.openToRelocation ? (
-								<>
-									<span class="identity__sep" aria-hidden="true">
-										{'\u00a0·\u00a0'}
-									</span>
-									{t.identity.openToRelocation}
-								</>
-							) : null}
-						</span>
-					</p>
-				</div>
 				<nav class="nav" aria-label={t.nav.ariaLabel}>
 					<a href="#intro-heading">{t.nav.intro}</a>
 					<a href="#skills-heading">{t.nav.skills}</a>
@@ -52,6 +35,20 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 			<div class="site-main__inner">
 				<section id="intro" class="section" aria-labelledby="intro-heading">
 					<h1 id="intro-heading" class="intro__title">{site.name}</h1>
+					<p class="identity__meta intro__subtitle">
+						<span class="identity__role">{t.identity.headline}</span>
+						<span class="identity__location">
+							{t.identity.location}
+							{site.openToRelocation ? (
+								<>
+									<span class="identity__sep" aria-hidden="true">
+										{'\u00a0·\u00a0'}
+									</span>
+									{t.identity.openToRelocation}
+								</>
+							) : null}
+						</span>
+					</p>
 					<p class="intro__lead">{t.profileLead}</p>
 				</section>
 
