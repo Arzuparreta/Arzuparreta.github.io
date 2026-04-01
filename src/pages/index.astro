@@ -17,9 +17,9 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 	skipToContent={t.a11y.skipToContent}
 >
 	<div class="page">
-		<header class="site-header">
-			<div class="site-header__inner">
-				<div>
+		<aside class="site-sidebar" aria-label={site.name}>
+			<div class="site-sidebar__inner">
+				<div class="identity">
 					<p class="identity__name">{site.name}</p>
 					<p class="identity__meta">
 						{t.identity.headline}
@@ -39,7 +39,7 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 					<a href={site.github} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
 				</nav>
 			</div>
-		</header>
+		</aside>
 
 		<main id="main" class="site-main">
 			<div class="site-main__inner">
