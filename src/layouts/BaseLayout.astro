@@ -1,19 +1,30 @@
 ---
 import '../styles/global.css';
 import { site } from '../data/site';
+import type { Locale } from '../i18n/config';
 
 interface Props {
-	title?: string;
-	description?: string;
+	title: string;
+	description: string;
 	canonicalPath?: string;
+	/** BCP 47 language tag for `<html lang>` and `og:locale`. */
+	lang?: Locale;
+	skipToContent: string;
 }
 
-const { title = site.title, description = site.description, canonicalPath = '/' } = Astro.props;
+const {
+	title,
+	description,
+	canonicalPath = '/',
+	lang = 'en',
+	skipToContent,
+} = Astro.props;
 const canonical = new URL(canonicalPath, site.url).href;
+const ogLocale = lang === 'es' ? 'es_ES' : 'en_GB';
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -27,7 +38,7 @@ const canonical = new URL(canonicalPath, site.url).href;
 		<meta property="og:url" content={canonical} />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
-		<meta property="og:locale" content="en_GB" />
+		<meta property="og:locale" content={ogLocale} />
 
 		<meta name="twitter:card" content="summary" />
 		<meta name="twitter:title" content={title} />
@@ -44,7 +55,7 @@ const canonical = new URL(canonicalPath, site.url).href;
 		/>
 	</head>
 	<body>
-		<a class="skip" href="#main">Skip to content</a>
+		<a class="skip" href="#main">{skipToContent}</a>
 		<slot />
 	</body>
 </html>

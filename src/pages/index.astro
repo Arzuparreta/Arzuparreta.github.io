@@ -2,39 +2,41 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCase from '../components/ProjectCase.astro';
 import { projects } from '../data/projects';
-import {
-	site,
-	profileLead,
-	technicalSkills,
-	cvWorkSamples,
-	education,
-} from '../data/site';
+import { site } from '../data/site';
+import { defaultLocale, getMessages } from '../i18n';
 
+const t = getMessages(defaultLocale);
 const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`;
 ---
 
-<BaseLayout title={site.title} description={site.description} canonicalPath="/">
+<BaseLayout
+	title={t.meta.title}
+	description={t.meta.description}
+	canonicalPath="/"
+	lang={defaultLocale}
+	skipToContent={t.a11y.skipToContent}
+>
 	<div class="page">
 		<header class="site-header">
 			<div class="site-header__inner">
 				<div>
 					<p class="identity__name">{site.name}</p>
 					<p class="identity__meta">
-						{site.headline}
+						{t.identity.headline}
 						{' · '}
-						{site.location}
-						{site.openToRelocation ? ' · Open to relocation' : ''}
+						{t.identity.location}
+						{site.openToRelocation ? t.identity.openToRelocation : ''}
 					</p>
 				</div>
-				<nav class="nav" aria-label="Primary">
-					<a href="#intro">Intro</a>
-					<a href="#skills">Skills</a>
-					<a href="#selected-work">Selected work</a>
-					<a href="#projects">Repositories</a>
-					<a href="#education">Education</a>
-					<a href="#cv">CV file</a>
-					<a href="#contact">Contact</a>
-					<a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+				<nav class="nav" aria-label={t.nav.ariaLabel}>
+					<a href="#intro">{t.nav.intro}</a>
+					<a href="#skills">{t.nav.skills}</a>
+					<a href="#selected-work">{t.nav.selectedWork}</a>
+					<a href="#projects">{t.nav.repositories}</a>
+					<a href="#education">{t.nav.education}</a>
+					<a href="#cv">{t.nav.cvFile}</a>
+					<a href="#contact">{t.nav.contact}</a>
+					<a href={site.github} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
 				</nav>
 			</div>
 		</header>
@@ -43,23 +45,23 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 			<div class="site-main__inner">
 				<section id="intro" class="section" aria-labelledby="intro-heading">
 					<h1 id="intro-heading" class="intro__title">{site.name}</h1>
-					<p class="intro__lead">{profileLead}</p>
+					<p class="intro__lead">{t.profileLead}</p>
 				</section>
 
 				<section id="skills" class="section" aria-labelledby="skills-heading">
-					<h2 id="skills-heading">Technical skills</h2>
-					<p class="section__intro">As listed on the CV.</p>
+					<h2 id="skills-heading">{t.sections.skills.title}</h2>
+					<p class="section__intro">{t.sections.skills.intro}</p>
 					<ul class="skills">
-						{technicalSkills.map((line) => (
+						{t.technicalSkills.map((line) => (
 							<li>{line}</li>
 						))}
 					</ul>
 				</section>
 
 				<section id="selected-work" class="section" aria-labelledby="selected-heading">
-					<h2 id="selected-heading">Selected work</h2>
-					<p class="section__intro">Infrastructure and automation projects from the CV.</p>
-					{cvWorkSamples.map((item) => (
+					<h2 id="selected-heading">{t.sections.selectedWork.title}</h2>
+					<p class="section__intro">{t.sections.selectedWork.intro}</p>
+					{t.cvWorkSamples.map((item) => (
 						<div class="cv-work">
 							<h3 class="cv-work__title">
 								{item.title}
@@ -75,42 +77,37 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 				</section>
 
 				<section id="projects" class="section" aria-labelledby="projects-heading">
-					<h2 id="projects-heading">Public repositories</h2>
-					<p class="section__intro">Open source on GitHub (problem / approach / stack / note per repo).</p>
-					{projects.map((project) => <ProjectCase project={project} />)}
+					<h2 id="projects-heading">{t.sections.projects.title}</h2>
+					<p class="section__intro">{t.sections.projects.intro}</p>
+					{projects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
 				</section>
 
 				<section id="education" class="section" aria-labelledby="education-heading">
-					<h2 id="education-heading">Education</h2>
+					<h2 id="education-heading">{t.sections.education.title}</h2>
 					<div class="education-block">
-						<p class="education-block__title">{education.title}</p>
-						<p class="education-block__inst">{education.institution}</p>
-						<p class="education-block__note">{education.note}</p>
+						<p class="education-block__title">{t.education.title}</p>
+						<p class="education-block__inst">{t.education.institution}</p>
+						<p class="education-block__note">{t.education.note}</p>
 					</div>
 				</section>
 
 				<section id="cv" class="section" aria-labelledby="cv-heading">
-					<h2 id="cv-heading">CV file</h2>
-					<p class="cv-summary">
-						The Markdown CV is the same document as in{' '}
-						<a href={site.cvRepo} target="_blank" rel="noopener noreferrer">Arzuparreta/CV</a>. It is
-						downloaded at build time from the <code>main</code> branch.
-					</p>
+					<h2 id="cv-heading">{t.sections.cv.title}</h2>
 					<div class="download-row">
 						<a class="btn" href={`${import.meta.env.BASE_URL}resume/CV.md`} download>
-							Download CV.md
+							{t.sections.cv.downloadCv}
 						</a>
 						<a class="btn btn--ghost" href={`${import.meta.env.BASE_URL}resume/CV.md`}>
-							View CV.md
+							{t.sections.cv.viewCv}
 						</a>
 						<a class="btn btn--ghost" href={site.cvRepo} target="_blank" rel="noopener noreferrer">
-							CV repository
+							{t.sections.cv.cvRepo}
 						</a>
 					</div>
 				</section>
 
 				<section id="contact" class="section" aria-labelledby="contact-heading">
-					<h2 id="contact-heading">Contact</h2>
+					<h2 id="contact-heading">{t.sections.contact.title}</h2>
 					<p>
 						<a href={gmailComposeUrl} target="_blank" rel="noopener noreferrer">{site.email}</a>
 					</p>
