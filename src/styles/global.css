@@ -312,10 +312,6 @@ h3 {
 	justify-content: flex-end;
 }
 
-.lang-switcher--compact {
-	display: none;
-}
-
 .lang-switcher__link--compact {
 	padding: 0.3125rem 0.625rem;
 	border: 1px solid var(--border);
@@ -368,17 +364,6 @@ h3 {
 		clip: rect(0, 0, 0, 0);
 		white-space: nowrap;
 		border: 0;
-	}
-
-	.lang-switcher--desktop {
-		display: none;
-	}
-
-	.lang-switcher--compact {
-		display: flex;
-		flex-wrap: nowrap;
-		align-items: center;
-		justify-content: flex-end;
 	}
 }
 
@@ -502,9 +487,25 @@ h3 {
 	user-select: none;
 }
 
+/*
+  Desktop vs compact language UI: both use .lang-switcher { display: flex } above.
+  Equal-specificity rules later in the file were overriding display:none on mobile.
+  These two-class selectors must sit AFTER .lang-switcher so they win the cascade.
+*/
+.lang-switcher.lang-switcher--compact {
+	display: none;
+}
+
 @media (max-width: 639px) {
-	.lang-switcher--compact {
+	.lang-switcher.lang-switcher--desktop {
+		display: none;
+	}
+
+	.lang-switcher.lang-switcher--compact {
+		display: flex;
 		flex-wrap: nowrap;
+		align-items: center;
+		justify-content: flex-end;
 	}
 
 	.lang-switcher__link--compact {
