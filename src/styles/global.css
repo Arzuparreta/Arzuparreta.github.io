@@ -877,8 +877,10 @@ a.small-tool__github-btn:focus-visible {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
+	justify-content: center;
 	gap: var(--s-2) var(--s-3);
 	margin: 0;
+	text-align: center;
 }
 
 .contact-email__address {
