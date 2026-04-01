@@ -26,10 +26,10 @@ Live audio mapped to a 3D Tonnetz in Rust for low-latency capture and render.
 Ebook reader packaged with Docker and Compose for repeatable deploys and volume layout.
 
 **brain | Python**  
-Public monorepo of small CLIs and experiments; commit history shows prototypes becoming reusable tools.
+Minimal CLI to manage Markdown notes in one folder from the terminal—add, edit, list; pure Python, no extra packages.
 
 **remove-multi-titles-yt | JavaScript, WebExtensions**  
-Browser extension (Chrome/Firefox) that normalizes messy duplicate text in YouTube titles.
+Chrome/Firefox extension that pins each video to the first title you saw, so YouTube cannot keep swapping titles on the same clip.
 
 ## Education
 Grado en Música (Interpretación Clásica | Trombón)  

@@ -101,7 +101,7 @@ const projectsEn: Project[] = [
 		title: 'brain',
 		tech: 'Python',
 		summary:
-			'Public monorepo of small Python CLIs and experiments—commit history is the story of turning throwaways into reusable tools.',
+			'Minimal terminal tool to add, edit, and list Markdown notes in one folder—plain Python, no install beyond the interpreter.',
 		repoUrl: 'https://github.com/Arzuparreta/brain',
 		tier: 'secondary',
 	},
@@ -110,7 +110,7 @@ const projectsEn: Project[] = [
 		title: 'remove-multi-titles-yt',
 		tech: 'JavaScript, WebExtensions',
 		summary:
-			'Chrome/Firefox extension that strips duplicate junk from YouTube titles—one narrow DOM fix, no extra services.',
+			'Chrome/Firefox extension that remembers the first title you saw for each video and keeps it when YouTube A/B-tests different titles for the same clip.',
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
 		tier: 'secondary',
 	},
@@ -172,7 +172,7 @@ const projectsEs: Project[] = [
 		title: 'Brain',
 		tech: 'Python',
 		summary:
-			'Monorepo público de scripts y utilidades CLI. Refleja la evolución de prototipos a herramientas de automatización reutilizables.',
+			'Herramienta de terminal mínima en Python para crear, editar y listar notas Markdown en una carpeta—sin dependencias externas.',
 		repoUrl: 'https://github.com/Arzuparreta/brain',
 		tier: 'secondary',
 	},
@@ -181,7 +181,7 @@ const projectsEs: Project[] = [
 		title: 'Remove-multi-titles-yt',
 		tech: 'JavaScript, WebExtensions',
 		summary:
-			'Extensión de navegador ligera para normalizar y limpiar la redundancia en los títulos de YouTube manipulando el DOM de forma eficiente.',
+			'Extensión para Chrome/Firefox que guarda el primer título que ves de cada vídeo y lo mantiene aunque YouTube pruebe variantes distintas en el mismo contenido.',
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
 		tier: 'secondary',
 	},
