@@ -1,0 +1,194 @@
+/**
+ * Client-side locale switching without full page reload: updates DOM + History API.
+ * Scroll position is preserved because navigation is not a document load.
+ */
+import type { Locale } from '../i18n/config';
+import type { Messages } from '../i18n/types';
+import type { PrimaryProject, SecondaryProject } from '../data/projects';
+
+export type LocaleBundle = {
+	baseUrl: string;
+	siteUrl: string;
+	messages: Record<Locale, Messages>;
+	projects: Record<Locale, { primary: PrimaryProject[]; secondary: SecondaryProject[] }>;
+};
+
+function getNested(obj: unknown, path: string): string | undefined {
+	const parts = path.split('.');
+	let cur: unknown = obj;
+	for (const p of parts) {
+		if (cur == null || typeof cur !== 'object') return undefined;
+		cur = (cur as Record<string, unknown>)[p];
+	}
+	return typeof cur === 'string' ? cur : undefined;
+}
+
+function localePathFromBase(baseUrl: string, locale: Locale): string {
+	if (locale === 'es') {
+		if (baseUrl === '/' || baseUrl === '') return '/es/';
+		const base = baseUrl.replace(/\/$/, '');
+		return `${base}/es/`;
+	}
+	if (baseUrl === '/' || baseUrl === '') return '/';
+	return baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+}
+
+/** Compare pathnames ignoring a trailing slash (except root). */
+function pathnameMatches(a: string, b: string): boolean {
+	const strip = (p: string) => {
+		if (p === '/' || p === '') return '/';
+		return p.replace(/\/$/, '');
+	};
+	return strip(a) === strip(b);
+}
+
+export function getLocaleFromPath(pathname: string, baseUrl: string): Locale {
+	if (baseUrl === '/' || baseUrl === '') {
+		const trimmed = pathname.replace(/^\/+|\/+$/g, '');
+		if (trimmed === 'es' || trimmed.startsWith('es/')) return 'es';
+		return 'en';
+	}
+	const base = baseUrl.replace(/\/$/, '');
+	if (!pathname.startsWith(base)) return 'en';
+	let rest = pathname.slice(base.length);
+	rest = rest.replace(/^\/+|\/+$/g, '');
+	if (rest === 'es' || rest.startsWith('es/')) return 'es';
+	return 'en';
+}
+
+function updateHead(m: Messages, siteUrl: string, locale: Locale): void {
+	const canonicalPath = locale === 'es' ? '/es/' : '/';
+	const canonical = new URL(canonicalPath, siteUrl).href;
+	const ogLocale = locale === 'es' ? 'es_ES' : 'en_GB';
+
+	document.title = m.meta.title;
+
+	document.querySelector('meta[name="description"]')?.setAttribute('content', m.meta.description);
+	document.querySelector('meta[property="og:title"]')?.setAttribute('content', m.meta.title);
+	document.querySelector('meta[property="og:description"]')?.setAttribute('content', m.meta.description);
+	document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonical);
+	document.querySelector('meta[property="og:locale"]')?.setAttribute('content', ogLocale);
+	document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', m.meta.title);
+	document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', m.meta.description);
+	document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonical);
+}
+
+function applyTechnicalSkills(ul: Element, lines: string[]): void {
+	ul.replaceChildren(
+		...lines.map((line) => {
+			const li = document.createElement('li');
+			li.textContent = line;
+			return li;
+		}),
+	);
+}
+
+function applyPrimaryCase(article: HTMLElement, project: PrimaryProject, githubCta: string): void {
+	const titleLink = article.querySelector<HTMLAnchorElement>('.case__title-link');
+	const tech = article.querySelector('.case__tech');
+	const why = article.querySelector('.case__why');
+	const how = article.querySelector('.case__how');
+	const cta = article.querySelector<HTMLAnchorElement>('.case__cta a');
+	if (titleLink) titleLink.textContent = project.title;
+	if (tech) tech.textContent = project.tech;
+	if (why) why.textContent = project.why;
+	if (how) {
+		how.replaceChildren(
+			...project.how.map((line) => {
+				const li = document.createElement('li');
+				li.textContent = line;
+				return li;
+			}),
+		);
+	}
+	if (cta) {
+		cta.textContent = githubCta;
+		cta.href = project.repoUrl;
+	}
+	if (titleLink) titleLink.href = project.repoUrl;
+}
+
+function applySmallTool(article: HTMLElement, tool: SecondaryProject, githubCta: string): void {
+	const name = article.querySelector('.small-tool__name');
+	const tech = article.querySelector('.small-tool__tech');
+	const summary = article.querySelector('.small-tool__summary');
+	const cta = article.querySelector<HTMLAnchorElement>('.small-tool__cta');
+	if (name) name.textContent = tool.title;
+	if (tech) tech.textContent = `${tool.tech}.`;
+	if (summary) summary.textContent = `${tool.summary} `;
+	if (cta) {
+		cta.textContent = githubCta;
+		cta.href = tool.repoUrl;
+	}
+}
+
+function applyLocale(bundle: LocaleBundle, locale: Locale): void {
+	const m = bundle.messages[locale];
+	const { primary, secondary } = bundle.projects[locale];
+
+	updateHead(m, bundle.siteUrl, locale);
+
+	document.querySelectorAll<HTMLElement>('[data-i18n]').forEach((el) => {
+		const path = el.getAttribute('data-i18n');
+		if (!path) return;
+		const val = getNested(m as unknown as Record<string, unknown>, path);
+		if (val !== undefined) el.textContent = val;
+	});
+
+	document.querySelector('.site-sidebar')?.setAttribute('aria-label', m.a11y.siteAside);
+	document.querySelector('.nav')?.setAttribute('aria-label', m.nav.ariaLabel);
+	document.querySelector('.lang-switcher')?.setAttribute('aria-label', m.language.ariaLabel);
+
+	const skillsUl = document.querySelector('ul.skills');
+	if (skillsUl) applyTechnicalSkills(skillsUl, m.technicalSkills);
+
+	for (const p of primary) {
+		const article = document.getElementById(p.slug);
+		if (article?.classList.contains('case')) applyPrimaryCase(article, p, m.sections.projects.githubCta);
+	}
+
+	for (const t of secondary) {
+		const article = document.getElementById(t.slug);
+		if (article?.classList.contains('small-tool')) applySmallTool(article, t, m.sections.projects.githubCtaSmall);
+	}
+
+	document.querySelectorAll<HTMLAnchorElement>('.lang-switcher__link').forEach((a) => {
+		const target = a.getAttribute('data-locale-target') as Locale | null;
+		if (target === locale) {
+			a.setAttribute('aria-current', 'page');
+		} else {
+			a.removeAttribute('aria-current');
+		}
+	});
+}
+
+export function initLocaleClient(bundle: LocaleBundle): void {
+	const { baseUrl } = bundle;
+
+	const applyAndSyncHistory = (locale: Locale): void => {
+		applyLocale(bundle, locale);
+		const path = localePathFromBase(baseUrl, locale);
+		if (!pathnameMatches(window.location.pathname, path)) {
+			history.pushState({ locale }, '', path);
+		}
+	};
+
+	document.querySelectorAll<HTMLAnchorElement>('.lang-switcher__link').forEach((a) => {
+		a.addEventListener('click', (e) => {
+			const target = a.getAttribute('data-locale-target') as Locale | null;
+			if (!target) return;
+			const current = getLocaleFromPath(window.location.pathname, baseUrl);
+			if (target === current) {
+				e.preventDefault();
+				return;
+			}
+			e.preventDefault();
+			applyAndSyncHistory(target);
+		});
+	});
+
+	window.addEventListener('popstate', () => {
+		const locale = getLocaleFromPath(window.location.pathname, baseUrl);
+		applyLocale(bundle, locale);
+	});
+}

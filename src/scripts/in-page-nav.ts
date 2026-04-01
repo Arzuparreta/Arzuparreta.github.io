@@ -56,10 +56,14 @@ function syncFromHash(links: HTMLAnchorElement[]): void {
 	setCurrentNav(links, section.id);
 }
 
+let inPageNavInitialized = false;
+
 export function initInPageNav(): void {
+	if (inPageNavInitialized) return;
 	const sections = getSections();
 	const links = getAnchorLinks();
 	if (sections.length === 0 || links.length === 0) return;
+	inPageNavInitialized = true;
 
 	/** Section top crosses this distance below the viewport top → that section is "current". */
 	const markerPx = Math.min(120, Math.max(48, window.innerHeight * 0.12));

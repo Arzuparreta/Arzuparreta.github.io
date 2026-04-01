@@ -15,7 +15,7 @@ const { tool, githubCta } = Astro.props;
 		<span class="small-tool__sep" aria-hidden="true"> | </span>
 		<span class="small-tool__tech">{tool.tech}.</span>
 		{' '}
-		{tool.summary}{' '}
+		<span class="small-tool__summary">{tool.summary} </span>
 		<a class="small-tool__cta" href={tool.repoUrl} target="_blank" rel="noopener noreferrer">{githubCta}</a>
 	</p>
 </article>

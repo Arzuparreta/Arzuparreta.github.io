@@ -9,7 +9,7 @@ interface Props {
 const { project, githubCta } = Astro.props;
 ---
 
-<article class="case" id={project.slug}>
+<article class="case" id={project.slug} data-project-slug={project.slug}>
 	<header class="case__top">
 		<h3 class="case__title">
 			<a class="case__title-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
