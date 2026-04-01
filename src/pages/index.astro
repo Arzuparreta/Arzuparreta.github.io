@@ -2,7 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCase from '../components/ProjectCase.astro';
 import { projects } from '../data/projects';
-import { site, philosophy, cvHighlights } from '../data/site';
+import {
+	site,
+	profileLead,
+	technicalSkills,
+	cvWorkSamples,
+	education,
+} from '../data/site';
 ---
 
 <BaseLayout title={site.title} description={site.description} canonicalPath="/">
@@ -12,14 +18,19 @@ import { site, philosophy, cvHighlights } from '../data/site';
 				<div>
 					<p class="identity__name">{site.name}</p>
 					<p class="identity__meta">
-						Developer · Musician · @{site.handle} · {site.location}
+						{site.headline}
+						{' · '}
+						{site.location}
+						{site.openToRelocation ? ' · Open to relocation' : ''}
 					</p>
 				</div>
 				<nav class="nav" aria-label="Primary">
 					<a href="#intro">Intro</a>
-					<a href="#projects">Projects</a>
-					<a href="#work">How I work</a>
-					<a href="#cv">CV</a>
+					<a href="#skills">Skills</a>
+					<a href="#selected-work">Selected work</a>
+					<a href="#projects">Repositories</a>
+					<a href="#education">Education</a>
+					<a href="#cv">CV file</a>
 					<a href="#contact">Contact</a>
 					<a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
 				</nav>
@@ -30,49 +41,68 @@ import { site, philosophy, cvHighlights } from '../data/site';
 			<div class="site-main__inner">
 				<section id="intro" class="section" aria-labelledby="intro-heading">
 					<h1 id="intro-heading" class="intro__title">{site.name}</h1>
-					<p class="intro__lead">
-						Full-stack and systems-oriented development: JavaScript and Rust for shipped work, Python for
-						exploration. Focus on self-hosted software, clear boundaries, and repositories you can audit.
-					</p>
-					<p class="intro__note">
-						Below: concise case studies with links to public code—no decorative filler.
-					</p>
+					<p class="intro__lead">{profileLead}</p>
 				</section>
 
-				<section id="projects" class="section" aria-labelledby="projects-heading">
-					<h2 id="projects-heading">Projects</h2>
-					<p class="section__intro">Each row links to a public repository on GitHub.</p>
-					{projects.map((project) => <ProjectCase project={project} />)}
-				</section>
-
-				<section id="work" class="section" aria-labelledby="work-heading">
-					<h2 id="work-heading">How I work</h2>
-					<p class="section__intro">{philosophy.lede}</p>
-					<ul class="principles">
-						{philosophy.points.map((item) => (
-							<li class="principles__item">
-								<h3>{item.head}</h3>
-								<p>{item.body}</p>
-							</li>
-						))}
-					</ul>
-				</section>
-
-				<section id="cv" class="section" aria-labelledby="cv-heading">
-					<h2 id="cv-heading">CV</h2>
-					<p class="cv-summary">{cvHighlights.summary}</p>
-					<h3 class="visually-hidden">Skills</h3>
+				<section id="skills" class="section" aria-labelledby="skills-heading">
+					<h2 id="skills-heading">Technical skills</h2>
+					<p class="section__intro">As listed on the CV.</p>
 					<ul class="skills">
-						{cvHighlights.skills.map((line) => (
+						{technicalSkills.map((line) => (
 							<li>{line}</li>
 						))}
 					</ul>
+				</section>
+
+				<section id="selected-work" class="section" aria-labelledby="selected-heading">
+					<h2 id="selected-heading">Selected work</h2>
+					<p class="section__intro">Infrastructure and automation projects from the CV.</p>
+					{cvWorkSamples.map((item) => (
+						<div class="cv-work">
+							<h3 class="cv-work__title">
+								{item.title}
+								<span class="cv-work__stack"> · {item.stack}</span>
+							</h3>
+							<ul class="cv-work__list">
+								{item.bullets.map((b) => (
+									<li>{b}</li>
+								))}
+							</ul>
+						</div>
+					))}
+				</section>
+
+				<section id="projects" class="section" aria-labelledby="projects-heading">
+					<h2 id="projects-heading">Public repositories</h2>
+					<p class="section__intro">Open source on GitHub (problem / approach / stack / note per repo).</p>
+					{projects.map((project) => <ProjectCase project={project} />)}
+				</section>
+
+				<section id="education" class="section" aria-labelledby="education-heading">
+					<h2 id="education-heading">Education</h2>
+					<div class="education-block">
+						<p class="education-block__title">{education.title}</p>
+						<p class="education-block__inst">{education.institution}</p>
+						<p class="education-block__note">{education.note}</p>
+					</div>
+				</section>
+
+				<section id="cv" class="section" aria-labelledby="cv-heading">
+					<h2 id="cv-heading">CV file</h2>
+					<p class="cv-summary">
+						The Markdown CV is the same document as in{' '}
+						<a href={site.cvRepo} target="_blank" rel="noopener noreferrer">Arzuparreta/CV</a>. It is
+						downloaded at build time from the <code>main</code> branch.
+					</p>
 					<div class="download-row">
 						<a class="btn" href={`${import.meta.env.BASE_URL}resume/CV.md`} download>
-							Download CV (.md)
+							Download CV.md
 						</a>
 						<a class="btn btn--ghost" href={`${import.meta.env.BASE_URL}resume/CV.md`}>
-							View Markdown
+							View CV.md
+						</a>
+						<a class="btn btn--ghost" href={site.cvRepo} target="_blank" rel="noopener noreferrer">
+							CV repository
 						</a>
 					</div>
 				</section>
@@ -80,12 +110,11 @@ import { site, philosophy, cvHighlights } from '../data/site';
 				<section id="contact" class="section" aria-labelledby="contact-heading">
 					<h2 id="contact-heading">Contact</h2>
 					<p>
-						Primary channel: <a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
-						(issues, discussions, profile).
-					</p>
-					<p class="contact-note">
-						For collaboration or roles, reference a concrete repo or problem—specific threads are easier to
-						respond to than generic intros.
+						<a href={`mailto:${site.email}`}>{site.email}</a>
+						{' · '}
+						<a href={site.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+						{' · '}
+						<a href={site.github} target="_blank" rel="noopener noreferrer">GitHub</a>
 					</p>
 				</section>
 			</div>

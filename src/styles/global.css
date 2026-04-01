@@ -496,3 +496,74 @@ h3 {
 	white-space: nowrap;
 	border: 0;
 }
+
+/* CV-selected work + education (factual blocks) */
+.cv-work {
+	margin-bottom: var(--s-5);
+	padding-bottom: var(--s-4);
+	border-bottom: 1px solid var(--border);
+}
+
+.cv-work:last-child {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	border-bottom: none;
+}
+
+.cv-work__title {
+	font-size: var(--text-base);
+	font-weight: 600;
+	margin: 0 0 var(--s-2);
+	line-height: 1.4;
+}
+
+.cv-work__stack {
+	font-weight: 400;
+	color: var(--text-muted);
+}
+
+.cv-work__list {
+	margin: 0;
+	padding-left: 1.25rem;
+	font-size: var(--text-sm);
+	color: var(--text);
+	line-height: 1.55;
+}
+
+.cv-work__list li {
+	margin-bottom: var(--s-2);
+}
+
+.education-block {
+	border: 1px solid var(--border);
+	padding: var(--s-3);
+	background: var(--surface);
+	border-radius: 2px;
+}
+
+.education-block__title {
+	font-weight: 600;
+	margin: 0 0 var(--s-2);
+	font-size: var(--text-base);
+}
+
+.education-block__inst {
+	margin: 0 0 var(--s-2);
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+}
+
+.education-block__note {
+	margin: 0;
+	font-size: var(--text-sm);
+	color: var(--text-muted);
+	line-height: 1.55;
+}
+
+.cv-summary code {
+	font-size: 0.9em;
+	background: var(--bg);
+	padding: 0.1em 0.35em;
+	border-radius: 2px;
+	border: 1px solid var(--border);
+}

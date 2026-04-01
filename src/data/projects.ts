@@ -1,6 +1,6 @@
 /**
- * Featured work — structured for case-study presentation.
- * Repos: https://github.com/Arzuparreta
+ * Public GitHub repositories — descriptions kept conservative (repo purpose only).
+ * https://github.com/Arzuparreta
  */
 export type Project = {
 	slug: string;
@@ -18,71 +18,56 @@ export const projects: Project[] = [
 	{
 		slug: 'soundsible',
 		title: 'soundsible',
-		tagline: 'Self-hosted streaming shaped like a familiar product, without the vendor.',
+		tagline: 'Self-hosted music platform: streaming and web client backed by your own machine.',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
 		languages: ['JavaScript'],
-		problem:
-			'Commercial streaming optimizes for lock-in and opaque pipelines. I wanted playback and library logic under my control, with a web client that stays thin while the “home” machine does the real work.',
-		approach:
-			'Separate concerns: a backend that owns indexing, transcoding decisions, and streaming; a frontend focused on navigation and playback state. The architecture mirrors how paid services feel—without surrendering data or deployment to a third party.',
-		stack: ['Node.js ecosystem', 'Web client', 'Self-hosted deployment'],
-		reflection:
-			'This project is as much about boundaries as about audio—where the server ends, how much state lives in the browser, and how to keep operations understandable when you are also the admin.',
+		problem: 'Run a personal music stack without depending on a third-party streaming backend.',
+		approach: 'Split backend responsibilities (library, streaming) from the web client; repo is the reference for architecture.',
+		stack: ['JavaScript', 'Node ecosystem', 'Web client'],
+		reflection: 'This repository documents how the stack is organized end to end.',
 	},
 	{
 		slug: 'docker-reader',
 		title: 'docker-reader',
-		tagline: 'Reading progress that survives devices—packaged for reproducible runs.',
+		tagline: 'Reader for books across devices; shipped with Docker.',
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
 		languages: ['JavaScript'],
-		problem:
-			'Bookmarks scatter across apps and formats. I needed one place for “where I am in this book,” accessible wherever I read, without depending on a proprietary sync layer.',
-		approach:
-			'Ship the app in Docker so environment and data paths are explicit. Favor a small, inspectable surface area: sync becomes a problem you can reason about with files and backups, not hidden cloud state.',
-		stack: ['Docker', 'Web stack', 'Persistent volumes'],
-		reflection:
-			'Packaging forces honesty about persistence and upgrades—good practice for anything meant to run for years on a home server.',
+		problem: 'Keep reading progress across devices with a deployable, portable setup.',
+		approach: 'Package the app in Docker so deployment and data paths are explicit in the repo.',
+		stack: ['Docker', 'Web stack'],
+		reflection: 'Dockerfile and compose files are the source of truth for how the app runs.',
 	},
 	{
 		slug: 'synesthetic-visualizer',
 		title: 'synesthetic-visualizer',
-		tagline: 'Real-time audio → geometry, with harmonic structure made visible.',
+		tagline: 'Real-time Rust audio visualizer in a 3D Tonnetz space.',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
 		languages: ['Rust'],
-		problem:
-			'Generic visualizers decorate amplitude. I wanted something tied to musical structure: synesthetic mapping and harmonic relationships, rendered in a Tonnetz-style space with minimal latency.',
-		approach:
-			'Rust for the hot path: predictable performance where audio and graphics meet. The 3D Tonnetz is not decoration—it encodes relationships I care about when listening.',
-		stack: ['Rust', 'Real-time audio', '3D graphics'],
-		reflection:
-			'This sits at the intersection of perception, DSP, and rendering—where small algorithmic choices are audible and visible.',
+		problem: 'Visualize audio with harmonic structure and low latency.',
+		approach: 'Rust for the real-time path; see the repo for rendering and audio pipeline details.',
+		stack: ['Rust', 'Audio', 'Graphics'],
+		reflection: 'Implementation details live in the repo and commits.',
 	},
 	{
 		slug: 'brain',
 		title: 'brain',
-		tagline: 'Experiments and tooling in Python—ideas worth capturing before they evaporate.',
+		tagline: 'Python workspace for experiments and tooling.',
 		repoUrl: 'https://github.com/Arzuparreta/brain',
 		languages: ['Python'],
-		problem:
-			'Not everything deserves a polished product immediately; some work is exploratory notebooks, scripts, and half-formed systems that still need a home.',
-		approach:
-			'A loose Python workspace for prototypes—kept public as a signal of how I iterate, not as a marketing demo.',
+		problem: 'Central place for small Python tools and prototypes.',
+		approach: 'Keep work public and incremental rather than a polished product-only release.',
 		stack: ['Python'],
-		reflection:
-			'Visibility of rough work is a deliberate choice: judgment comes from trajectory, not only from finished artifacts.',
+		reflection: 'Use the repo history for how ideas evolve.',
 	},
 	{
 		slug: 'remove-multi-titles-yt',
 		title: 'remove-multi-titles-yt',
-		tagline: 'Browser extension: one canonical title per YouTube video.',
+		tagline: 'Browser extension to normalize YouTube titles (Chrome/Firefox).',
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
 		languages: ['JavaScript'],
-		problem:
-			'The same video can appear under different titles across sessions and surfaces—noise for anyone curating or searching their history.',
-		approach:
-			'A small, focused extension that stabilizes title presentation in the browser—minimal scope, clear user-facing win.',
-		stack: ['WebExtensions', 'DOM', 'Chrome & Firefox'],
-		reflection:
-			'Shipping to extension stores is a reminder that distribution and policy matter as much as code.',
+		problem: 'Reduce duplicate or inconsistent titles for the same video in the browser.',
+		approach: 'Small, focused extension; scope is defined in the repository.',
+		stack: ['WebExtensions', 'JavaScript'],
+		reflection: 'Manifest and store listings in the repo describe distribution.',
 	},
 ];
