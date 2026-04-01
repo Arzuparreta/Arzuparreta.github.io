@@ -164,6 +164,13 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 		if (val !== undefined) el.textContent = val;
 	});
 
+	document.querySelectorAll<HTMLElement>('[data-i18n-aria]').forEach((el) => {
+		const path = el.getAttribute('data-i18n-aria');
+		if (!path) return;
+		const val = getNested(m as unknown as Record<string, unknown>, path);
+		if (val !== undefined) el.setAttribute('aria-label', val);
+	});
+
 	document.querySelector('.site-bottom-bar')?.setAttribute('aria-label', m.a11y.siteAside);
 	document.querySelector('.lang-switcher')?.setAttribute('aria-label', m.language.ariaLabel);
 

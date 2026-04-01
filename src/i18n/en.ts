@@ -51,6 +51,9 @@ export const en: Messages = {
 		},
 		contact: {
 			title: 'Contact',
+			copyEmail: 'Copy',
+			copyEmailAria: 'Copy email address to clipboard',
+			copied: 'Copied!',
 		},
 	},
 	profileLead:

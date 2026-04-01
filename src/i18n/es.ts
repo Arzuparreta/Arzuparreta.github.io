@@ -51,6 +51,9 @@ export const es: Messages = {
 		},
 		contact: {
 			title: 'Contacto',
+			copyEmail: 'Copiar',
+			copyEmailAria: 'Copiar dirección de correo al portapapeles',
+			copied: '¡Copiado!',
 		},
 	},
 	profileLead:

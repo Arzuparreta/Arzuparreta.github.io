@@ -40,7 +40,7 @@ export type Messages = {
 			projectImageAltSuffix: string;
 		};
 		cv: { title: string; downloadCv: string; viewCv: string; cvRepo: string };
-		contact: { title: string };
+		contact: { title: string; copyEmail: string; copyEmailAria: string; copied: string };
 	};
 	profileLead: string;
 	technicalSkills: string[];
