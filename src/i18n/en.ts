@@ -49,7 +49,9 @@ export const en: Messages = {
 		},
 	},
 	profileLead:
-		'Self-taught systems enthusiast with a decade of hardware tinkering and two years of deep focus on Linux, Docker, and Python automation. I build and maintain reliable homelab infrastructure and containerized services. Transitioning from a rigorous background in classical music performance to IT operations.',
+		'Self-taught systems enthusiast with a decade of hardware tinkering and two years of deep focus on Linux, Docker, and Python automation. I build and maintain reliable homelab infrastructure and containerized services.',
+	profileLeadNote:
+		'Transitioning from a rigorous background in classical music performance to IT operations.',
 	technicalSkills: [
 		'Operating systems: UNIX/Linux (Arch, Debian, Ubuntu)',
 		'Infrastructure: Docker, Docker Compose, Portainer',

@@ -30,12 +30,13 @@
 	--stack-gap: var(--s-4);
 	--prose-gap: var(--s-3);
 
-	--text-sm: 0.875rem;
-	--text-base: 1rem;
-	--text-lg: 1.125rem;
-	--text-xl: 1.25rem;
-	--text-2xl: 1.5rem;
-	--text-3xl: 1.875rem;
+	/* +1pt on each step for slightly larger body/UI copy; spacing stays on --s-* rem scale. */
+	--text-sm: calc(0.875rem + 1pt);
+	--text-base: calc(1rem + 1pt);
+	--text-lg: calc(1.125rem + 1pt);
+	--text-xl: calc(1.25rem + 1pt);
+	--text-2xl: calc(1.5rem + 1pt);
+	--text-3xl: calc(1.875rem + 1pt);
 }
 
 *,
@@ -435,11 +436,18 @@ h3 {
 	margin-bottom: var(--s-3);
 }
 
+.intro__lead-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s-2);
+	margin-bottom: var(--s-3);
+}
+
 .intro__lead {
 	font-size: var(--text-lg);
 	color: var(--text-muted);
 	line-height: 1.55;
-	margin-bottom: var(--s-3);
+	margin-bottom: 0;
 }
 
 .intro__note {

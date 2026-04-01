@@ -38,6 +38,8 @@ export type Messages = {
 		contact: { title: string };
 	};
 	profileLead: string;
+	/** Second intro paragraph (e.g. career transition), separate from the main bio. */
+	profileLeadNote: string;
 	technicalSkills: string[];
 	/** Language switcher in the sidebar (bottom). */
 	language: {
