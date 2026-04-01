@@ -34,6 +34,7 @@ export const en: Messages = {
 			intro: 'What I built, why it matters, and how it actually runs.',
 			smallerTools: 'Smaller Tools & Scripts',
 			githubCta: 'View configuration and source code on GitHub',
+			githubCtaSmall: 'View repository on GitHub',
 		},
 		cv: {
 			title: 'CV',

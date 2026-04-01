@@ -28,6 +28,8 @@ export type Messages = {
 			intro: string;
 			smallerTools: string;
 			githubCta: string;
+			/** CTA for compact secondary-project lines (often “repository” vs “config/source”). */
+			githubCtaSmall: string;
 		};
 		cv: { title: string; downloadCv: string; viewCv: string; cvRepo: string };
 		contact: { title: string };
