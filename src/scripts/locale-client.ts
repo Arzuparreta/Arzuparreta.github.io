@@ -165,7 +165,15 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 	});
 
 	document.querySelector('.site-bottom-bar')?.setAttribute('aria-label', m.a11y.siteAside);
-	document.querySelector('.lang-switcher')?.setAttribute('aria-label', m.language.ariaLabel);
+	document.querySelectorAll('.lang-switcher').forEach((nav) => {
+		nav.setAttribute('aria-label', m.language.ariaLabel);
+	});
+
+	document.querySelectorAll<HTMLAnchorElement>('.lang-switcher--compact .lang-switcher__link').forEach((a) => {
+		const target = a.getAttribute('data-locale-target') as Locale | null;
+		if (!target) return;
+		a.hidden = target === locale;
+	});
 
 	const skillsUl = document.querySelector('ul.skills');
 	if (skillsUl) applyTechnicalSkills(skillsUl, m.technicalSkills);
@@ -190,6 +198,11 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 
 	document.querySelectorAll<HTMLAnchorElement>('.lang-switcher__link').forEach((a) => {
 		const target = a.getAttribute('data-locale-target') as Locale | null;
+		if (!target) return;
+		if (a.closest('.lang-switcher--compact')) {
+			a.removeAttribute('aria-current');
+			return;
+		}
 		if (target === locale) {
 			a.setAttribute('aria-current', 'page');
 		} else {
