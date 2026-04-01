@@ -29,13 +29,13 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 					</p>
 				</div>
 				<nav class="nav" aria-label={t.nav.ariaLabel}>
-					<a href="#intro">{t.nav.intro}</a>
-					<a href="#skills">{t.nav.skills}</a>
-					<a href="#selected-work">{t.nav.selectedWork}</a>
-					<a href="#projects">{t.nav.repositories}</a>
-					<a href="#education">{t.nav.education}</a>
-					<a href="#cv">{t.nav.cvFile}</a>
-					<a href="#contact">{t.nav.contact}</a>
+					<a href="#intro-heading">{t.nav.intro}</a>
+					<a href="#skills-heading">{t.nav.skills}</a>
+					<a href="#selected-heading">{t.nav.selectedWork}</a>
+					<a href="#projects-heading">{t.nav.repositories}</a>
+					<a href="#education-heading">{t.nav.education}</a>
+					<a href="#cv-heading">{t.nav.cvFile}</a>
+					<a href="#contact-heading">{t.nav.contact}</a>
 					<a href={site.github} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
 				</nav>
 			</div>
@@ -115,4 +115,8 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 			</div>
 		</main>
 	</div>
+	<script>
+		import { initInPageNav } from '../scripts/in-page-nav.ts';
+		initInPageNav();
+	</script>
 </BaseLayout>

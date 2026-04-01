@@ -43,8 +43,19 @@
 	box-sizing: border-box;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+	html {
+		scroll-behavior: smooth;
+	}
+}
+
+/* In-page targets: heading/title aligns with top of viewport (not section padding box). */
+.site-main :is(h1, h2)[id] {
+	scroll-margin-top: max(0.75rem, env(safe-area-inset-top, 0px));
+}
+
 html {
-	scroll-behavior: auto;
+	scroll-padding-top: max(0.75rem, env(safe-area-inset-top, 0px));
 }
 
 body {
@@ -224,6 +235,23 @@ h3 {
 
 .nav a:focus-visible {
 	color: var(--accent);
+}
+
+.nav a[aria-current='location'] {
+	color: var(--text);
+	font-weight: 600;
+}
+
+.nav a[aria-current='location']:hover {
+	color: var(--accent);
+}
+
+@media (max-width: 879px) {
+	.nav a[aria-current='location'] {
+		text-decoration: underline;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 0.2em;
+	}
 }
 
 /* —— Main —— */
