@@ -22,9 +22,10 @@ export const projects: Project[] = [
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
 		languages: ['JavaScript'],
 		problem: 'Run a personal music stack without depending on a third-party streaming backend.',
-		approach: 'Split backend responsibilities (library, streaming) from the web client; repo is the reference for architecture.',
+		approach:
+			'Separate backend duties (library, streaming) from the web client, with architecture documented alongside the code.',
 		stack: ['JavaScript', 'Node ecosystem', 'Web client'],
-		reflection: 'This repository documents how the stack is organized end to end.',
+		reflection: 'End-to-end layout from media library through streaming to the client.',
 	},
 	{
 		slug: 'docker-reader',
@@ -33,9 +34,9 @@ export const projects: Project[] = [
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
 		languages: ['JavaScript'],
 		problem: 'Keep reading progress across devices with a deployable, portable setup.',
-		approach: 'Package the app in Docker so deployment and data paths are explicit in the repo.',
+		approach: 'Package the app in Docker so deployment and data paths are explicit and reproducible.',
 		stack: ['Docker', 'Web stack'],
-		reflection: 'Dockerfile and compose files are the source of truth for how the app runs.',
+		reflection: 'Dockerfile and Compose define how the app runs in practice.',
 	},
 	{
 		slug: 'synesthetic-visualizer',
@@ -44,9 +45,9 @@ export const projects: Project[] = [
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
 		languages: ['Rust'],
 		problem: 'Visualize audio with harmonic structure and low latency.',
-		approach: 'Rust for the real-time path; see the repo for rendering and audio pipeline details.',
+		approach: 'Rust on the real-time path; rendering and audio pipeline are implemented in the project sources.',
 		stack: ['Rust', 'Audio', 'Graphics'],
-		reflection: 'Implementation details live in the repo and commits.',
+		reflection: 'Finer points live in the implementation and in recent commits.',
 	},
 	{
 		slug: 'brain',
@@ -57,7 +58,7 @@ export const projects: Project[] = [
 		problem: 'Central place for small Python tools and prototypes.',
 		approach: 'Keep work public and incremental rather than a polished product-only release.',
 		stack: ['Python'],
-		reflection: 'Use the repo history for how ideas evolve.',
+		reflection: 'Commit history shows how experiments and tools evolved.',
 	},
 	{
 		slug: 'remove-multi-titles-yt',
@@ -66,8 +67,8 @@ export const projects: Project[] = [
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
 		languages: ['JavaScript'],
 		problem: 'Reduce duplicate or inconsistent titles for the same video in the browser.',
-		approach: 'Small, focused extension; scope is defined in the repository.',
+		approach: 'Small, focused extension with behaviour and scope defined in source and manifest.',
 		stack: ['WebExtensions', 'JavaScript'],
-		reflection: 'Manifest and store listings in the repo describe distribution.',
+		reflection: 'Manifest and store listings cover packaging and distribution.',
 	},
 ];

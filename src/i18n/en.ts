@@ -1,6 +1,5 @@
 import type { Messages } from './types';
 
-/** English copy — default site language. */
 export const en: Messages = {
 	meta: {
 		title: 'Rubén Peña Rubio — Junior Linux Systems Administrator · DevOps',
@@ -14,10 +13,10 @@ export const en: Messages = {
 		ariaLabel: 'Primary',
 		intro: 'Intro',
 		skills: 'Skills',
-		selectedWork: 'Selected work',
+		selectedWork: 'Featured work',
 		repositories: 'Repositories',
 		education: 'Education',
-		cvFile: 'CV file',
+		cvFile: 'Résumé',
 		contact: 'Contact',
 		github: 'GitHub',
 	},
@@ -29,24 +28,24 @@ export const en: Messages = {
 	sections: {
 		skills: {
 			title: 'Technical skills',
-			intro: 'As listed on the CV.',
+			intro: 'Operating systems, infrastructure, networking, and tooling I use regularly.',
 		},
 		selectedWork: {
-			title: 'Selected work',
-			intro: 'Infrastructure and automation projects from the CV.',
+			title: 'Featured work',
+			intro: 'Hands-on infrastructure and automation from my home lab and day-to-day practice.',
 		},
 		projects: {
 			title: 'Public repositories',
-			intro: 'Open source on GitHub (problem / approach / stack / note per repo).',
+			intro: 'Open-source work on GitHub with a short write-up for each project below.',
 		},
 		education: {
 			title: 'Education',
 		},
 		cv: {
-			title: 'CV file',
-			downloadCv: 'Download CV.md',
-			viewCv: 'View CV.md',
-			cvRepo: 'CV repository',
+			title: 'Résumé',
+			downloadCv: 'Download résumé',
+			viewCv: 'View online',
+			cvRepo: 'Source on GitHub',
 		},
 		contact: {
 			title: 'Contact',
@@ -66,7 +65,7 @@ export const en: Messages = {
 			stack: 'Python, Docker, SQLite',
 			bullets: [
 				'Managed persistent data storage with SQLite and automated media indexing.',
-				'Outcome: daily driven system maintaining 99% uptime on a personal headless server.',
+				'System in daily use with ~99% uptime on a personal headless server.',
 			],
 		},
 		{
@@ -74,8 +73,8 @@ export const en: Messages = {
 			stack: 'Linux, Tailscale',
 			bullets: [
 				'Architected a secure remote-access workflow using Tailscale and Mosh to maintain and manage a headless server located in Seville from a ThinkPad anywhere in Spain.',
-				'Configured tailscale-network-wide ad-blocking using Pi-hole.',
-				'Handled hardware overclocks and curve oprmizations for peak stability.',
+				'Configured network-wide ad blocking with Pi-hole over Tailscale.',
+				'Tuned hardware overclocks and power curves for stable sustained load.',
 			],
 		},
 	],
@@ -86,9 +85,9 @@ export const en: Messages = {
 	},
 	projectCase: {
 		repository: 'Repository',
-		problem: 'Problem',
+		problem: 'Challenge',
 		approach: 'Approach',
-		stack: 'Stack',
-		reflection: 'Reflection',
+		stack: 'Technologies',
+		reflection: 'Takeaways',
 	},
 };

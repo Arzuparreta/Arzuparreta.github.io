@@ -1,9 +1,5 @@
 import type { Messages } from './types';
 
-/**
- * Spanish copy — use with `getMessages('es')` when you add `/es/` or a locale switch.
- * Repository project blurbs (`data/projects.ts`) stay in English until you add per-locale project data.
- */
 export const es: Messages = {
 	meta: {
 		title: 'Rubén Peña Rubio — Administrador de sistemas Linux junior · DevOps',
@@ -20,7 +16,7 @@ export const es: Messages = {
 		selectedWork: 'Trabajos destacados',
 		repositories: 'Repositorios',
 		education: 'Formación',
-		cvFile: 'CV',
+		cvFile: 'Currículum',
 		contact: 'Contacto',
 		github: 'GitHub',
 	},
@@ -32,24 +28,24 @@ export const es: Messages = {
 	sections: {
 		skills: {
 			title: 'Habilidades técnicas',
-			intro: 'Como figuran en el CV.',
+			intro: 'Sistemas operativos, infraestructura, redes y herramientas que uso con frecuencia.',
 		},
 		selectedWork: {
 			title: 'Trabajos destacados',
-			intro: 'Proyectos de infraestructura y automatización del CV.',
+			intro: 'Infraestructura y automatización en laboratorio casero y en la práctica diaria.',
 		},
 		projects: {
 			title: 'Repositorios públicos',
-			intro: 'Código abierto en GitHub (problema / enfoque / stack / nota por repositorio).',
+			intro: 'Código abierto en GitHub; cada proyecto incluye un breve contexto.',
 		},
 		education: {
 			title: 'Formación',
 		},
 		cv: {
-			title: 'Archivo CV',
-			downloadCv: 'Descargar CV.md',
-			viewCv: 'Ver CV.md',
-			cvRepo: 'Repositorio del CV',
+			title: 'Currículum',
+			downloadCv: 'Descargar currículum',
+			viewCv: 'Ver en línea',
+			cvRepo: 'Código en GitHub',
 		},
 		contact: {
 			title: 'Contacto',
@@ -89,9 +85,9 @@ export const es: Messages = {
 	},
 	projectCase: {
 		repository: 'Repositorio',
-		problem: 'Problema',
+		problem: 'Reto',
 		approach: 'Enfoque',
-		stack: 'Stack',
-		reflection: 'Reflexión',
+		stack: 'Tecnologías',
+		reflection: 'Notas',
 	},
 };

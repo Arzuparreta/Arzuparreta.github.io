@@ -495,7 +495,7 @@ h3 {
 	line-height: 1.55;
 }
 
-/* —— CV —— */
+/* Résumé / download block */
 .cv-summary {
 	font-size: var(--text-base);
 	color: var(--text-muted);
@@ -590,7 +590,7 @@ h3 {
 	border: 0;
 }
 
-/* CV-selected work + education (factual blocks) */
+/* Featured work samples */
 .cv-work {
 	margin-bottom: var(--s-5);
 	padding-bottom: var(--s-4);
