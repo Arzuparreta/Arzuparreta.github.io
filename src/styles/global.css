@@ -256,6 +256,32 @@ h3 {
 	color: var(--accent);
 }
 
+.nav a.nav__github {
+	gap: 0.5rem;
+	padding: 0.375rem 0.625rem;
+	border: 1px solid var(--border);
+	border-radius: 2px;
+	background: var(--surface);
+	min-height: auto;
+}
+
+.nav__github-icon {
+	flex-shrink: 0;
+	width: 1.125rem;
+	height: 1.125rem;
+	display: block;
+}
+
+.nav a.nav__github:hover {
+	border-color: var(--accent);
+}
+
+.nav a.nav__github:focus-visible {
+	border-color: var(--accent);
+	outline: 2px solid var(--focus-ring);
+	outline-offset: 2px;
+}
+
 /* —— Language switcher (sidebar bottom on wide viewports) —— */
 .lang-switcher {
 	display: flex;
