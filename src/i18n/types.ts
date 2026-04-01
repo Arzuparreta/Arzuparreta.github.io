@@ -15,6 +15,11 @@ export type Messages = {
 		cvFile: string;
 		contact: string;
 		github: string;
+		linkedin: string;
+	};
+	theme: {
+		switchToLight: string;
+		switchToDark: string;
 	};
 	identity: {
 		headline: string;

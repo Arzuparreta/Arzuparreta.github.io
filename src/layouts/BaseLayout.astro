@@ -40,8 +40,22 @@ const ogLocale = lang === 'es' ? 'es_ES' : 'en_GB';
 		<meta name="description" content={description} />
 		<meta name="author" content={site.name} />
 		<meta name="color-scheme" content="light dark" />
-		<meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)" />
-		<meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+		<meta id="theme-color-meta" name="theme-color" content="#f5f5f7" />
+		<script is:inline>
+			(function () {
+				try {
+					var t = localStorage.getItem('theme');
+					if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+					var m = document.getElementById('theme-color-meta');
+					if (m) {
+						var dark =
+							t === 'dark' ||
+							(!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+						m.setAttribute('content', dark ? '#000000' : '#f5f5f7');
+					}
+				} catch (e) {}
+			})();
+		</script>
 		<link rel="canonical" href={canonical} />
 		{alternates?.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
 

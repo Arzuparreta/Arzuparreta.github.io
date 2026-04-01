@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import GitHubIcon from './GitHubIcon.astro';
+import LinkedInIcon from './LinkedInIcon.astro';
 import ProjectCase from './ProjectCase.astro';
 import SmallTool from './SmallTool.astro';
 import { getPrimaryProjects, getSecondaryProjects } from '../data/projects';
@@ -148,40 +149,90 @@ const localeBundleJson = JSON.stringify({
 		</main>
 
 		<footer class="site-bottom-bar" aria-label={t.a11y.siteAside}>
-			<a
-				class="site-bottom-bar__github"
-				href={site.github}
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<GitHubIcon class="site-bottom-bar__github-icon" />
-				<span data-i18n="nav.github">{t.nav.github}</span>
-			</a>
-			<nav class="lang-switcher" aria-label={t.language.ariaLabel}>
-				<a
-					class="lang-switcher__link"
-					href={hrefEn}
-					hreflang="en"
-					lang="en"
-					data-i18n="language.english"
-					data-locale-target="en"
-					aria-current={locale === 'en' ? 'page' : undefined}
+			<div class="site-bottom-bar__left">
+				<button
+					type="button"
+					class="theme-toggle"
+					id="theme-toggle"
+					aria-pressed="false"
+					aria-label={t.theme.switchToDark}
 				>
-					{t.language.english}
-				</a>
-				<span class="lang-switcher__sep" aria-hidden="true">·</span>
+					<svg
+						class="theme-toggle__icon theme-toggle__icon--sun"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<circle cx="12" cy="12" r="4"></circle>
+						<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+					</svg>
+					<svg
+						class="theme-toggle__icon theme-toggle__icon--moon"
+						xmlns="http://www.w3.org/2000/svg"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+					</svg>
+				</button>
+			</div>
+			<div class="site-bottom-bar__center">
 				<a
-					class="lang-switcher__link"
-					href={hrefEs}
-					hreflang="es"
-					lang="es"
-					data-i18n="language.spanish"
-					data-locale-target="es"
-					aria-current={locale === 'es' ? 'page' : undefined}
+					class="site-bottom-bar__social"
+					href={site.github}
+					target="_blank"
+					rel="noopener noreferrer"
 				>
-					{t.language.spanish}
+					<GitHubIcon class="site-bottom-bar__social-icon" />
+					<span data-i18n="nav.github">{t.nav.github}</span>
 				</a>
-			</nav>
+				<a
+					class="site-bottom-bar__social"
+					href={site.linkedin}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<LinkedInIcon class="site-bottom-bar__social-icon" />
+					<span data-i18n="nav.linkedin">{t.nav.linkedin}</span>
+				</a>
+			</div>
+			<div class="site-bottom-bar__right">
+				<nav class="lang-switcher" aria-label={t.language.ariaLabel}>
+					<a
+						class="lang-switcher__link"
+						href={hrefEn}
+						hreflang="en"
+						lang="en"
+						data-i18n="language.english"
+						data-locale-target="en"
+						aria-current={locale === 'en' ? 'page' : undefined}
+					>
+						{t.language.english}
+					</a>
+					<span class="lang-switcher__sep" aria-hidden="true">·</span>
+					<a
+						class="lang-switcher__link"
+						href={hrefEs}
+						hreflang="es"
+						lang="es"
+						data-i18n="language.spanish"
+						data-locale-target="es"
+						aria-current={locale === 'es' ? 'page' : undefined}
+					>
+						{t.language.spanish}
+					</a>
+				</nav>
+			</div>
 		</footer>
 	</div>
 </BaseLayout>

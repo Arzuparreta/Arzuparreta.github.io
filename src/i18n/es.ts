@@ -18,6 +18,11 @@ export const es: Messages = {
 		cvFile: 'Currículum',
 		contact: 'Contacto',
 		github: 'GitHub',
+		linkedin: 'LinkedIn',
+	},
+	theme: {
+		switchToLight: 'Cambiar a tema claro',
+		switchToDark: 'Cambiar a tema oscuro',
 	},
 	identity: {
 		headline: 'Administrador de Sistemas Linux Junior\u00a0|\u00a0Entusiasta DevOps',

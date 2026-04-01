@@ -5,6 +5,7 @@
 import type { Locale } from '../i18n/config';
 import type { Messages } from '../i18n/types';
 import type { PrimaryProject, SecondaryProject } from '../data/projects';
+import { refreshThemeButton } from './theme';
 
 export type LocaleBundle = {
 	baseUrl: string;
@@ -195,6 +196,7 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 			a.removeAttribute('aria-current');
 		}
 	});
+	refreshThemeButton(bundle);
 }
 
 export function initLocaleClient(bundle: LocaleBundle): void {
