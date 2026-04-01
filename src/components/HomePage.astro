@@ -207,7 +207,7 @@ const localeBundleJson = JSON.stringify({
 				</a>
 			</div>
 			<div class="site-bottom-bar__right">
-				<nav class="lang-switcher lang-switcher--desktop" aria-label={t.language.ariaLabel}>
+				<nav class="lang-switcher" aria-label={t.language.ariaLabel}>
 					<a
 						class="lang-switcher__link"
 						href={hrefEn}
@@ -228,30 +228,6 @@ const localeBundleJson = JSON.stringify({
 						data-i18n="language.spanish"
 						data-locale-target="es"
 						aria-current={locale === 'es' ? 'page' : undefined}
-					>
-						{t.language.spanish}
-					</a>
-				</nav>
-				<nav class="lang-switcher lang-switcher--compact" aria-label={t.language.ariaLabel}>
-					<a
-						class="lang-switcher__link lang-switcher__link--compact"
-						href={hrefEn}
-						hreflang="en"
-						lang="en"
-						data-i18n="language.english"
-						data-locale-target="en"
-						hidden={locale === 'en'}
-					>
-						{t.language.english}
-					</a>
-					<a
-						class="lang-switcher__link lang-switcher__link--compact"
-						href={hrefEs}
-						hreflang="es"
-						lang="es"
-						data-i18n="language.spanish"
-						data-locale-target="es"
-						hidden={locale === 'es'}
 					>
 						{t.language.spanish}
 					</a>
