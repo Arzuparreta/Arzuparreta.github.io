@@ -31,11 +31,11 @@ export const es: Messages = {
 	},
 	sections: {
 		skills: {
-			title: 'Habilidades Técnicas',
+			title: 'Habilidades',
 			intro: 'Sistemas operativos, infraestructura, redes y automatización.',
 		},
 		projects: {
-			title: 'Proyectos Técnicos',
+			title: 'Proyectos',
 			intro: 'Implementaciones reales: arquitectura, despliegue y operación.',
 			smallerTools: 'Herramientas y scripts menores',
 			githubCta: 'Ver configuración y código fuente en GitHub',

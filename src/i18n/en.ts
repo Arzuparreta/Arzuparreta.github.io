@@ -31,11 +31,11 @@ export const en: Messages = {
 	},
 	sections: {
 		skills: {
-			title: 'Technical skills',
+			title: 'Skills',
 			intro: 'Operating systems, infrastructure, networking, and tooling I use regularly.',
 		},
 		projects: {
-			title: 'Technical projects',
+			title: 'Projects',
 			intro: 'What I built, why it matters, and how it actually runs.',
 			smallerTools: 'Smaller Tools & Scripts',
 			githubCta: 'View configuration and source code on GitHub',
