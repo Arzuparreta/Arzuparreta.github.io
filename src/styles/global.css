@@ -378,7 +378,7 @@ h3 {
 	color: var(--text);
 }
 
-/* —— Project case (card + dl grid) —— */
+/* —— Project case (card) —— */
 .case {
 	border: 1px solid var(--border);
 	border-radius: 2px;
@@ -392,14 +392,14 @@ h3 {
 }
 
 .case__top {
-	margin-bottom: 0;
+	margin-bottom: var(--s-3);
 }
 
 .case__title {
 	font-size: var(--text-lg);
 	font-weight: 600;
-	margin: 0 0 var(--s-1);
-	line-height: 1.35;
+	margin: 0;
+	line-height: 1.4;
 }
 
 .case__title-link {
@@ -413,54 +413,94 @@ h3 {
 	text-decoration: underline;
 }
 
-.case__tagline {
-	font-size: var(--text-sm);
+.case__title-sep,
+.case__tech {
+	font-weight: 400;
 	color: var(--text-muted);
-	margin: 0 0 var(--s-2);
-	line-height: 1.45;
 }
 
-.case__meta {
+.case__tech {
+	font-size: var(--text-sm);
+}
+
+.case__why {
+	margin: 0 0 var(--s-3);
+	font-size: var(--text-sm);
+	line-height: 1.55;
+	color: var(--text);
+}
+
+.case__how {
+	margin: 0 0 var(--s-3);
+	padding-left: 1.15rem;
+	font-size: var(--text-sm);
+	line-height: 1.55;
+	color: var(--text);
+}
+
+.case__how li {
+	margin-bottom: var(--s-2);
+}
+
+.case__how li:last-child {
+	margin-bottom: 0;
+}
+
+.case__cta {
 	margin: 0;
 	font-size: var(--text-sm);
+}
+
+.case__cta a {
 	color: var(--text-muted);
-	line-height: 1.45;
+	text-decoration: none;
 }
 
-.case__dl {
-	margin: var(--s-4) 0 0;
-	display: grid;
-	grid-template-columns: minmax(5.5rem, 7rem) 1fr;
-	gap: var(--s-2) var(--s-3);
-	font-size: var(--text-sm);
+.case__cta a:hover {
+	color: var(--accent);
+	text-decoration: underline;
 }
 
-@media (max-width: 480px) {
-	.case__dl {
-		grid-template-columns: 1fr;
-		gap: var(--s-1);
-	}
+/* —— Smaller tools (compact) —— */
+.small-tools {
+	display: flex;
+	flex-direction: column;
+	gap: var(--s-3);
 }
 
-.case__dt {
+.small-tool {
+	border: 1px solid var(--border);
+	border-radius: 2px;
+	background: var(--surface);
+	padding: var(--s-3) var(--s-4);
+}
+
+.small-tool__line {
 	margin: 0;
-	padding: 0;
+	font-size: var(--text-sm);
+	line-height: 1.55;
+	color: var(--text);
+}
+
+.small-tool__name {
 	font-weight: 600;
 	color: var(--text-muted);
-	font-size: var(--text-sm);
-	text-transform: uppercase;
-	letter-spacing: 0.04em;
 }
 
-.case__dd {
-	margin: 0;
-	padding: 0;
-	color: var(--text);
-	line-height: 1.55;
+.small-tool__sep,
+.small-tool__tech {
+	font-weight: 400;
+	color: var(--text-muted);
 }
 
-.case__dd p {
-	margin: 0;
+.small-tool__cta {
+	color: var(--text-muted);
+	text-decoration: none;
+}
+
+.small-tool__cta:hover {
+	color: var(--accent);
+	text-decoration: underline;
 }
 
 /* —— Philosophy (flat list, no cards) —— */

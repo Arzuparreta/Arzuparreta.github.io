@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * Downloads canonical CV.md from github.com/Arzuparreta/CV before build.
+ * Optionally downloads CV.md from github.com/Arzuparreta/CV before build.
+ * Default build uses SKIP_FETCH_CV=1 and the committed public/resume/CV.md.
  * @see https://github.com/Arzuparreta/CV
  */
 import { mkdir, writeFile } from 'node:fs/promises';

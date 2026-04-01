@@ -23,5 +23,3 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# Canonical CV is fetched from github.com/Arzuparreta/CV at build time (see scripts/fetch-cv.mjs)
-public/resume/CV.md

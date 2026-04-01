@@ -4,7 +4,7 @@ export const es: Messages = {
 	meta: {
 		title: 'Rubén Peña Rubio — Administrador de sistemas Linux junior · DevOps',
 		description:
-			'Administrador junior centrado en infraestructura y Linux en Sevilla, España: Docker, Debian, redes, automatización con Python, Bash, Git. Autodidacta con formación en interpretación musical.',
+			'Linux e infraestructura autodidacta en Sevilla: homelab, Docker, automatización con Python, Debian. Músico clásico en transición a administración de sistemas / operaciones.',
 	},
 	a11y: {
 		skipToContent: 'Saltar al contenido',
@@ -30,9 +30,9 @@ export const es: Messages = {
 		},
 		projects: {
 			title: 'Proyectos técnicos',
-			intro:
-				'Cómo se aloja y opera cada cosa, no solo qué hace el código. Cada entrada enlaza el stack con el despliegue y el resultado.',
-			smallerTools: 'Herramientas menores',
+			intro: 'Qué construí, para qué sirve y cómo funciona en la práctica.',
+			smallerTools: 'Herramientas y scripts menores',
+			githubCta: 'Ver configuración y código fuente en GitHub',
 		},
 		cv: {
 			title: 'Currículum',
@@ -45,16 +45,11 @@ export const es: Messages = {
 		},
 	},
 	profileLead:
-		'Infraestructura, Linux y Docker son mi foco principal: trabajo autodidacta en sistemas con más de 10 años de experiencia con hardware y SO y dos años centrados en contenedores, redes y automatización con Python. Formación en análisis e interpretación musical. Busco un puesto junior de administrador de sistemas o DevOps.',
+		'Autodidacta en sistemas: una década trasteando hardware y dos años muy enfocados en Linux, Docker y automatización con Python. Monto y mantengo un homelab fiable y servicios en contenedores. Paso de la interpretación musical clásica a operaciones TI.',
 	technicalSkills: [
 		'Sistemas operativos: UNIX/Linux (Arch, Debian, Ubuntu)',
 		'Infraestructura: Docker, Docker Compose, Portainer',
 		'Redes: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automatización: Python (CLI y desarrollo de APIs), Bash, Git',
 	],
-	projectCase: {
-		stack: 'El stack',
-		architecture: 'La arquitectura',
-		keyFeature: 'Logro clave',
-	},
 };

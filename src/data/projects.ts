@@ -1,103 +1,104 @@
 /**
- * Technical projects — infrastructure-first narrative.
+ * Technical projects — plain narrative, no template labels in the UI.
  * https://github.com/Arzuparreta
  */
 export type ProjectTier = 'primary' | 'secondary';
 
-export type Project = {
+export type PrimaryProject = {
 	slug: string;
 	title: string;
-	tagline: string;
+	/** Comma-separated core technologies (shown after title). */
+	tech: string;
+	/** What it is and what problem it solves. */
+	why: string;
+	/** One or two concrete technical or operational details. */
+	how: [string] | [string, string];
 	repoUrl: string;
-	languages: string[];
-	/** Tools and platforms (Docker, Linux, Tailscale, etc.) */
-	stack: string;
-	/** How and where it runs (hosting, topology, deployment). */
-	architecture: string;
-	/** One concrete technical outcome or win. */
-	keyFeature: string;
-	tier: ProjectTier;
-	liveUrl?: string;
+	tier: 'primary';
 };
+
+export type SecondaryProject = {
+	slug: string;
+	title: string;
+	tech: string;
+	/** Single sentence for compact listing. */
+	summary: string;
+	repoUrl: string;
+	tier: 'secondary';
+};
+
+export type Project = PrimaryProject | SecondaryProject;
 
 export const projects: Project[] = [
 	{
 		slug: 'homelab',
 		title: 'Remote administration & homelab',
-		tagline:
-			'Zero-trust remote access, network-wide DNS filtering, and day-to-day ops on a headless home server.',
-		repoUrl: 'https://github.com/Arzuparreta',
-		languages: ['Linux', 'Tailscale'],
-		stack: 'Debian Linux, Tailscale (mesh VPN), Mosh, SSH, Pi-hole, tuned hardware for stable sustained load.',
-		architecture:
-			'A headless server in Seville acts as the home backbone; I maintain it from a ThinkPad using Mosh over Tailscale for encrypted, low-latency access from anywhere in Spain. Pi-hole provides network-wide ad blocking across the Tailscale mesh.',
-		keyFeature:
-			'Secure remote administration without exposing SSH to the public internet—Tailscale as the zero-trust perimeter.',
+		tech: 'Debian, Tailscale, Pi-hole, SSH, Mosh',
+		why:
+			'A headless home server in Seville is my day-to-day ops base: I need reliable remote access, sane DNS, and ad blocking across the network without opening SSH to the whole internet.',
+		how: [
+			'I administer it from a ThinkPad over Tailscale with Mosh for resilient sessions; Pi-hole sits on the mesh for network-wide filtering.',
+			'No public SSH: Tailscale is the only path in, which keeps the attack surface small.',
+		],
 		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta',
 	},
 	{
 		slug: 'soundsible',
 		title: 'soundsible',
-		tagline: 'Self-hosted music platform: library, streaming, and web client backed by your own machine.',
-		repoUrl: 'https://github.com/Arzuparreta/soundsible',
-		languages: ['JavaScript'],
-		stack: 'JavaScript/Node, SQLite, Docker, Python for media tooling where applicable; runs on a personal Linux server.',
-		architecture:
-			'Services split between library/indexing, streaming, and web client, with SQLite for persistent catalog data on a headless host—documented alongside the code.',
-		keyFeature:
-			'Daily-use stack with roughly 99% uptime on self-hosted hardware and automated media indexing.',
+		tech: 'JavaScript, Node, SQLite, Docker, Python',
+		why:
+			'Self-hosted music library and streaming so my collection lives on hardware I control, with a web client and indexing that stay in sync.',
+		how: [
+			'SQLite holds the catalog on a headless Linux host; services split between indexing, streaming, and the web UI, all documented in the repo.',
+			'It runs as daily-use infrastructure with stable uptime on that box.',
+		],
 		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta/soundsible',
 	},
 	{
 		slug: 'synesthetic-visualizer',
 		title: 'synesthetic-visualizer',
-		tagline: 'Real-time Rust audio visualizer in a 3D Tonnetz space.',
-		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
-		languages: ['Rust'],
-		stack: 'Rust, audio I/O, GPU-oriented graphics, real-time pipeline.',
-		architecture:
-			'Native desktop build with Rust on the low-latency audio and render path; harmonic structure mapped into 3D Tonnetz visualization driven from live input.',
-		keyFeature:
-			'Performance-critical audio and graphics handled in Rust to keep visualization aligned with the signal.',
+		tech: 'Rust, real-time audio, GPU-oriented graphics',
+		why:
+			'A desktop app that maps live audio into a 3D Tonnetz so harmonic relationships are visible in real time—useful for ear training and experimentation.',
+		how: [
+			'Rust owns the low-latency capture and render path so the picture stays locked to the signal.',
+		],
 		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
 	},
 	{
 		slug: 'docker-reader',
 		title: 'docker-reader',
-		tagline: 'Reader for books across devices; shipped with Docker.',
-		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
-		languages: ['JavaScript'],
-		stack: 'Docker, Docker Compose, JavaScript web stack.',
-		architecture:
-			'Packaged as a containerized service with explicit volume and config paths so it deploys the same way on any Docker host.',
-		keyFeature: 'Reproducible deploys: Dockerfile and Compose define how the app runs in practice.',
+		tech: 'Docker, Docker Compose, JavaScript',
+		why:
+			'A personal ebook reader I can run anywhere Docker runs, with the same layout of volumes and config on every machine.',
+		how: [
+			'Dockerfile and Compose pin how the app starts, mounts data, and picks up settings—no one-off server setup.',
+		],
 		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
 	},
 	{
 		slug: 'brain',
 		title: 'brain',
-		tagline: 'Python workspace for experiments and tooling.',
+		tech: 'Python',
+		summary:
+			'Public monorepo of small Python CLIs and experiments—commit history is the story of turning throwaways into reusable tools.',
 		repoUrl: 'https://github.com/Arzuparreta/brain',
-		languages: ['Python'],
-		stack: 'Python, small CLIs and scripts.',
-		architecture:
-			'Public monorepo of incremental experiments—no single production topology; each tool is a small, focused workflow.',
-		keyFeature: 'Commit history shows how prototypes evolve into reusable utilities.',
 		tier: 'secondary',
 	},
 	{
 		slug: 'remove-multi-titles-yt',
 		title: 'remove-multi-titles-yt',
-		tagline: 'Browser extension to normalize YouTube titles (Chrome/Firefox).',
+		tech: 'JavaScript, WebExtensions',
+		summary:
+			'Chrome/Firefox extension that strips duplicate junk from YouTube titles—one narrow DOM fix, no extra services.',
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
-		languages: ['JavaScript'],
-		stack: 'WebExtensions API, JavaScript, Chrome/Firefox manifests.',
-		architecture:
-			'Runs entirely in the browser; packaging and store listings are defined in the manifest and repository.',
-		keyFeature: 'Narrow scope: fix inconsistent duplicate titles without extra moving parts.',
 		tier: 'secondary',
 	},
 ];
 
-export const primaryProjects = projects.filter((p) => p.tier === 'primary');
-export const secondaryProjects = projects.filter((p) => p.tier === 'secondary');
+export const primaryProjects = projects.filter((p): p is PrimaryProject => p.tier === 'primary');
+export const secondaryProjects = projects.filter((p): p is SecondaryProject => p.tier === 'secondary');

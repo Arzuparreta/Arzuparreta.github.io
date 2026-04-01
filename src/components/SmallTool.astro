@@ -1,0 +1,21 @@
+---
+import type { SecondaryProject } from '../data/projects';
+
+interface Props {
+	tool: SecondaryProject;
+	githubCta: string;
+}
+
+const { tool, githubCta } = Astro.props;
+---
+
+<article class="small-tool" id={tool.slug}>
+	<p class="small-tool__line">
+		<strong class="small-tool__name">{tool.title}</strong>
+		<span class="small-tool__sep" aria-hidden="true"> | </span>
+		<span class="small-tool__tech">{tool.tech}.</span>
+		{' '}
+		{tool.summary}{' '}
+		<a class="small-tool__cta" href={tool.repoUrl} target="_blank" rel="noopener noreferrer">{githubCta}</a>
+	</p>
+</article>

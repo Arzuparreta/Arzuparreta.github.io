@@ -1,13 +1,12 @@
 ---
-import type { Project } from '../data/projects';
-import type { Messages } from '../i18n/types';
+import type { PrimaryProject } from '../data/projects';
 
 interface Props {
-	project: Project;
-	labels: Messages['projectCase'];
+	project: PrimaryProject;
+	githubCta: string;
 }
 
-const { project, labels } = Astro.props;
+const { project, githubCta } = Astro.props;
 ---
 
 <article class="case" id={project.slug}>
@@ -16,16 +15,17 @@ const { project, labels } = Astro.props;
 			<a class="case__title-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
 				{project.title}
 			</a>
+			<span class="case__title-sep" aria-hidden="true"> | </span>
+			<span class="case__tech">{project.tech}</span>
 		</h3>
-		<p class="case__tagline">{project.tagline}</p>
-		<p class="case__meta">{project.languages.join(' · ')}</p>
 	</header>
-	<dl class="case__dl">
-		<dt class="case__dt">{labels.stack}</dt>
-		<dd class="case__dd"><p>{project.stack}</p></dd>
-		<dt class="case__dt">{labels.architecture}</dt>
-		<dd class="case__dd"><p>{project.architecture}</p></dd>
-		<dt class="case__dt">{labels.keyFeature}</dt>
-		<dd class="case__dd"><p>{project.keyFeature}</p></dd>
-	</dl>
+	<p class="case__why">{project.why}</p>
+	<ul class="case__how">
+		{project.how.map((line) => (
+			<li>{line}</li>
+		))}
+	</ul>
+	<p class="case__cta">
+		<a href={project.repoUrl} target="_blank" rel="noopener noreferrer">{githubCta}</a>
+	</p>
 </article>

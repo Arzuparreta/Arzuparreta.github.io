@@ -22,15 +22,15 @@ export type Messages = {
 	};
 	sections: {
 		skills: { title: string; intro: string };
-		projects: { title: string; intro: string; smallerTools: string };
+		projects: {
+			title: string;
+			intro: string;
+			smallerTools: string;
+			githubCta: string;
+		};
 		cv: { title: string; downloadCv: string; viewCv: string; cvRepo: string };
 		contact: { title: string };
 	};
 	profileLead: string;
 	technicalSkills: string[];
-	projectCase: {
-		stack: string;
-		architecture: string;
-		keyFeature: string;
-	};
 };

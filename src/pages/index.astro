@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCase from '../components/ProjectCase.astro';
+import SmallTool from '../components/SmallTool.astro';
 import { primaryProjects, secondaryProjects } from '../data/projects';
 import { site } from '../data/site';
 import { defaultLocale, getMessages } from '../i18n';
@@ -67,11 +68,17 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 				<section id="projects" class="section" aria-labelledby="projects-heading">
 					<h2 id="projects-heading">{t.sections.projects.title}</h2>
 					<p class="section__intro">{t.sections.projects.intro}</p>
-					{primaryProjects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
+					{primaryProjects.map((project) => (
+						<ProjectCase project={project} githubCta={t.sections.projects.githubCta} />
+					))}
 					<h3 id="smaller-tools-heading" class="section__subheading">
 						{t.sections.projects.smallerTools}
 					</h3>
-					{secondaryProjects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
+					<div class="small-tools">
+						{secondaryProjects.map((tool) => (
+							<SmallTool tool={tool} githubCta={t.sections.projects.githubCta} />
+						))}
+					</div>
 				</section>
 
 				<section id="cv" class="section" aria-labelledby="cv-heading">

@@ -1,5 +1,5 @@
 # Build Astro static site and deploy to GitHub Pages (artifact-based).
-# npm run build runs scripts/fetch-cv.mjs then astro build (canonical CV from github.com/Arzuparreta/CV).
+# CV is committed as public/resume/CV.md; SKIP_FETCH_CV=1 skips download from github.com/Arzuparreta/CV.
 # Repository settings → Pages → Build and deployment → Source: GitHub Actions
 name: Deploy GitHub Pages
 

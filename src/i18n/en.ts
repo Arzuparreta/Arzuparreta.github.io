@@ -4,7 +4,7 @@ export const en: Messages = {
 	meta: {
 		title: 'Rubén Peña Rubio — Junior Linux Systems Administrator · DevOps',
 		description:
-			'Infrastructure and Linux-focused junior sysadmin in Seville, Spain: Docker, Debian, networking, Python automation, Bash, Git. Self-taught with a music performance background.',
+			'Self-taught Linux and infrastructure in Seville: homelab, Docker, Python automation, Debian. Classical musician moving into junior sysadmin / ops work.',
 	},
 	a11y: {
 		skipToContent: 'Skip to content',
@@ -30,9 +30,9 @@ export const en: Messages = {
 		},
 		projects: {
 			title: 'Technical projects',
-			intro:
-				'How things are hosted and operated—not only what the code does. Each entry ties stack choices to deployment and outcomes.',
-			smallerTools: 'Smaller tools',
+			intro: 'What I built, why it matters, and how it actually runs.',
+			smallerTools: 'Smaller Tools & Scripts',
+			githubCta: 'View configuration and source code on GitHub',
 		},
 		cv: {
 			title: 'CV',
@@ -45,16 +45,11 @@ export const en: Messages = {
 		},
 	},
 	profileLead:
-		'Infrastructure, Linux, and Docker are my core focus: self-taught systems work with 10+ years of hardware and OS experience and two years concentrated on containerization, networking, and Python automation. Background in musical analysis and interpretation. Seeking a Junior Systems Administrator or DevOps role.',
+		'Self-taught systems enthusiast with a decade of hardware tinkering and two years of deep focus on Linux, Docker, and Python automation. I build and maintain reliable homelab infrastructure and containerized services. Transitioning from a rigorous background in classical music performance to IT operations.',
 	technicalSkills: [
 		'Operating systems: UNIX/Linux (Arch, Debian, Ubuntu)',
 		'Infrastructure: Docker, Docker Compose, Portainer',
 		'Networking: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automation: Python (CLI and API development), Bash, Git',
 	],
-	projectCase: {
-		stack: 'The stack',
-		architecture: 'The architecture',
-		keyFeature: 'Key feature',
-	},
 };
