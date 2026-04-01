@@ -1,4 +1,5 @@
 ---
+import GitHubIcon from './GitHubIcon.astro';
 import type { PrimaryProject } from '../data/projects';
 
 interface Props {
@@ -19,13 +20,24 @@ const imgAlt = `${project.title}${projectImageAltSuffix}`;
 >
 	<div class="case__main">
 		<header class="case__top">
-			<h3 class="case__title">
-				<a class="case__title-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
-					{project.title}
+			<div class="case__title-row">
+				<h3 class="case__title">
+					<a class="case__title-link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+						{project.title}
+					</a>
+					<span class="case__title-sep" aria-hidden="true"> | </span>
+					<span class="case__tech">{project.tech}</span>
+				</h3>
+				<a
+					class="case__github-btn"
+					href={project.repoUrl}
+					target="_blank"
+					rel="noopener noreferrer"
+					aria-label={githubCta}
+				>
+					<GitHubIcon class="case__github-icon" />
 				</a>
-				<span class="case__title-sep" aria-hidden="true"> | </span>
-				<span class="case__tech">{project.tech}</span>
-			</h3>
+			</div>
 		</header>
 		<p class="case__why">{project.why}</p>
 		<ul class="case__how">
@@ -33,14 +45,9 @@ const imgAlt = `${project.title}${projectImageAltSuffix}`;
 				<li>{line}</li>
 			))}
 		</ul>
-		<p class="case__cta case__cta-row">
-			<a
-				class="case__cta-github"
-				href={project.repoUrl}
-				target="_blank"
-				rel="noopener noreferrer">{githubCta}</a>
-			{
-				project.demoUrl && (
+		{
+			project.demoUrl && (
+				<p class="case__cta case__cta-row">
 					<a
 						class="btn btn--ghost case__cta-demo"
 						href={project.demoUrl}
@@ -49,9 +56,9 @@ const imgAlt = `${project.title}${projectImageAltSuffix}`;
 					>
 						{demoYoutubeCta}
 					</a>
-				)
-			}
-		</p>
+				</p>
+			)
+		}
 	</div>
 	{
 		project.imageSrc && (

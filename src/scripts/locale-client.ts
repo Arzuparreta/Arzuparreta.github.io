@@ -94,7 +94,7 @@ function applyPrimaryCase(
 	const tech = article.querySelector('.case__tech');
 	const why = article.querySelector('.case__why');
 	const how = article.querySelector('.case__how');
-	const githubLink = article.querySelector<HTMLAnchorElement>('.case__cta-github');
+	const githubLink = article.querySelector<HTMLAnchorElement>('.case__github-btn');
 	const demoLink = article.querySelector<HTMLAnchorElement>('.case__cta-demo');
 	const img = article.querySelector<HTMLImageElement>('.case__img');
 
@@ -111,7 +111,7 @@ function applyPrimaryCase(
 		);
 	}
 	if (githubLink) {
-		githubLink.textContent = githubCta;
+		githubLink.setAttribute('aria-label', githubCta);
 		githubLink.href = project.repoUrl;
 	}
 	if (titleLink) titleLink.href = project.repoUrl;
@@ -136,13 +136,13 @@ function applySmallTool(article: HTMLElement, tool: SecondaryProject, githubCta:
 	const name = article.querySelector('.small-tool__name');
 	const tech = article.querySelector('.small-tool__tech');
 	const summary = article.querySelector('.small-tool__summary');
-	const cta = article.querySelector<HTMLAnchorElement>('.small-tool__cta');
+	const githubBtn = article.querySelector<HTMLAnchorElement>('.small-tool__github-btn');
 	if (name) name.textContent = tool.title;
 	if (tech) tech.textContent = `${tool.tech}.`;
 	if (summary) summary.textContent = `${tool.summary} `;
-	if (cta) {
-		cta.textContent = githubCta;
-		cta.href = tool.repoUrl;
+	if (githubBtn) {
+		githubBtn.setAttribute('aria-label', githubCta);
+		githubBtn.href = tool.repoUrl;
 	}
 }
 

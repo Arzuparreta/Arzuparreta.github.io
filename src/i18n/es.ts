@@ -50,8 +50,6 @@ export const es: Messages = {
 	},
 	profileLead:
 		'Perfil técnico autodidacta con más de 10 años de experiencia a nivel hardware/SO y dos años de especialización en Linux, contenedores (Docker) y automatización con Python. Diseño y administro infraestructura homelab de alta fiabilidad.',
-	profileLeadNote:
-		'Aporto la disciplina analítica de la interpretación musical clásica al sector de operaciones TI.',
 	technicalSkills: [
 		'Sistemas Operativos: UNIX/Linux (Arch, Debian, Ubuntu)',
 		'Infraestructura: Docker, Docker Compose, Portainer',
