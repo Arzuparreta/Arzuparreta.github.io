@@ -4,6 +4,13 @@
  */
 import type { Locale } from '../i18n/config';
 
+/** Public URL from site root (served from `public/`). */
+const IMG_SOUNDSIBLE_MOBILE = '/images/projects/soundsible-mobile.png';
+const IMG_DOCKER_READER_LIGHT = '/images/projects/docker-reader-light.png';
+
+const SYNESTHETIC_DEMO_YOUTUBE =
+	'https://www.youtube.com/watch?v=umtcc_3KsfI&list=PL4wUTace1gknGv08vVZ4xtOPwTX8arWlG&index=2';
+
 export type ProjectTier = 'primary' | 'secondary';
 
 export type PrimaryProject = {
@@ -17,6 +24,10 @@ export type PrimaryProject = {
 	how: [string] | [string, string];
 	repoUrl: string;
 	tier: 'primary';
+	/** Optional screenshot path under site root. */
+	imageSrc?: string;
+	/** Optional external demo (e.g. video). */
+	demoUrl?: string;
 };
 
 export type SecondaryProject = {
@@ -57,6 +68,7 @@ const projectsEn: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
+		imageSrc: IMG_SOUNDSIBLE_MOBILE,
 	},
 	{
 		slug: 'synesthetic-visualizer',
@@ -69,6 +81,7 @@ const projectsEn: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
+		demoUrl: SYNESTHETIC_DEMO_YOUTUBE,
 	},
 	{
 		slug: 'docker-reader',
@@ -81,6 +94,7 @@ const projectsEn: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
+		imageSrc: IMG_DOCKER_READER_LIGHT,
 	},
 	{
 		slug: 'brain',
@@ -127,6 +141,7 @@ const projectsEs: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
+		imageSrc: IMG_SOUNDSIBLE_MOBILE,
 	},
 	{
 		slug: 'synesthetic-visualizer',
@@ -139,6 +154,7 @@ const projectsEs: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
+		demoUrl: SYNESTHETIC_DEMO_YOUTUBE,
 	},
 	{
 		slug: 'docker-reader',
@@ -150,6 +166,7 @@ const projectsEs: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
+		imageSrc: IMG_DOCKER_READER_LIGHT,
 	},
 	{
 		slug: 'brain',

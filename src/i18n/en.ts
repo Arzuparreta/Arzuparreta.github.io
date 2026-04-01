@@ -35,6 +35,8 @@ export const en: Messages = {
 			smallerTools: 'Smaller Tools & Scripts',
 			githubCta: 'View configuration and source code on GitHub',
 			githubCtaSmall: 'View repository on GitHub',
+			demoYoutubeCta: 'Watch on YouTube',
+			projectImageAltSuffix: ' — interface preview',
 		},
 		cv: {
 			title: 'CV',

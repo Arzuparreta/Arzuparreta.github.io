@@ -151,7 +151,12 @@ const localeBundleJson = JSON.stringify({
 						{t.sections.projects.intro}
 					</p>
 					{primaryProjects.map((project) => (
-						<ProjectCase project={project} githubCta={t.sections.projects.githubCta} />
+						<ProjectCase
+							project={project}
+							githubCta={t.sections.projects.githubCta}
+							demoYoutubeCta={t.sections.projects.demoYoutubeCta}
+							projectImageAltSuffix={t.sections.projects.projectImageAltSuffix}
+						/>
 					))}
 					<h3 id="smaller-tools-heading" class="section__subheading" data-i18n="sections.projects.smallerTools">
 						{t.sections.projects.smallerTools}

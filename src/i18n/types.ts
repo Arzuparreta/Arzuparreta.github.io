@@ -30,6 +30,9 @@ export type Messages = {
 			githubCta: string;
 			/** CTA for compact secondary-project lines (often “repository” vs “config/source”). */
 			githubCtaSmall: string;
+			demoYoutubeCta: string;
+			/** Appended to project title in screenshot `alt` (localized). */
+			projectImageAltSuffix: string;
 		};
 		cv: { title: string; downloadCv: string; viewCv: string; cvRepo: string };
 		contact: { title: string };

@@ -35,6 +35,8 @@ export const es: Messages = {
 			smallerTools: 'Herramientas y scripts menores',
 			githubCta: 'Ver configuración y código fuente en GitHub',
 			githubCtaSmall: 'Ver repositorio en GitHub',
+			demoYoutubeCta: 'Ver en YouTube',
+			projectImageAltSuffix: ' — vista de la interfaz',
 		},
 		cv: {
 			title: 'Currículum',

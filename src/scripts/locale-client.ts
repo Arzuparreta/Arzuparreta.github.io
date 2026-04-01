@@ -83,12 +83,21 @@ function applyTechnicalSkills(ul: Element, lines: string[]): void {
 	);
 }
 
-function applyPrimaryCase(article: HTMLElement, project: PrimaryProject, githubCta: string): void {
+function applyPrimaryCase(
+	article: HTMLElement,
+	project: PrimaryProject,
+	githubCta: string,
+	demoYoutubeCta: string,
+	projectImageAltSuffix: string,
+): void {
 	const titleLink = article.querySelector<HTMLAnchorElement>('.case__title-link');
 	const tech = article.querySelector('.case__tech');
 	const why = article.querySelector('.case__why');
 	const how = article.querySelector('.case__how');
-	const cta = article.querySelector<HTMLAnchorElement>('.case__cta a');
+	const githubLink = article.querySelector<HTMLAnchorElement>('.case__cta-github');
+	const demoLink = article.querySelector<HTMLAnchorElement>('.case__cta-demo');
+	const img = article.querySelector<HTMLImageElement>('.case__img');
+
 	if (titleLink) titleLink.textContent = project.title;
 	if (tech) tech.textContent = project.tech;
 	if (why) why.textContent = project.why;
@@ -101,11 +110,26 @@ function applyPrimaryCase(article: HTMLElement, project: PrimaryProject, githubC
 			}),
 		);
 	}
-	if (cta) {
-		cta.textContent = githubCta;
-		cta.href = project.repoUrl;
+	if (githubLink) {
+		githubLink.textContent = githubCta;
+		githubLink.href = project.repoUrl;
 	}
 	if (titleLink) titleLink.href = project.repoUrl;
+
+	if (demoLink) {
+		if (project.demoUrl) {
+			demoLink.hidden = false;
+			demoLink.href = project.demoUrl;
+			demoLink.textContent = demoYoutubeCta;
+		} else {
+			demoLink.hidden = true;
+		}
+	}
+
+	if (img && project.imageSrc) {
+		img.src = project.imageSrc;
+		img.alt = `${project.title}${projectImageAltSuffix}`;
+	}
 }
 
 function applySmallTool(article: HTMLElement, tool: SecondaryProject, githubCta: string): void {
@@ -144,7 +168,15 @@ function applyLocale(bundle: LocaleBundle, locale: Locale): void {
 
 	for (const p of primary) {
 		const article = document.getElementById(p.slug);
-		if (article?.classList.contains('case')) applyPrimaryCase(article, p, m.sections.projects.githubCta);
+		if (article?.classList.contains('case')) {
+			applyPrimaryCase(
+				article,
+				p,
+				m.sections.projects.githubCta,
+				m.sections.projects.demoYoutubeCta,
+				m.sections.projects.projectImageAltSuffix,
+			);
+		}
 	}
 
 	for (const t of secondary) {
