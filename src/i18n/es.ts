@@ -31,7 +31,7 @@ export const es: Messages = {
 		},
 		projects: {
 			title: 'Proyectos técnicos',
-			intro: 'Qué construí, para qué sirve y cómo funciona en la práctica.',
+			intro: 'Lo que he construido, para qué sirve y cómo funciona en la práctica.',
 			smallerTools: 'Herramientas y scripts menores',
 			githubCta: 'Ver configuración y código fuente en GitHub',
 		},
@@ -53,4 +53,9 @@ export const es: Messages = {
 		'Redes: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automatización: Python (CLI y desarrollo de APIs), Bash, Git',
 	],
+	language: {
+		ariaLabel: 'Idioma',
+		english: 'English',
+		spanish: 'Español',
+	},
 };

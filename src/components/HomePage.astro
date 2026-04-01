@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCase from './ProjectCase.astro';
+import SmallTool from './SmallTool.astro';
+import { getPrimaryProjects, getSecondaryProjects } from '../data/projects';
+import { site } from '../data/site';
+import type { Locale } from '../i18n/config';
+import { getMessages } from '../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getMessages(locale);
+const canonicalPath = locale === 'es' ? '/es/' : '/';
+const base = import.meta.env.BASE_URL;
+const hrefEn = base.endsWith('/') ? base : `${base}/`;
+const hrefEs = `${hrefEn}es/`;
+
+const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(site.email)}`;
+const primaryProjects = getPrimaryProjects(locale);
+const secondaryProjects = getSecondaryProjects(locale);
+
+const alternates = [
+	{ hreflang: 'en', href: new URL('/', site.url).href },
+	{ hreflang: 'es', href: new URL('/es/', site.url).href },
+	{ hreflang: 'x-default', href: new URL('/', site.url).href },
+];
+---
+
+<BaseLayout
+	title={t.meta.title}
+	description={t.meta.description}
+	canonicalPath={canonicalPath}
+	lang={locale}
+	skipToContent={t.a11y.skipToContent}
+	alternates={alternates}
+>
+	<div class="page">
+		<aside class="site-sidebar" aria-label={t.a11y.siteAside}>
+			<div class="site-sidebar__inner">
+				<nav class="nav" aria-label={t.nav.ariaLabel}>
+					<a href="#intro-heading">{t.nav.intro}</a>
+					<a href="#skills-heading">{t.nav.skills}</a>
+					<a href="#projects-heading">{t.nav.projects}</a>
+					<a href="#cv-heading">{t.nav.cvFile}</a>
+					<a href="#contact-heading">{t.nav.contact}</a>
+					<a href={site.github} target="_blank" rel="noopener noreferrer">{t.nav.github}</a>
+				</nav>
+				<nav class="lang-switcher" aria-label={t.language.ariaLabel}>
+					<a
+						class="lang-switcher__link"
+						href={hrefEn}
+						hreflang="en"
+						lang="en"
+						aria-current={locale === 'en' ? 'page' : undefined}
+					>
+						{t.language.english}
+					</a>
+					<span class="lang-switcher__sep" aria-hidden="true">·</span>
+					<a
+						class="lang-switcher__link"
+						href={hrefEs}
+						hreflang="es"
+						lang="es"
+						aria-current={locale === 'es' ? 'page' : undefined}
+					>
+						{t.language.spanish}
+					</a>
+				</nav>
+			</div>
+		</aside>
+
+		<main id="main" class="site-main">
+			<div class="site-main__inner">
+				<section id="intro" class="section" aria-labelledby="intro-heading">
+					<h1 id="intro-heading" class="intro__title">{site.name}</h1>
+					<p class="identity__meta intro__subtitle">
+						<span class="identity__role">{t.identity.headline}</span>
+						<span class="identity__location">
+							{t.identity.location}
+							{site.openToRelocation ? (
+								<>
+									<span class="identity__sep" aria-hidden="true">
+										{'\u00a0·\u00a0'}
+									</span>
+									{t.identity.openToRelocation}
+								</>
+							) : null}
+						</span>
+					</p>
+					<p class="intro__lead">{t.profileLead}</p>
+				</section>
+
+				<section id="skills" class="section" aria-labelledby="skills-heading">
+					<h2 id="skills-heading">{t.sections.skills.title}</h2>
+					<p class="section__intro">{t.sections.skills.intro}</p>
+					<ul class="skills">
+						{t.technicalSkills.map((line) => (
+							<li>{line}</li>
+						))}
+					</ul>
+				</section>
+
+				<section id="projects" class="section" aria-labelledby="projects-heading">
+					<h2 id="projects-heading">{t.sections.projects.title}</h2>
+					<p class="section__intro">{t.sections.projects.intro}</p>
+					{primaryProjects.map((project) => (
+						<ProjectCase project={project} githubCta={t.sections.projects.githubCta} />
+					))}
+					<h3 id="smaller-tools-heading" class="section__subheading">
+						{t.sections.projects.smallerTools}
+					</h3>
+					<div class="small-tools">
+						{secondaryProjects.map((tool) => (
+							<SmallTool tool={tool} githubCta={t.sections.projects.githubCta} />
+						))}
+					</div>
+				</section>
+
+				<section id="cv" class="section" aria-labelledby="cv-heading">
+					<h2 id="cv-heading">{t.sections.cv.title}</h2>
+					<div class="download-row">
+						<a class="btn" href={`${import.meta.env.BASE_URL}resume/CV.md`} download>
+							{t.sections.cv.downloadCv}
+						</a>
+						<a class="btn btn--ghost" href={`${import.meta.env.BASE_URL}resume/CV.md`}>
+							{t.sections.cv.viewCv}
+						</a>
+						<a class="btn btn--ghost" href={site.cvRepo} target="_blank" rel="noopener noreferrer">
+							{t.sections.cv.cvRepo}
+						</a>
+					</div>
+				</section>
+
+				<section id="contact" class="section" aria-labelledby="contact-heading">
+					<h2 id="contact-heading">{t.sections.contact.title}</h2>
+					<p>
+						<a href={gmailComposeUrl} target="_blank" rel="noopener noreferrer">{site.email}</a>
+					</p>
+				</section>
+			</div>
+		</main>
+	</div>
+	<script>
+		import { initInPageNav } from '../scripts/in-page-nav.ts';
+		initInPageNav();
+	</script>
+</BaseLayout>

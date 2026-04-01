@@ -53,4 +53,9 @@ export const en: Messages = {
 		'Networking: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automation: Python (CLI and API development), Bash, Git',
 	],
+	language: {
+		ariaLabel: 'Language',
+		english: 'English',
+		spanish: 'Español',
+	},
 };

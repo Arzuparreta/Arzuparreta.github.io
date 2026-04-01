@@ -34,4 +34,10 @@ export type Messages = {
 	};
 	profileLead: string;
 	technicalSkills: string[];
+	/** Language switcher in the sidebar (bottom). */
+	language: {
+		ariaLabel: string;
+		english: string;
+		spanish: string;
+	};
 };

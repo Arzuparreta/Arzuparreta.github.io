@@ -1,9 +1,6 @@
 /**
- * UI strings for the site. Default locale is `defaultLocale` in `./config`.
- *
- * Next steps for a Spanish page: add a route (e.g. `src/pages/es/index.astro`) with
- * `const t = getMessages('es')`, pass `lang="es"` to `BaseLayout`, and add `hreflang`
- * / `alternate` links. Project copy stays in English in `data/projects.ts` until you add per-locale variants.
+ * UI strings for the site. English is at `/`, Spanish at `/es/` via `HomePage` and `getMessages('es')`.
+ * Project narratives are localized in `data/projects.ts` (`getPrimaryProjects` / `getSecondaryProjects`).
  */
 export type { Locale } from './config';
 export { defaultLocale, supportedLocales } from './config';

@@ -2,6 +2,8 @@
  * Technical projects — plain narrative, no template labels in the UI.
  * https://github.com/Arzuparreta
  */
+import type { Locale } from '../i18n/config';
+
 export type ProjectTier = 'primary' | 'secondary';
 
 export type PrimaryProject = {
@@ -29,7 +31,7 @@ export type SecondaryProject = {
 
 export type Project = PrimaryProject | SecondaryProject;
 
-export const projects: Project[] = [
+const projectsEn: Project[] = [
 	{
 		slug: 'homelab',
 		title: 'Remote administration & homelab',
@@ -100,5 +102,90 @@ export const projects: Project[] = [
 	},
 ];
 
-export const primaryProjects = projects.filter((p): p is PrimaryProject => p.tier === 'primary');
-export const secondaryProjects = projects.filter((p): p is SecondaryProject => p.tier === 'secondary');
+const projectsEs: Project[] = [
+	{
+		slug: 'homelab',
+		title: 'Administración remota y homelab',
+		tech: 'Debian, Tailscale, Pi-hole, SSH, Mosh',
+		why:
+			'Un servidor casero sin interfaz gráfica en Sevilla es mi base operativa: necesito acceso remoto fiable, DNS razonable y bloqueo de anuncios en toda la red sin exponer SSH a internet.',
+		how: [
+			'Lo administro desde un ThinkPad por Tailscale con Mosh para sesiones resilientes; Pi-hole en la malla para filtrado en toda la red.',
+			'Sin SSH público: Tailscale es la única entrada, lo que mantiene la superficie de ataque pequeña.',
+		],
+		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta',
+	},
+	{
+		slug: 'soundsible',
+		title: 'soundsible',
+		tech: 'JavaScript, Node, SQLite, Docker, Python',
+		why:
+			'Biblioteca musical autoalojada y streaming para que mi colección viva en hardware que controlo, con cliente web e indexación sincronizados.',
+		how: [
+			'SQLite guarda el catálogo en un host Linux sin cabeza; servicios separados para indexación, streaming e interfaz web, todo documentado en el repositorio.',
+			'Funciona como infraestructura de uso diario con buen tiempo activo en esa máquina.',
+		],
+		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta/soundsible',
+	},
+	{
+		slug: 'synesthetic-visualizer',
+		title: 'synesthetic-visualizer',
+		tech: 'Rust, audio en tiempo real, gráficos orientados a GPU',
+		why:
+			'Una aplicación de escritorio que mapea audio en vivo a un Tonnetz 3D para que las relaciones armónicas se vean en tiempo real: útil para entrenamiento auditivo y experimentación.',
+		how: [
+			'Rust controla la captura y el renderizado de baja latencia para que la imagen vaya al unísono con la señal.',
+		],
+		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
+	},
+	{
+		slug: 'docker-reader',
+		title: 'docker-reader',
+		tech: 'Docker, Docker Compose, JavaScript',
+		why:
+			'Un lector de libros electrónicos personal que puedo ejecutar donde haya Docker, con el mismo esquema de volúmenes y configuración en cada máquina.',
+		how: [
+			'Dockerfile y Compose fijan cómo arranca la aplicación, monta datos y lee ajustes, sin instalaciones ad hoc en servidores.',
+		],
+		tier: 'primary',
+		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
+	},
+	{
+		slug: 'brain',
+		title: 'brain',
+		tech: 'Python',
+		summary:
+			'Monorepo público de CLIs y experimentos en Python: el historial de commits cuenta cómo convertir pruebas en herramientas reutilizables.',
+		repoUrl: 'https://github.com/Arzuparreta/brain',
+		tier: 'secondary',
+	},
+	{
+		slug: 'remove-multi-titles-yt',
+		title: 'remove-multi-titles-yt',
+		tech: 'JavaScript, WebExtensions',
+		summary:
+			'Extensión para Chrome/Firefox que elimina basura duplicada en títulos de YouTube: un arreglo DOM acotado, sin servicios adicionales.',
+		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
+		tier: 'secondary',
+	},
+];
+
+const byLocale: Record<Locale, Project[]> = {
+	en: projectsEn,
+	es: projectsEs,
+};
+
+export function getProjects(locale: Locale): Project[] {
+	return byLocale[locale];
+}
+
+export function getPrimaryProjects(locale: Locale): PrimaryProject[] {
+	return getProjects(locale).filter((p): p is PrimaryProject => p.tier === 'primary');
+}
+
+export function getSecondaryProjects(locale: Locale): SecondaryProject[] {
+	return getProjects(locale).filter((p): p is SecondaryProject => p.tier === 'secondary');
+}
