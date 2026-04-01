@@ -6,7 +6,6 @@
 const SECTION_TO_HASH: Record<string, string> = {
 	intro: '#intro-heading',
 	skills: '#skills-heading',
-	'selected-work': '#selected-heading',
 	projects: '#projects-heading',
 	education: '#education-heading',
 	cv: '#cv-heading',

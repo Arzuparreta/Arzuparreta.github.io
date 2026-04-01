@@ -19,16 +19,23 @@ const { project, labels } = Astro.props;
 	</header>
 	<div class="case__meta">
 		<span>{project.languages.join(' · ')}</span>
-		<a href={project.repoUrl} target="_blank" rel="noopener noreferrer">{labels.repository}</a>
+	</div>
+	<div class="case__actions">
+		<a class="btn" href={project.repoUrl} target="_blank" rel="noopener noreferrer">{labels.github}</a>
+		{
+			project.liveUrl ? (
+				<a class="btn btn--ghost" href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+					{labels.viewLive}
+				</a>
+			) : null
+		}
 	</div>
 	<dl class="case__dl">
-		<dt class="case__dt">{labels.problem}</dt>
-		<dd class="case__dd"><p>{project.problem}</p></dd>
-		<dt class="case__dt">{labels.approach}</dt>
-		<dd class="case__dd"><p>{project.approach}</p></dd>
 		<dt class="case__dt">{labels.stack}</dt>
-		<dd class="case__dd"><p>{project.stack.join(' · ')}</p></dd>
-		<dt class="case__dt">{labels.reflection}</dt>
-		<dd class="case__dd"><p>{project.reflection}</p></dd>
+		<dd class="case__dd"><p>{project.stack}</p></dd>
+		<dt class="case__dt">{labels.architecture}</dt>
+		<dd class="case__dd"><p>{project.architecture}</p></dd>
+		<dt class="case__dt">{labels.keyFeature}</dt>
+		<dd class="case__dd"><p>{project.keyFeature}</p></dd>
 	</dl>
 </article>

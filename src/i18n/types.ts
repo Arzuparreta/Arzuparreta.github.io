@@ -1,9 +1,3 @@
-export type CvWorkItem = {
-	title: string;
-	stack: string;
-	bullets: string[];
-};
-
 export type Messages = {
 	meta: {
 		title: string;
@@ -16,8 +10,7 @@ export type Messages = {
 		ariaLabel: string;
 		intro: string;
 		skills: string;
-		selectedWork: string;
-		repositories: string;
+		projects: string;
 		education: string;
 		cvFile: string;
 		contact: string;
@@ -30,25 +23,23 @@ export type Messages = {
 	};
 	sections: {
 		skills: { title: string; intro: string };
-		selectedWork: { title: string; intro: string };
-		projects: { title: string; intro: string };
+		projects: { title: string; intro: string; smallerTools: string };
 		education: { title: string };
 		cv: { title: string; downloadCv: string; viewCv: string; cvRepo: string };
 		contact: { title: string };
 	};
 	profileLead: string;
 	technicalSkills: string[];
-	cvWorkSamples: CvWorkItem[];
 	education: {
 		title: string;
 		institution: string;
 		note: string;
 	};
 	projectCase: {
-		repository: string;
-		problem: string;
-		approach: string;
+		github: string;
+		viewLive: string;
 		stack: string;
-		reflection: string;
+		architecture: string;
+		keyFeature: string;
 	};
 };

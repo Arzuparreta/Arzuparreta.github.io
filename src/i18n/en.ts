@@ -4,7 +4,7 @@ export const en: Messages = {
 	meta: {
 		title: 'Rubén Peña Rubio — Junior Linux Systems Administrator · DevOps',
 		description:
-			'Junior Linux Systems Administrator and DevOps enthusiast in Seville, Spain. Self-taught Linux and infrastructure focus: Docker, networking, Python automation, Bash, Git.',
+			'Infrastructure and Linux-focused junior sysadmin in Seville, Spain: Docker, Debian, networking, Python automation, Bash, Git. Self-taught with a music performance background.',
 	},
 	a11y: {
 		skipToContent: 'Skip to content',
@@ -13,8 +13,7 @@ export const en: Messages = {
 		ariaLabel: 'Primary',
 		intro: 'Intro',
 		skills: 'Skills',
-		selectedWork: 'Featured work',
-		repositories: 'Repositories',
+		projects: 'Projects',
 		education: 'Education',
 		cvFile: 'CV',
 		contact: 'Contact',
@@ -30,13 +29,11 @@ export const en: Messages = {
 			title: 'Technical skills',
 			intro: 'Operating systems, infrastructure, networking, and tooling I use regularly.',
 		},
-		selectedWork: {
-			title: 'Featured work',
-			intro: 'Hands-on infrastructure and automation from my home lab and day-to-day practice.',
-		},
 		projects: {
-			title: 'Public repositories',
-			intro: 'Open-source work on GitHub with a short write-up for each project below.',
+			title: 'Technical projects',
+			intro:
+				'How things are hosted and operated—not only what the code does. Each entry ties stack choices to deployment and outcomes.',
+			smallerTools: 'Smaller tools',
 		},
 		education: {
 			title: 'Education',
@@ -52,42 +49,23 @@ export const en: Messages = {
 		},
 	},
 	profileLead:
-		'Self-taught Linux systems and infrastructure enthusiast with 10+ years of hardware/OS tinkering and 2 years focused on containerization (Docker), networking, and Python. Background in musical analysis and interpretation. Seeking a Junior Systems Administrator or DevOps role.',
+		'Infrastructure, Linux, and Docker are my core focus: self-taught systems work with 10+ years of hardware and OS experience and two years concentrated on containerization, networking, and Python automation. Background in musical analysis and interpretation. Seeking a Junior Systems Administrator or DevOps role.',
 	technicalSkills: [
 		'Operating systems: UNIX/Linux (Arch, Debian, Ubuntu)',
 		'Infrastructure: Docker, Docker Compose, Portainer',
 		'Networking: SSH/Mosh, Tailscale, Samba, VPN',
 		'Automation: Python (CLI and API development), Bash, Git',
 	],
-	cvWorkSamples: [
-		{
-			title: 'Self-Hosted Media & Library Infrastructure',
-			stack: 'Python, Docker, SQLite',
-			bullets: [
-				'Managed persistent data storage with SQLite and automated media indexing.',
-				'System in daily use with ~99% uptime on a personal headless server.',
-			],
-		},
-		{
-			title: 'Remote Server Administration & Zero-Trust Networking',
-			stack: 'Linux, Tailscale',
-			bullets: [
-				'Architected a secure remote-access workflow using Tailscale and Mosh to maintain and manage a headless server located in Seville from a ThinkPad anywhere in Spain.',
-				'Configured network-wide ad blocking with Pi-hole over Tailscale.',
-				'Tuned hardware overclocks and power curves for stable sustained load.',
-			],
-		},
-	],
 	education: {
 		title: "Bachelor's degree in Music (Classical Performance | Trombone)",
 		institution: 'Manuel Castillo Superior Conservatory of Music',
-		note: 'Demonstrated constant discipline, analytical thinking and high level of control under pressure.',
+		note: 'Training in analytical systems thinking and rigorous technical discipline under performance pressure—reading complex scores, coordinating ensembles, and maintaining control at a high level.',
 	},
 	projectCase: {
-		repository: 'Repository',
-		problem: 'Challenge',
-		approach: 'Approach',
-		stack: 'Technologies',
-		reflection: 'Takeaways',
+		github: 'GitHub',
+		viewLive: 'View live',
+		stack: 'The stack',
+		architecture: 'The architecture',
+		keyFeature: 'Key feature',
 	},
 };

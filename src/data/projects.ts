@@ -1,42 +1,52 @@
 /**
- * Public GitHub repositories — descriptions kept conservative (repo purpose only).
+ * Technical projects — infrastructure-first narrative.
  * https://github.com/Arzuparreta
  */
+export type ProjectTier = 'primary' | 'secondary';
+
 export type Project = {
 	slug: string;
 	title: string;
 	tagline: string;
 	repoUrl: string;
 	languages: string[];
-	problem: string;
-	approach: string;
-	stack: string[];
-	reflection: string;
+	/** Tools and platforms (Docker, Linux, Tailscale, etc.) */
+	stack: string;
+	/** How and where it runs (hosting, topology, deployment). */
+	architecture: string;
+	/** One concrete technical outcome or win. */
+	keyFeature: string;
+	tier: ProjectTier;
+	liveUrl?: string;
 };
 
 export const projects: Project[] = [
 	{
-		slug: 'soundsible',
-		title: 'soundsible',
-		tagline: 'Self-hosted music platform: streaming and web client backed by your own machine.',
-		repoUrl: 'https://github.com/Arzuparreta/soundsible',
-		languages: ['JavaScript'],
-		problem: 'Run a personal music stack without depending on a third-party streaming backend.',
-		approach:
-			'Separate backend duties (library, streaming) from the web client, with architecture documented alongside the code.',
-		stack: ['JavaScript', 'Node ecosystem', 'Web client'],
-		reflection: 'End-to-end layout from media library through streaming to the client.',
+		slug: 'homelab',
+		title: 'Remote administration & homelab',
+		tagline:
+			'Zero-trust remote access, network-wide DNS filtering, and day-to-day ops on a headless home server.',
+		repoUrl: 'https://github.com/Arzuparreta',
+		languages: ['Linux', 'Tailscale'],
+		stack: 'Debian Linux, Tailscale (mesh VPN), Mosh, SSH, Pi-hole, tuned hardware for stable sustained load.',
+		architecture:
+			'A headless server in Seville acts as the home backbone; I maintain it from a ThinkPad using Mosh over Tailscale for encrypted, low-latency access from anywhere in Spain. Pi-hole provides network-wide ad blocking across the Tailscale mesh.',
+		keyFeature:
+			'Secure remote administration without exposing SSH to the public internet—Tailscale as the zero-trust perimeter.',
+		tier: 'primary',
 	},
 	{
-		slug: 'docker-reader',
-		title: 'docker-reader',
-		tagline: 'Reader for books across devices; shipped with Docker.',
-		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
+		slug: 'soundsible',
+		title: 'soundsible',
+		tagline: 'Self-hosted music platform: library, streaming, and web client backed by your own machine.',
+		repoUrl: 'https://github.com/Arzuparreta/soundsible',
 		languages: ['JavaScript'],
-		problem: 'Keep reading progress across devices with a deployable, portable setup.',
-		approach: 'Package the app in Docker so deployment and data paths are explicit and reproducible.',
-		stack: ['Docker', 'Web stack'],
-		reflection: 'Dockerfile and Compose define how the app runs in practice.',
+		stack: 'JavaScript/Node, SQLite, Docker, Python for media tooling where applicable; runs on a personal Linux server.',
+		architecture:
+			'Services split between library/indexing, streaming, and web client, with SQLite for persistent catalog data on a headless host—documented alongside the code.',
+		keyFeature:
+			'Daily-use stack with roughly 99% uptime on self-hosted hardware and automated media indexing.',
+		tier: 'primary',
 	},
 	{
 		slug: 'synesthetic-visualizer',
@@ -44,10 +54,24 @@ export const projects: Project[] = [
 		tagline: 'Real-time Rust audio visualizer in a 3D Tonnetz space.',
 		repoUrl: 'https://github.com/Arzuparreta/synesthetic-visualizer',
 		languages: ['Rust'],
-		problem: 'Visualize audio with harmonic structure and low latency.',
-		approach: 'Rust on the real-time path; rendering and audio pipeline are implemented in the project sources.',
-		stack: ['Rust', 'Audio', 'Graphics'],
-		reflection: 'Finer points live in the implementation and in recent commits.',
+		stack: 'Rust, audio I/O, GPU-oriented graphics, real-time pipeline.',
+		architecture:
+			'Native desktop build with Rust on the low-latency audio and render path; harmonic structure mapped into 3D Tonnetz visualization driven from live input.',
+		keyFeature:
+			'Performance-critical audio and graphics handled in Rust to keep visualization aligned with the signal.',
+		tier: 'primary',
+	},
+	{
+		slug: 'docker-reader',
+		title: 'docker-reader',
+		tagline: 'Reader for books across devices; shipped with Docker.',
+		repoUrl: 'https://github.com/Arzuparreta/docker-reader',
+		languages: ['JavaScript'],
+		stack: 'Docker, Docker Compose, JavaScript web stack.',
+		architecture:
+			'Packaged as a containerized service with explicit volume and config paths so it deploys the same way on any Docker host.',
+		keyFeature: 'Reproducible deploys: Dockerfile and Compose define how the app runs in practice.',
+		tier: 'primary',
 	},
 	{
 		slug: 'brain',
@@ -55,10 +79,11 @@ export const projects: Project[] = [
 		tagline: 'Python workspace for experiments and tooling.',
 		repoUrl: 'https://github.com/Arzuparreta/brain',
 		languages: ['Python'],
-		problem: 'Central place for small Python tools and prototypes.',
-		approach: 'Keep work public and incremental rather than a polished product-only release.',
-		stack: ['Python'],
-		reflection: 'Commit history shows how experiments and tools evolved.',
+		stack: 'Python, small CLIs and scripts.',
+		architecture:
+			'Public monorepo of incremental experiments—no single production topology; each tool is a small, focused workflow.',
+		keyFeature: 'Commit history shows how prototypes evolve into reusable utilities.',
+		tier: 'secondary',
 	},
 	{
 		slug: 'remove-multi-titles-yt',
@@ -66,9 +91,13 @@ export const projects: Project[] = [
 		tagline: 'Browser extension to normalize YouTube titles (Chrome/Firefox).',
 		repoUrl: 'https://github.com/Arzuparreta/remove-multi-titles-yt',
 		languages: ['JavaScript'],
-		problem: 'Reduce duplicate or inconsistent titles for the same video in the browser.',
-		approach: 'Small, focused extension with behaviour and scope defined in source and manifest.',
-		stack: ['WebExtensions', 'JavaScript'],
-		reflection: 'Manifest and store listings cover packaging and distribution.',
+		stack: 'WebExtensions API, JavaScript, Chrome/Firefox manifests.',
+		architecture:
+			'Runs entirely in the browser; packaging and store listings are defined in the manifest and repository.',
+		keyFeature: 'Narrow scope: fix inconsistent duplicate titles without extra moving parts.',
+		tier: 'secondary',
 	},
 ];
+
+export const primaryProjects = projects.filter((p) => p.tier === 'primary');
+export const secondaryProjects = projects.filter((p) => p.tier === 'secondary');

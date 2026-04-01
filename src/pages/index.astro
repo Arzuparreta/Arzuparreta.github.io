@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCase from '../components/ProjectCase.astro';
-import { projects } from '../data/projects';
+import { primaryProjects, secondaryProjects } from '../data/projects';
 import { site } from '../data/site';
 import { defaultLocale, getMessages } from '../i18n';
 
@@ -39,8 +39,7 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 				<nav class="nav" aria-label={t.nav.ariaLabel}>
 					<a href="#intro-heading">{t.nav.intro}</a>
 					<a href="#skills-heading">{t.nav.skills}</a>
-					<a href="#selected-heading">{t.nav.selectedWork}</a>
-					<a href="#projects-heading">{t.nav.repositories}</a>
+					<a href="#projects-heading">{t.nav.projects}</a>
 					<a href="#education-heading">{t.nav.education}</a>
 					<a href="#cv-heading">{t.nav.cvFile}</a>
 					<a href="#contact-heading">{t.nav.contact}</a>
@@ -66,28 +65,14 @@ const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeU
 					</ul>
 				</section>
 
-				<section id="selected-work" class="section" aria-labelledby="selected-heading">
-					<h2 id="selected-heading">{t.sections.selectedWork.title}</h2>
-					<p class="section__intro">{t.sections.selectedWork.intro}</p>
-					{t.cvWorkSamples.map((item) => (
-						<div class="cv-work">
-							<h3 class="cv-work__title">
-								{item.title}
-								<span class="cv-work__stack"> · {item.stack}</span>
-							</h3>
-							<ul class="cv-work__list">
-								{item.bullets.map((b) => (
-									<li>{b}</li>
-								))}
-							</ul>
-						</div>
-					))}
-				</section>
-
 				<section id="projects" class="section" aria-labelledby="projects-heading">
 					<h2 id="projects-heading">{t.sections.projects.title}</h2>
 					<p class="section__intro">{t.sections.projects.intro}</p>
-					{projects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
+					{primaryProjects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
+					<h3 id="smaller-tools-heading" class="section__subheading">
+						{t.sections.projects.smallerTools}
+					</h3>
+					{secondaryProjects.map((project) => <ProjectCase project={project} labels={t.projectCase} />)}
 				</section>
 
 				<section id="education" class="section" aria-labelledby="education-heading">

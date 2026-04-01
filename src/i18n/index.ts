@@ -8,7 +8,7 @@
  */
 export type { Locale } from './config';
 export { defaultLocale, supportedLocales } from './config';
-export type { CvWorkItem, Messages } from './types';
+export type { Messages } from './types';
 export { en } from './en';
 export { es } from './es';
 
