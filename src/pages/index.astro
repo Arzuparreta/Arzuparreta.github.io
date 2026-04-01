@@ -1,0 +1,121 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCase from '../components/ProjectCase.astro';
+import { projects } from '../data/projects';
+import { site, philosophy, cvHighlights } from '../data/site';
+---
+
+<BaseLayout title={site.title} description={site.description} canonicalPath="/">
+	<div class="shell">
+		<aside class="sidebar" aria-label="Site">
+			<div>
+				<header class="identity">
+					<p class="identity__name">{site.name}</p>
+					<p class="identity__role">
+						Developer · Musician · <span title="GitHub handle">@{site.handle}</span>
+					</p>
+				</header>
+				<nav class="nav" aria-label="Primary">
+					<a href="#intro">Intro</a>
+					<a href="#projects">Projects</a>
+					<a href="#work">How I work</a>
+					<a href="#cv">CV</a>
+					<a href="#contact">Contact</a>
+				</nav>
+			</div>
+			<div class="sidebar__foot">
+				<p>
+					<a href={site.github} target="_blank" rel="noopener noreferrer">GitHub profile</a>
+					<br />
+					<span>{site.location}</span>
+				</p>
+			</div>
+		</aside>
+
+		<main id="main" class="main">
+			<div class="content">
+				<section id="intro" aria-labelledby="intro-heading">
+					<h1 id="intro-heading" class="lede motion-fade">
+						<em>Software that respects attention.</em> I build self-hosted tools, audio-adjacent systems,
+						and web surfaces where the architecture is visible—not buried under effects.
+					</h1>
+					<p>
+						This page is intentionally spare: typography, structure, and links to real repositories. No
+						generated filler—only work you can inspect, fork, or challenge.
+					</p>
+				</section>
+
+				<section id="projects" aria-labelledby="projects-heading">
+					<h2 id="projects-heading">Projects</h2>
+					<p>
+						Each entry is a public repository—read the code, not just this summary.
+					</p>
+					{projects.map((project) => <ProjectCase project={project} />)}
+				</section>
+
+				<section id="work" aria-labelledby="work-heading">
+					<h2 id="work-heading">How I work</h2>
+					<p class="motion-fade">{philosophy.lede}</p>
+					<div class="philosophy-grid">
+						{philosophy.points.map((item) => (
+							<div class="philosophy-card motion-fade">
+								<h3>{item.head}</h3>
+								<p>{item.body}</p>
+							</div>
+						))}
+					</div>
+				</section>
+
+				<section id="cv" aria-labelledby="cv-heading">
+					<h2 id="cv-heading">CV</h2>
+					<p>{cvHighlights.summary}</p>
+					<div class="cv-block">
+						<h3 class="visually-hidden">Skills</h3>
+						<ul class="cv-skills">
+							{cvHighlights.skills.map((line) => (
+								<li>{line}</li>
+							))}
+						</ul>
+					</div>
+					<div class="download-row">
+						<a class="btn" href={`${import.meta.env.BASE_URL}resume/CV.md`} download>
+							Download CV (.md)
+						</a>
+						<a class="btn btn--ghost" href={`${import.meta.env.BASE_URL}resume/CV.md`}>
+							View raw Markdown
+						</a>
+					</div>
+				</section>
+
+				<hr class="divider" />
+
+				<section id="contact" aria-labelledby="contact-heading">
+					<h2 id="contact-heading">Contact</h2>
+					<p>
+						The most reliable channel is <a href={site.github} target="_blank" rel="noopener noreferrer"
+							>GitHub</a
+						>: issues, discussions, or profile visibility for professional context.
+					</p>
+					<p class="contact-note">
+						If you are reaching out about collaboration or work, point to a repository or problem statement—
+						concrete threads beat cold intros.
+					</p>
+				</section>
+			</div>
+		</main>
+	</div>
+</BaseLayout>
+
+<style>
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+</style>

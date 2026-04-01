@@ -1,0 +1,40 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<article class="case" id={project.slug}>
+	<header class="case__header">
+		<h3 class="case__title">
+			<a href={project.repoUrl} target="_blank" rel="noopener noreferrer">{project.title}</a>
+		</h3>
+		<p class="case__tagline">{project.tagline}</p>
+	</header>
+	<div class="case__meta">
+		<span class="case__langs">{project.languages.join(' · ')}</span>
+		<a class="case__link" href={project.repoUrl} target="_blank" rel="noopener noreferrer">
+			Repository →
+		</a>
+	</div>
+	<div class="case__block">
+		<p class="case__label">Problem</p>
+		<p>{project.problem}</p>
+	</div>
+	<div class="case__block">
+		<p class="case__label">Approach</p>
+		<p>{project.approach}</p>
+	</div>
+	<div class="case__block">
+		<p class="case__label">Stack</p>
+		<p>{project.stack.join(' · ')}</p>
+	</div>
+	<div class="case__block">
+		<p class="case__label">Reflection</p>
+		<p>{project.reflection}</p>
+	</div>
+</article>
