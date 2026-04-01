@@ -1,7 +1,8 @@
 /**
- * Scroll-spy for in-page nav: syncs aria-current on the link for the section
- * nearest the top of the viewport. Works with smooth CSS scroll; respects
- * reduced motion via scroll listener only (no animation here).
+ * Scroll-spy for in-page nav: syncs aria-current with the section whose top has
+ * crossed a marker below the viewport top, and when the user reaches the end of
+ * a scrollable document, the last section—so short tail sections still highlight.
+ * Works with smooth CSS scroll; respects reduced motion via scroll listener only.
  */
 const SECTION_TO_HASH: Record<string, string> = {
 	intro: '#intro-heading',
@@ -23,7 +24,18 @@ function getSections(): HTMLElement[] {
 	return Array.from(main.querySelectorAll<HTMLElement>('section[id]'));
 }
 
+/** Pixels from document bottom; subpixel/layout rounding. */
+const DOC_BOTTOM_EPSILON_PX = 4;
+
 function activeSectionId(sections: HTMLElement[], markerPx: number): string | undefined {
+	const doc = document.documentElement;
+	const scrollable = doc.scrollHeight > window.innerHeight + 1;
+	const nearBottom =
+		window.scrollY + window.innerHeight >= doc.scrollHeight - DOC_BOTTOM_EPSILON_PX;
+	if (scrollable && nearBottom && sections.length > 0) {
+		return sections[sections.length - 1].id;
+	}
+
 	let current: string | undefined;
 	for (const section of sections) {
 		const top = section.getBoundingClientRect().top;
