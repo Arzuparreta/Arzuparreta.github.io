@@ -113,7 +113,7 @@ const localeBundleJson = JSON.stringify({
 		</aside>
 
 		<main id="main" class="site-main">
-			<div class="site-main__inner">
+			<div class="site-main__inner site-main__inner--reading">
 				<section id="intro" class="section" aria-labelledby="intro-heading">
 					<h1 id="intro-heading" class="intro__title">{site.name}</h1>
 					<p class="identity__meta intro__subtitle">
@@ -142,7 +142,8 @@ const localeBundleJson = JSON.stringify({
 						))}
 					</ul>
 				</section>
-
+			</div>
+			<div class="site-main__inner site-main__inner--projects">
 				<section id="projects" class="section" aria-labelledby="projects-heading">
 					<h2 id="projects-heading" data-i18n="sections.projects.title">
 						{t.sections.projects.title}

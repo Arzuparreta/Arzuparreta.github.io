@@ -21,7 +21,8 @@
 	--s-7: 4rem; /* 64px */
 	--s-8: 5rem; /* 80px */
 
-	--content-max: 45rem; /* ~720px */
+	--content-max: 45rem; /* ~720px — intro / skills */
+	--content-max-wide: 72rem; /* projects / cv / contact */
 	--sidebar-width: clamp(14rem, 22vw, 18rem);
 	--page-pad-x: var(--s-3);
 	/* Section vertical rhythm: was 64px top+bottom per section (128px between content + border). */
@@ -351,9 +352,16 @@ h3 {
 }
 
 .site-main__inner {
-	max-width: var(--content-max);
 	margin-left: 0;
 	margin-right: auto;
+}
+
+.site-main__inner--reading {
+	max-width: var(--content-max);
+}
+
+.site-main__inner--projects {
+	max-width: min(var(--content-max-wide), 100%);
 }
 
 /* —— Stacked layout (narrow) —— */
@@ -409,7 +417,7 @@ h3 {
 	border-bottom: 1px solid var(--border);
 }
 
-.section:last-of-type {
+#contact.section {
 	border-bottom: none;
 	padding-bottom: 0;
 }
@@ -469,7 +477,7 @@ h3 {
 
 @media (min-width: 768px) {
 	.case--with-media {
-		grid-template-columns: 1fr minmax(260px, 360px);
+		grid-template-columns: 1fr minmax(280px, 400px);
 	}
 }
 
