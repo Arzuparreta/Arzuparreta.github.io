@@ -5,7 +5,7 @@ export const site = {
 	url: 'https://arzuparreta.github.io',
 	github: 'https://github.com/Arzuparreta',
 	cvRepo: 'https://github.com/Arzuparreta/CV',
-	linkedin: 'https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-rubio-432953378/',
+	linkedin: 'https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-432953378/',
 	email: 'rubenpenarubio02@gmail.com',
 	openToRelocation: true,
 } as const;

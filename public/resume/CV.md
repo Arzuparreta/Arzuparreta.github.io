@@ -1,7 +1,7 @@
 # Rubén Peña Rubio (Arzuparreta)
 
 ### Junior Linux Systems Administrator | DevOps Enthusiast
- Seville, Spain | Open to relocation | [Email](rubenpenarubio02@gmail.com) | [GitHub](https://github.com/Arzuparreta) | [LinkedIn](https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-rubio-432953378/)
+ Seville, Spain | Open to relocation | [Email](rubenpenarubio02@gmail.com) | [GitHub](https://github.com/Arzuparreta) | [LinkedIn](https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-432953378/)
 
 Self-taught systems enthusiast with a decade of hardware tinkering and two years of deep focus on Linux, Docker, and Python automation. I build and maintain reliable homelab infrastructure and containerized services.
 
