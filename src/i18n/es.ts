@@ -19,6 +19,8 @@ export const es: Messages = {
 		linkedin: 'LinkedIn',
 	},
 	footer: {
+		cvLabel: 'CV',
+		mailLabel: 'Mail',
 		openCvAria: 'Abrir currículum — ver en línea, descargar o código en GitHub',
 		emailAria: 'Enviar correo',
 	},

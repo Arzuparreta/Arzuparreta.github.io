@@ -7,7 +7,6 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArrowLeftIcon from '../../components/ArrowLeftIcon.astro';
 import GitHubIcon from '../../components/GitHubIcon.astro';
 import LinkedInIcon from '../../components/LinkedInIcon.astro';
-import MailIcon from '../../components/MailIcon.astro';
 import { site } from '../../data/site';
 import { getMessages } from '../../i18n';
 import type { LocaleBundle } from '../../scripts/locale-client';
@@ -64,7 +63,7 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		</main>
 		<footer class="site-bottom-bar" aria-label={t.a11y.siteAside}>
 			<div class="site-bottom-bar__left">
-				<div class="site-bottom-bar__left-cluster">
+				<div class="site-bottom-bar__start">
 					<button
 						type="button"
 						class="theme-toggle"
@@ -101,11 +100,11 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 						</svg>
 					</button>
 					<a
-						class="site-bottom-bar__icon-link"
+						class="site-bottom-bar__social"
 						href={`mailto:${site.email}`}
 						aria-label={t.footer.emailAria}
 					>
-						<MailIcon class="site-bottom-bar__icon-link__svg" />
+						<span>{t.footer.mailLabel}</span>
 					</a>
 				</div>
 			</div>

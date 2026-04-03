@@ -16,6 +16,8 @@ export type Messages = {
 		linkedin: string;
 	};
 	footer: {
+		cvLabel: string;
+		mailLabel: string;
 		openCvAria: string;
 		emailAria: string;
 	};
