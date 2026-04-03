@@ -37,15 +37,15 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 
 <BaseLayout title={title} description={description} canonicalPath={canonicalPath} lang="en" skipToContent={t.a11y.skipToContent}>
 	<div class="page cv-page">
+		<a
+			class="cv-page__back"
+			href={homeHref}
+			aria-label="Back to home"
+			title="Back to home"
+		>
+			<ArrowLeftIcon class="cv-page__back-icon" />
+		</a>
 		<header class="cv-page__header">
-			<a
-				class="cv-page__back"
-				href={homeHref}
-				aria-label="Back to home"
-				title="Back to home"
-			>
-				<ArrowLeftIcon class="cv-page__back-icon" />
-			</a>
 			<div class="cv-page__actions">
 				<a class="btn btn--ghost btn--compact" href={`${base}resume/CV.md`} download>Download .md</a>
 				<a class="btn btn--ghost btn--compact" href={site.cvRepo} target="_blank" rel="noopener noreferrer">Source repo</a>
@@ -130,18 +130,21 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-end;
 		gap: var(--s-2);
 		border-bottom: 1px solid var(--border);
 	}
 
 	.cv-page__back {
+		position: fixed;
+		top: max(var(--s-2), env(safe-area-inset-top, 0px));
+		left: max(var(--page-pad-x), env(safe-area-inset-left, 0px));
+		z-index: 100;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		min-width: 2.75rem;
 		min-height: 2.75rem;
-		margin: calc(-1 * var(--s-1));
 		padding: var(--s-1);
 		color: var(--accent);
 		text-decoration: none;
