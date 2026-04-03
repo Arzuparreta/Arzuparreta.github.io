@@ -114,46 +114,54 @@ const localeBundleJson = JSON.stringify({
 				</section>
 
 				<section id="cv" class="section" aria-labelledby="cv-heading">
-					<h2 id="cv-heading" data-i18n="sections.cv.title">{t.sections.cv.title}</h2>
-					<div class="download-row">
-						<a
-							class="btn btn--ghost"
-							href={site.cvRepo}
-							target="_blank"
-							rel="noopener noreferrer"
-							data-i18n="sections.cv.cvRepo"
-						>
-							{t.sections.cv.cvRepo}
-						</a>
-						<a class="btn" href={`${import.meta.env.BASE_URL}resume/CV.md`} download data-i18n="sections.cv.downloadCv">
-							{t.sections.cv.downloadCv}
-						</a>
-						<a
-							class="btn btn--ghost"
-							href={`${import.meta.env.BASE_URL}resume/`}
-							data-i18n="sections.cv.viewCv"
-						>
-							{t.sections.cv.viewCv}
-						</a>
+					<div class="section-inline-row">
+						<h2 id="cv-heading" class="section-inline-row__title" data-i18n="sections.cv.title">
+							{t.sections.cv.title}
+						</h2>
+						<div class="download-row">
+							<a
+								class="btn btn--ghost"
+								href={site.cvRepo}
+								target="_blank"
+								rel="noopener noreferrer"
+								data-i18n="sections.cv.cvRepo"
+							>
+								{t.sections.cv.cvRepo}
+							</a>
+							<a class="btn" href={`${import.meta.env.BASE_URL}resume/CV.md`} download data-i18n="sections.cv.downloadCv">
+								{t.sections.cv.downloadCv}
+							</a>
+							<a
+								class="btn btn--ghost"
+								href={`${import.meta.env.BASE_URL}resume/`}
+								data-i18n="sections.cv.viewCv"
+							>
+								{t.sections.cv.viewCv}
+							</a>
+						</div>
 					</div>
 				</section>
 
 				<section id="contact" class="section" aria-labelledby="contact-heading">
-					<h2 id="contact-heading" data-i18n="sections.contact.title">{t.sections.contact.title}</h2>
-					<p class="contact-email">
-						<span class="contact-email__address">{site.email}</span>
-						<button
-							type="button"
-							class="btn btn--ghost btn--compact contact-email__copy"
-							id="copy-email-btn"
-							data-email={site.email}
-							data-i18n="sections.contact.copyEmail"
-							data-i18n-aria="sections.contact.copyEmailAria"
-							aria-label={t.sections.contact.copyEmailAria}
-						>
-							{t.sections.contact.copyEmail}
-						</button>
-					</p>
+					<div class="section-inline-row">
+						<h2 id="contact-heading" class="section-inline-row__title" data-i18n="sections.contact.title">
+							{t.sections.contact.title}
+						</h2>
+						<p class="contact-email">
+							<span class="contact-email__address">{site.email}</span>
+							<button
+								type="button"
+								class="btn btn--ghost btn--compact contact-email__copy"
+								id="copy-email-btn"
+								data-email={site.email}
+								data-i18n="sections.contact.copyEmail"
+								data-i18n-aria="sections.contact.copyEmailAria"
+								aria-label={t.sections.contact.copyEmailAria}
+							>
+								{t.sections.contact.copyEmail}
+							</button>
+						</p>
+					</div>
 				</section>
 			</div>
 		</main>
