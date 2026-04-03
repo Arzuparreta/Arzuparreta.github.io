@@ -48,7 +48,6 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		<header class="cv-page__header">
 			<div class="cv-page__actions">
 				<a class="btn btn--ghost btn--compact" href={`${base}resume/CV.md`} download>Download .md</a>
-				<a class="btn btn--ghost btn--compact" href={site.cvRepo} target="_blank" rel="noopener noreferrer">Source repo</a>
 			</div>
 		</header>
 		<main id="main" class="cv-page__main">
@@ -171,6 +170,16 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		display: flex;
 		flex-wrap: wrap;
 		gap: var(--s-2);
+	}
+
+	.cv-page__actions .btn {
+		text-decoration: none;
+	}
+
+	.cv-page__actions .btn:hover,
+	.cv-page__actions .btn:focus,
+	.cv-page__actions .btn:focus-visible {
+		text-decoration: none;
 	}
 
 	.cv-page__main {
