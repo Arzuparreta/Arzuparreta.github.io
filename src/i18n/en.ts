@@ -15,10 +15,12 @@ export const en: Messages = {
 		intro: 'Intro',
 		skills: 'Skills',
 		projects: 'Projects',
-		cvFile: 'CV',
-		contact: 'Contact',
 		github: 'GitHub',
 		linkedin: 'LinkedIn',
+	},
+	footer: {
+		openCvAria: 'Open CV — view online, download, or source on GitHub',
+		emailAria: 'Send email',
 	},
 	theme: {
 		switchToLight: 'Switch to light theme',
@@ -44,16 +46,7 @@ export const en: Messages = {
 			projectImageAltSuffix: ' — interface preview',
 		},
 		cv: {
-			title: 'CV',
-			downloadCv: 'Download CV',
-			viewCv: 'View online',
 			cvRepo: 'Source on GitHub',
-		},
-		contact: {
-			title: 'Contact',
-			copyEmail: 'Copy',
-			copyEmailAria: 'Copy email address to clipboard',
-			copied: 'Copied!',
 		},
 	},
 	profileLead:

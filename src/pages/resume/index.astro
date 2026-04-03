@@ -7,6 +7,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ArrowLeftIcon from '../../components/ArrowLeftIcon.astro';
 import GitHubIcon from '../../components/GitHubIcon.astro';
 import LinkedInIcon from '../../components/LinkedInIcon.astro';
+import MailIcon from '../../components/MailIcon.astro';
 import { site } from '../../data/site';
 import { getMessages } from '../../i18n';
 import type { LocaleBundle } from '../../scripts/locale-client';
@@ -48,6 +49,14 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		<header class="cv-page__header">
 			<div class="cv-page__actions">
 				<a class="btn btn--ghost btn--compact" href={`${base}resume/CV.md`} download>Download .md</a>
+				<a
+					class="btn btn--ghost btn--compact"
+					href={site.cvRepo}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					{t.sections.cv.cvRepo}
+				</a>
 			</div>
 		</header>
 		<main id="main" class="cv-page__main">
@@ -55,41 +64,50 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		</main>
 		<footer class="site-bottom-bar" aria-label={t.a11y.siteAside}>
 			<div class="site-bottom-bar__left">
-				<button
-					type="button"
-					class="theme-toggle"
-					id="theme-toggle"
-					aria-pressed="false"
-					aria-label={t.theme.switchToDark}
-				>
-					<svg
-						class="theme-toggle__icon theme-toggle__icon--sun"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
+				<div class="site-bottom-bar__left-cluster">
+					<button
+						type="button"
+						class="theme-toggle"
+						id="theme-toggle"
+						aria-pressed="false"
+						aria-label={t.theme.switchToDark}
 					>
-						<circle cx="12" cy="12" r="4"></circle>
-						<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
-					</svg>
-					<svg
-						class="theme-toggle__icon theme-toggle__icon--moon"
-						xmlns="http://www.w3.org/2000/svg"
-						viewBox="0 0 24 24"
-						fill="none"
-						stroke="currentColor"
-						stroke-width="2"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-						aria-hidden="true"
+						<svg
+							class="theme-toggle__icon theme-toggle__icon--sun"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<circle cx="12" cy="12" r="4"></circle>
+							<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+						</svg>
+						<svg
+							class="theme-toggle__icon theme-toggle__icon--moon"
+							xmlns="http://www.w3.org/2000/svg"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+							aria-hidden="true"
+						>
+							<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+						</svg>
+					</button>
+					<a
+						class="site-bottom-bar__icon-link"
+						href={`mailto:${site.email}`}
+						aria-label={t.footer.emailAria}
 					>
-						<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-					</svg>
-				</button>
+						<MailIcon class="site-bottom-bar__icon-link__svg" />
+					</a>
+				</div>
 			</div>
 			<div class="site-bottom-bar__center">
 				<a class="site-bottom-bar__social" href={site.github} target="_blank" rel="noopener noreferrer">

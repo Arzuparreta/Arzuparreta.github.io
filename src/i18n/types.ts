@@ -12,10 +12,12 @@ export type Messages = {
 		intro: string;
 		skills: string;
 		projects: string;
-		cvFile: string;
-		contact: string;
 		github: string;
 		linkedin: string;
+	};
+	footer: {
+		openCvAria: string;
+		emailAria: string;
 	};
 	theme: {
 		switchToLight: string;
@@ -39,8 +41,7 @@ export type Messages = {
 			/** Appended to project title in screenshot `alt` (localized). */
 			projectImageAltSuffix: string;
 		};
-		cv: { title: string; downloadCv: string; viewCv: string; cvRepo: string };
-		contact: { title: string; copyEmail: string; copyEmailAria: string; copied: string };
+		cv: { cvRepo: string };
 	};
 	profileLead: string;
 	technicalSkills: string[];
