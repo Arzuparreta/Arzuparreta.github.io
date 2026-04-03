@@ -78,6 +78,7 @@ function applyTechnicalSkills(ul: Element, lines: string[]): void {
 	ul.replaceChildren(
 		...lines.map((line) => {
 			const li = document.createElement('li');
+			li.className = 'skill-chip';
 			li.textContent = line;
 			return li;
 		}),

@@ -80,9 +80,9 @@ const localeBundleJson = JSON.stringify({
 				<section id="skills" class="section" aria-labelledby="skills-heading">
 					<h2 id="skills-heading" data-i18n="sections.skills.title">{t.sections.skills.title}</h2>
 					<p class="section__intro" data-i18n="sections.skills.intro">{t.sections.skills.intro}</p>
-					<ul class="skills">
+					<ul class="skills skills--chips" role="list">
 						{t.technicalSkills.map((line) => (
-							<li>{line}</li>
+							<li class="skill-chip">{line}</li>
 						))}
 					</ul>
 				</section>

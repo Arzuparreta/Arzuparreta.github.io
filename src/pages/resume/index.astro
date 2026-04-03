@@ -137,6 +137,7 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		display: flex;
 		flex-direction: column;
 		padding-bottom: var(--site-bottom-bar-clearance);
+		background: transparent;
 	}
 
 	.cv-page__header {
@@ -148,7 +149,7 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 		align-items: center;
 		justify-content: flex-end;
 		gap: var(--s-2);
-		border-bottom: 1px solid var(--border);
+		border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
 	}
 
 	.cv-page__back {
@@ -214,26 +215,40 @@ const homeHref = base.endsWith('/') ? base : `${base}/`;
 
 	.cv-prose :global(h1) {
 		font-size: var(--text-3xl);
-		font-weight: 600;
-		letter-spacing: -0.02em;
+		font-weight: 750;
+		letter-spacing: -0.035em;
 		line-height: 1.15;
 		margin: 0 0 var(--s-2);
 		color: var(--text);
+		font-family: var(--font);
+	}
+
+	@supports (-webkit-background-clip: text) or (background-clip: text) {
+		.cv-prose :global(h1) {
+			background-image: var(--accent-gradient);
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			-webkit-text-fill-color: transparent;
+		}
 	}
 
 	.cv-prose :global(h2) {
 		font-size: var(--text-section);
-		font-weight: 600;
+		font-weight: 650;
 		margin: var(--s-5) 0 var(--s-2);
 		color: var(--text);
 		scroll-margin-top: var(--s-4);
+		font-family: var(--font);
+		letter-spacing: -0.03em;
 	}
 
 	.cv-prose :global(h3) {
 		font-size: var(--text-xl);
-		font-weight: 600;
+		font-weight: 650;
 		margin: 0 0 var(--s-3);
 		color: var(--text-muted);
+		font-family: var(--font);
 	}
 
 	.cv-prose :global(p) {
