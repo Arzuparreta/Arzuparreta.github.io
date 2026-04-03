@@ -515,6 +515,54 @@ h3 {
 	.lang-toggle {
 		display: inline-flex;
 	}
+
+	/* Keep the bottom bar to one short row: icon-only socials, no wrapped pill stacks. */
+	.site-bottom-bar {
+		column-gap: var(--s-2);
+		row-gap: var(--s-1);
+	}
+
+	.site-bottom-bar__center {
+		flex-wrap: nowrap;
+		gap: var(--s-2);
+	}
+
+	.site-bottom-bar__center .site-bottom-bar__social {
+		position: relative;
+		padding: 0.375rem;
+		min-width: 2.25rem;
+	}
+
+	.site-bottom-bar__center .site-bottom-bar__social > span {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.site-bottom-bar__start {
+		flex-wrap: nowrap;
+		gap: var(--s-2);
+	}
+
+	.site-bottom-bar__left {
+		min-width: 0;
+		overflow-x: auto;
+		overflow-y: hidden;
+		-webkit-overflow-scrolling: touch;
+		overscroll-behavior-x: contain;
+		scrollbar-width: none;
+		touch-action: pan-x;
+	}
+
+	.site-bottom-bar__left::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .site-main {
