@@ -120,7 +120,7 @@ const localeBundleJson = JSON.stringify({
 				<div class="site-bottom-bar__start">
 					<button
 						type="button"
-						class="theme-toggle"
+						class="theme-toggle site-bottom-bar__theme-slot"
 						id="theme-toggle"
 						aria-pressed="false"
 						aria-label={t.theme.switchToDark}
@@ -154,7 +154,7 @@ const localeBundleJson = JSON.stringify({
 						</svg>
 					</button>
 					<a
-						class="site-bottom-bar__social"
+						class="site-bottom-bar__social site-bottom-bar__cv"
 						href={`${import.meta.env.BASE_URL}resume/`}
 						aria-label={t.footer.openCvAria}
 						data-i18n-aria="footer.openCvAria"
@@ -162,7 +162,7 @@ const localeBundleJson = JSON.stringify({
 						<span data-i18n="footer.cvLabel">{t.footer.cvLabel}</span>
 					</a>
 					<a
-						class="site-bottom-bar__social"
+						class="site-bottom-bar__social site-bottom-bar__mail--placement-start"
 						href={`mailto:${site.email}`}
 						aria-label={t.footer.emailAria}
 						data-i18n-aria="footer.emailAria"
@@ -239,6 +239,14 @@ const localeBundleJson = JSON.stringify({
 						></path>
 					</svg>
 				</button>
+				<a
+					class="site-bottom-bar__social site-bottom-bar__mail--placement-end"
+					href={`mailto:${site.email}`}
+					aria-label={t.footer.emailAria}
+					data-i18n-aria="footer.emailAria"
+				>
+					<span data-i18n="footer.mailLabel">{t.footer.mailLabel}</span>
+				</a>
 			</div>
 		</footer>
 	</div>

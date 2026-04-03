@@ -374,6 +374,15 @@ h3 {
 .site-bottom-bar__right {
 	justify-self: end;
 	min-width: 0;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	gap: var(--s-2);
+	flex-wrap: nowrap;
+}
+
+.site-bottom-bar__mail--placement-end {
+	display: none;
 }
 
 .theme-toggle,
@@ -514,6 +523,22 @@ h3 {
 
 	.lang-toggle {
 		display: inline-flex;
+	}
+
+	.site-bottom-bar__mail--placement-start {
+		display: none;
+	}
+
+	.site-bottom-bar__mail--placement-end {
+		display: inline-flex;
+	}
+
+	.site-bottom-bar__start .site-bottom-bar__cv {
+		order: 1;
+	}
+
+	.site-bottom-bar__start .site-bottom-bar__theme-slot {
+		order: 2;
 	}
 
 	/* Keep the bottom bar to one short row: icon-only socials, no wrapped pill stacks. */
