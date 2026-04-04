@@ -801,6 +801,10 @@ h3 {
 	margin-bottom: 0;
 }
 
+.case[data-project-site-url] {
+	cursor: pointer;
+}
+
 .case__top {
 	margin-bottom: var(--s-3);
 }

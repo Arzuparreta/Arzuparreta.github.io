@@ -12,12 +12,14 @@ interface Props {
 const { project, githubCta, demoYoutubeCta, projectImageAltSuffix } = Astro.props;
 const imgAlt = `${project.title}${projectImageAltSuffix}`;
 const repoUrl = project.repoUrl;
+const titleHref = project.projectSiteUrl ?? repoUrl;
 ---
 
 <article
 	class:list={['case', project.imageSrc && 'case--with-media']}
 	id={project.slug}
 	data-project-slug={project.slug}
+	data-project-site-url={project.projectSiteUrl}
 >
 	<div class="case__main">
 		<header class="case__top">
@@ -26,7 +28,7 @@ const repoUrl = project.repoUrl;
 					{
 						repoUrl ? (
 							<>
-								<a class="case__title-link" href={repoUrl} target="_blank" rel="noopener noreferrer">
+								<a class="case__title-link" href={titleHref} target="_blank" rel="noopener noreferrer">
 									{project.title}
 								</a>
 								<a

@@ -24,6 +24,8 @@ export type PrimaryProject = {
 	how: [string] | [string, string];
 	/** Public repo URL; omit when the entry is not tied to a GitHub project (no title link or repo button). */
 	repoUrl?: string;
+	/** Optional landing page (e.g. GitHub Pages): title link and card background clicks use this when set. */
+	projectSiteUrl?: string;
 	tier: 'primary';
 	/** Optional screenshot path under site root. */
 	imageSrc?: string;
@@ -68,6 +70,7 @@ const projectsEn: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
+		projectSiteUrl: 'https://arzuparreta.github.io/soundsible.github.io/',
 		imageSrc: IMG_SOUNDSIBLE_MOBILE,
 	},
 	{
@@ -141,6 +144,7 @@ const projectsEs: Project[] = [
 		],
 		tier: 'primary',
 		repoUrl: 'https://github.com/Arzuparreta/soundsible',
+		projectSiteUrl: 'https://arzuparreta.github.io/soundsible.github.io/',
 		imageSrc: IMG_SOUNDSIBLE_MOBILE,
 	},
 	{
