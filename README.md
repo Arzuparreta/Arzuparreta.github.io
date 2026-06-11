@@ -1,2 +1,3 @@
-**Source:** [Arzuparreta/Arzuparreta](https://github.com/Arzuparreta/Arzuparreta)  
-**Published** at http://arzuparreta.github.io.
+# Arzuparreta.github.io
+
+The previous website has been removed. Its replacement will be built independently in this repository.
