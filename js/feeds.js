@@ -222,6 +222,39 @@ export const system = {
   },
 };
 
+// ============================================================================
+// ESCENAS — API pública real de archivoescenas.xyz (/api/feed). La "escena del
+// día" se fija con seed=fecha (estable todo el día, cambia mañana). El link va
+// al clip de YouTube en su timestamp (lo mismo que reproduce el modal del sitio).
+// ============================================================================
+export const escenas = {
+  data: null,
+  live: false,
+
+  async refresh() {
+    try {
+      const seed = new Date().toISOString().slice(0, 10); // YYYY-MM-DD
+      const r = await fetchJSON(`https://archivoescenas.xyz/api/feed?seed=${seed}&limit=1`);
+      const it = r?.items?.[0];
+      if (!it) { this.live = false; return; }
+      const start = Math.floor(it.playback_start_sec || 0);
+      const yt = it.youtube_url ||
+        (it.youtube_id ? `https://www.youtube.com/watch?v=${it.youtube_id}` : "https://archivoescenas.xyz");
+      const clip = start > 0 ? `${yt}${yt.includes("?") ? "&" : "?"}t=${start}s` : yt;
+      this.data = {
+        title: it.scene_label || it.film_title || it.title || "escena",
+        meta: [it.director, it.year].filter(Boolean).join(" · "),
+        thumb: it.thumbnail_url ||
+          (it.youtube_id ? `https://img.youtube.com/vi/${it.youtube_id}/hqdefault.jpg` : null),
+        clip,
+      };
+      this.live = true;
+    } catch {
+      this.live = false;
+    }
+  },
+};
+
 // --- util de tiempo relativo (es) ------------------------------------------
 function relTime(iso) {
   const s = (Date.now() - new Date(iso).getTime()) / 1000;

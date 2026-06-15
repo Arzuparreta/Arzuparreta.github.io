@@ -58,17 +58,6 @@ export const SEARCH_TARGETS = {
   escenas: (q) => `https://archivoescenas.xyz/?q=${encodeURIComponent(q)}`,
 };
 
-// --- Escenas del día (panel; rota por día) ----------------------------------
-export const SCENES = [
-  { quote: "Siempre nos quedará París", film: "Casablanca · 1942" },
-  { quote: "Voy a hacerle una oferta que no podrá rechazar", film: "El Padrino · 1972" },
-  { quote: "Yo he visto cosas que vosotros no creeríais", film: "Blade Runner · 1982" },
-  { quote: "¿Estás hablando conmigo?", film: "Taxi Driver · 1976" },
-  { quote: "Que la fuerza te acompañe", film: "Star Wars · 1977" },
-  { quote: "Hasta la vista, baby", film: "Terminator 2 · 1991" },
-  { quote: "Mañana será otro día", film: "Lo que el viento se llevó · 1939" },
-];
-
 // --- Baselines de simulación ------------------------------------------------
 export const SIM = {
   transparencia: {
@@ -94,11 +83,3 @@ export const THEMES = [
   { name: "magenta", accent: "#ff4fd8", accent2: "#d63bb5" },
   { name: "hueso", accent: "#ececec", accent2: "#b9b9b9" },
 ];
-
-// Utilidad: elige por día del año (determinista)
-export function pickByDay(arr) {
-  const now = new Date();
-  const start = new Date(now.getFullYear(), 0, 0);
-  const day = Math.floor((now - start) / 86400000);
-  return arr[day % arr.length];
-}

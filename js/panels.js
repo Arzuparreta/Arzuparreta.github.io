@@ -2,8 +2,6 @@
 // panels.js — pinta y refresca cada panel a partir de los snapshots de feeds.
 // =============================================================================
 
-import { pickByDay, SCENES } from "./data/curated.js";
-
 const $ = (id) => document.getElementById(id);
 const nf = new Intl.NumberFormat("es-ES");
 
@@ -139,11 +137,28 @@ export function renderSystem(d, live) {
     .join("");
 }
 
-// --- Escena del día ---------------------------------------------------------
-export function renderEscena() {
-  const s = pickByDay(SCENES);
-  $("esc-quote").textContent = s.quote;
-  $("esc-film").textContent = s.film;
+// --- Escena del día (real, desde archivoescenas; honesto si la API cae) ------
+export function renderEscena(d, live) {
+  const link = $("esc-link"), img = $("esc-img");
+  if (!live || !d) {
+    $("esc-quote").textContent = "— archivo sin conexión —";
+    $("esc-film").textContent = "";
+    link.classList.remove("has-img");
+    img.removeAttribute("src");
+    link.setAttribute("href", "https://archivoescenas.xyz");
+    return;
+  }
+  $("esc-quote").textContent = d.title;
+  $("esc-film").textContent = d.meta || "";
+  link.setAttribute("href", d.clip);
+  if (d.thumb) {
+    img.onerror = () => link.classList.remove("has-img");
+    if (img.getAttribute("src") !== d.thumb) img.setAttribute("src", d.thumb);
+    link.classList.add("has-img");
+  } else {
+    link.classList.remove("has-img");
+    img.removeAttribute("src");
+  }
 }
 
 // efecto: parpadeo de un panel (lo usa la terminal)

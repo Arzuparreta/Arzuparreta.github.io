@@ -102,11 +102,15 @@
 
       <article class="panel panel--escenas" data-panel="escenas" aria-labelledby="t-esc">
         <div class="panel-head"><span class="panel-title" id="t-esc">escena del día</span><span class="panel-tag dim">archivo de cine</span></div>
-        <div class="panel-body">
-          <blockquote class="esc-quote" id="esc-quote">—</blockquote>
-          <div class="esc-meta">
-            <span class="dim" id="esc-film">—</span>
-            <a class="esc-link" id="esc-link" href="https://archivoescenas.xyz" target="_blank" rel="noopener">▶ ver en archivoescenas</a>
+        <div class="panel-body esc-body">
+          <a class="esc-thumb" id="esc-link" href="https://archivoescenas.xyz" target="_blank" rel="noopener" aria-label="Ver la escena del día">
+            <img class="esc-img" id="esc-img" alt="" />
+            <span class="esc-play" aria-hidden="true">▶</span>
+          </a>
+          <div class="esc-text">
+            <blockquote class="esc-quote" id="esc-quote">—</blockquote>
+            <span class="esc-film dim" id="esc-film"></span>
+            <a class="esc-more" id="esc-more" href="https://archivoescenas.xyz" target="_blank" rel="noopener">archivo completo →</a>
           </div>
         </div>
       </article>

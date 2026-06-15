@@ -319,17 +319,29 @@ b { font-weight: 700; color: var(--fg); }
 .svc.down .led { background: var(--bad); box-shadow: 0 0 6px var(--bad); }
 
 /* ---- escenas ------------------------------------------------------------- */
-.esc-quote {
-  font-size: clamp(15px, 1.9vw, 20px);
-  line-height: 1.4;
-  color: var(--fg);
-  font-style: italic;
+.esc-body { flex-direction: row; gap: 16px; align-items: flex-start; }
+.esc-thumb {
+  position: relative; flex: 0 0 auto;
+  width: clamp(120px, 22vw, 168px); aspect-ratio: 16 / 9;
+  border-radius: 4px; overflow: hidden; display: block;
+  border: 1px solid var(--panel-border); background: var(--accent-ghost);
 }
-.esc-quote::before { content: "“"; color: var(--accent); margin-right: 2px; }
-.esc-quote::after  { content: "”"; color: var(--accent); margin-left: 2px; }
-.esc-meta { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; flex-wrap: wrap; }
-.esc-link { color: var(--accent); text-decoration: none; font-size: 12px; }
-.esc-link:hover { text-shadow: var(--glow); text-decoration: underline; }
+.esc-img { width: 100%; height: 100%; object-fit: cover; display: none; }
+.esc-thumb.has-img .esc-img { display: block; }
+.esc-play {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: 24px; color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.85);
+  background: rgba(0, 0, 0, 0.18); transition: background 0.2s ease;
+}
+.esc-thumb:hover .esc-play { background: rgba(0, 0, 0, 0.04); }
+.esc-text { display: flex; flex-direction: column; min-width: 0; flex: 1; gap: 6px; }
+.esc-quote {
+  font-size: clamp(15px, 1.9vw, 20px); line-height: 1.35; color: var(--fg); font-style: italic;
+  display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+}
+.esc-film { font-size: 12px; }
+.esc-more { color: var(--accent); text-decoration: none; font-size: 12px; margin-top: auto; }
+.esc-more:hover { text-shadow: var(--glow); text-decoration: underline; }
 
 /* ---- console / terminal -------------------------------------------------- */
 .console {

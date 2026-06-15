@@ -34,6 +34,7 @@ const drawGithub = () => panels.renderGithub(feeds.github.data, feeds.github.liv
 const drawTrans  = () => panels.renderTransparencia(feeds.transparencia.data, feeds.transparencia.live);
 const drawNow    = () => panels.renderNowPlaying(feeds.nowplaying.data, feeds.nowplaying.live);
 const drawSys    = () => panels.renderSystem(feeds.system.data, feeds.system.live);
+const drawEscena = () => panels.renderEscena(feeds.escenas.data, feeds.escenas.live);
 
 // --- inicialización ---------------------------------------------------------
 const bg = initBackground();
@@ -43,14 +44,14 @@ feeds.nowplaying.onChange(() => bg.pulse());
 const term = initTerminal({
   nowplaying: feeds.nowplaying,
   system: feeds.system,
+  escenas: feeds.escenas,
   background: bg,
   applyTheme,
   flashPanel: panels.flashPanel,
 });
 
-// pintado inicial (datos simulados; se sustituyen al llegar los reales)
+// pintado inicial (se sustituye al llegar los datos reales)
 drawGithub(); drawTrans(); drawNow(); drawSys();
-panels.renderEscena();
 
 // --- reloj ------------------------------------------------------------------
 function updateClock() {
@@ -73,10 +74,12 @@ function refreshGithub() { feeds.github.refresh().then(drawGithub); }
 function refreshTrans()  { feeds.transparencia.refresh().then(drawTrans); }
 function refreshNow()    { feeds.nowplaying.refresh().then(drawNow); }
 function refreshSys()    { feeds.system.refresh().then(drawSys); }
+function refreshEscena() { feeds.escenas.refresh().then(drawEscena); }
 
-refreshGithub(); refreshTrans(); refreshNow(); refreshSys();
+refreshGithub(); refreshTrans(); refreshNow(); refreshSys(); refreshEscena();
 setInterval(refreshGithub, 10 * 60 * 1000);
 setInterval(refreshTrans, 60 * 1000);
+setInterval(refreshEscena, 30 * 60 * 1000);
 setInterval(() => { refreshNow(); refreshSys(); }, 12 * 1000);
 
 // --- loop de 1s (cosas que viven cada segundo) ------------------------------

@@ -4,7 +4,7 @@
 // =============================================================================
 
 import {
-  IDENTITY, LINKS, PROJECTS, SEARCH_TARGETS, THEMES, pickByDay, SCENES,
+  IDENTITY, LINKS, PROJECTS, SEARCH_TARGETS, THEMES,
 } from "./data/curated.js";
 
 const esc = (s) => String(s).replace(/[&<>"]/g,
@@ -130,9 +130,13 @@ export function initTerminal(ctx) {
     contact: { desc: "cómo contactarme", run: () => commands.links.run() },
 
     escena: { desc: "la escena de cine del día", run: () => {
-      const s = pickByDay(SCENES);
-      print(`“<span class="out-accent">${esc(s.quote)}</span>” — ${esc(s.film)}`, "out");
-      print('<span class="out-dim">archivo completo → <span class="out-accent">open escenas</span></span>', "out");
+      const e = ctx.escenas, d = e && e.data;
+      if (e && e.live && d) {
+        print(`🎬 <span class="out-accent">${esc(d.title)}</span>${d.meta ? " — " + esc(d.meta) : ""}`, "out");
+        print(`  <a href="${esc(d.clip)}" target="_blank" rel="noopener">▶ ver el clip</a> · <a href="https://archivoescenas.xyz" target="_blank" rel="noopener">archivo completo</a>`, "out-dim");
+      } else {
+        print("el archivo de cine no responde ahora mismo.", "out-warn");
+      }
     }},
 
     theme: { desc: "cambia el color de acento (theme | theme ámbar)", run: (a) => {
