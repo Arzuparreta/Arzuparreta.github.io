@@ -11,11 +11,8 @@ export const CONFIG = {
   supabaseUrl: "https://desktop-ruben.taileed0d5.ts.net",
   supabaseKey: "sb_publishable_ACJWlzQHlZjBrEguHvfOxg_3BJgxAaH",
 
-  // Para activar now-playing/system reales: apunta a los JSON que publica
-  // `server/publish.sh` en una ruta estática pública con CORS. Vacío = simulado.
-  nowPlayingUrl: "", // p.ej. "https://desktop-ruben.taileed0d5.ts.net/observatorio/nowplaying.json"
-  statsUrl: "",      // p.ej. "https://desktop-ruben.taileed0d5.ts.net/observatorio/stats.json"
-
+  // now-playing y system se leen de la tabla pública `observatorio_state` del
+  // mismo Supabase (la alimenta server/publish.sh en desktop-ruben).
   fetchTimeoutMs: 2200,
   cacheTtlMs: 10 * 60 * 1000, // 10 min para GitHub (límite anónimo 60/h)
 };
@@ -61,18 +58,7 @@ export const SEARCH_TARGETS = {
   escenas: (q) => `https://archivoescenas.xyz/?q=${encodeURIComponent(q)}`,
 };
 
-// --- Playlist curada (fallback de now-playing) ------------------------------
-// Lo que suena en su Soundsible cuando no hay feed real. Su lado clásico.
-export const PLAYLIST = [
-  { title: "Goldberg Variations, BWV 988 — Aria", artist: "Glenn Gould", album: "Bach · The Goldberg Variations (1981)", dur: 372 },
-  { title: "Cello Suite No. 1 en Sol, BWV 1007 — Prélude", artist: "Mstislav Rostropovich", album: "Bach · Cello Suites", dur: 158 },
-  { title: "Das wohltemperierte Klavier I — Prelude in C", artist: "Sviatoslav Richter", album: "Bach · WTK", dur: 138 },
-  { title: "Partita No. 2 en Re menor — Chaconne", artist: "Hilary Hahn", album: "Bach · Sonatas & Partitas", dur: 873 },
-  { title: "Gymnopédie No. 1", artist: "Erik Satie", album: "Trois Gymnopédies", dur: 210 },
-  { title: "Clair de Lune", artist: "Claude Debussy", album: "Suite bergamasque", dur: 300 },
-];
-
-// --- Escenas del día (fallback / panel; rota por día) -----------------------
+// --- Escenas del día (panel; rota por día) ----------------------------------
 export const SCENES = [
   { quote: "Siempre nos quedará París", film: "Casablanca · 1942" },
   { quote: "Voy a hacerle una oferta que no podrá rechazar", film: "El Padrino · 1972" },
@@ -91,17 +77,6 @@ export const SIM = {
     diputados: 350,
     latestDate: "hoy",
     top: { amount: 451200, contractor: "Accenture España S.L.", windowDays: 30 },
-  },
-  system: {
-    uptimeSec: 41 * 86400 + 3 * 3600 + 12 * 60,
-    load: 0.12,
-    memPct: 38,
-    services: [
-      { name: "postgres", up: true },
-      { name: "nginx", up: true },
-      { name: "soundsible", up: true },
-      { name: "tailscale", up: true },
-    ],
   },
   github: {
     repos: 15, followers: 5, stars: 18,

@@ -45,7 +45,7 @@ export function initTerminal(ctx) {
   const commands = {
     help: { desc: "esta lista de comandos", run: () => {
       print("comandos disponibles:", "out-dim");
-      const order = ["whoami", "about", "ls", "open", "play", "now", "next",
+      const order = ["whoami", "about", "ls", "open", "now", "play",
         "search", "links", "escena", "theme", "github", "date", "clear"];
       for (const k of order) {
         if (commands[k]) print(`  <span class="out-accent">${k.padEnd(9)}</span> ${esc(commands[k].desc)}`, "out");
@@ -92,26 +92,23 @@ export function initTerminal(ctx) {
       window.open(url, "_blank", "noopener");
     }},
 
-    play: { desc: "reproduce / pausa la música", run: () => {
-      const playing = ctx.nowplaying.toggle();
-      const d = ctx.nowplaying.data;
-      print(playing ? `▶ ${esc(d.title)} — <span class="out-dim">${esc(d.artist)}</span>`
-                    : "⏸ en pausa", "out-accent");
+    now: { desc: "qué suena ahora en mi Soundsible", run: () => {
+      const np = ctx.nowplaying, d = np.data;
+      if (np.live && d.isPlaying && d.title) {
+        print(`♪ <span class="out-accent">${esc(d.title)}</span> — ${esc(d.artist || "")}`, "out");
+        if (d.album) print(`  <span class="out-dim">${esc(d.album)}</span>`, "out");
+      } else if (np.live) {
+        print("ahora mismo no suena nada en mi Soundsible.", "out-dim");
+      } else {
+        print("now-playing sin conexión (el publisher no responde).", "out-warn");
+      }
     }},
-    pause: { desc: "pausa la música", run: () => {
-      if (ctx.nowplaying.data.isPlaying) ctx.nowplaying.toggle();
-      print("⏸ en pausa", "out-accent");
+    play: { desc: "(la música es mi Soundsible real)", run: () => {
+      print("esto es mi Soundsible de verdad — no se controla desde la web 🙂", "out-dim");
+      print('mira con <span class="out-accent">now</span> qué estoy escuchando.', "out-dim");
     }},
-    now: { desc: "qué está sonando ahora", run: () => {
-      const d = ctx.nowplaying.data;
-      print(`♪ <span class="out-accent">${esc(d.title)}</span> — ${esc(d.artist)}`, "out");
-      print(`  <span class="out-dim">${esc(d.album)}</span>`, "out");
-    }},
-    next: { desc: "siguiente pista", run: () => {
-      ctx.nowplaying.next();
-      const d = ctx.nowplaying.data;
-      print(`⏭ ${esc(d.title)} — <span class="out-dim">${esc(d.artist)}</span>`, "out-accent");
-    }},
+    pause: { desc: null, run: () => commands.play.run() },
+    next: { desc: null, run: () => commands.play.run() },
 
     search: { desc: 'busca en mis índices: search escenas "frase"', run: (a) => {
       const target = (a[0] || "").toLowerCase();

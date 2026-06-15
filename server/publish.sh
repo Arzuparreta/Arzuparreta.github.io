@@ -1,54 +1,72 @@
 #!/usr/bin/env bash
 # =============================================================================
-# observatorio-publish — lee Soundsible (local) + stats del sistema y escribe
-# dos JSON pequeños y SANITIZADOS en una ruta estática pública.
+# observatorio-publish — lee Soundsible (local) + stats del sistema y hace
+# UPSERT de dos filas en la tabla pública `observatorio_state` de tu Supabase.
 #
-# Soundsible se queda cerrado a LAN/Tailscale; aquí solo sale lo que tú decides
-# (título/artista/álbum) y un puñado de métricas. Coste: unos ms cada 30s.
+# La web lee esa tabla por el REST público (anon, solo-lectura). La service key
+# se queda AQUÍ (env OBS_SERVICE_KEY), nunca toca el repo ni el navegador.
+# Soundsible no se expone: solo sale título/artista/álbum/posición.
 #
-# Requiere: bash, curl, jq.  Sirve OUT_DIR por nginx/caddy con CORS (ver README).
+# Requiere: bash, curl, jq.
+# Config por entorno:
+#   OBS_SERVICE_KEY   (obligatoria)  service_role key de Supabase
+#   OBS_SUPABASE_REST (opcional)     por defecto http://127.0.0.1:54321/rest/v1
+#   SOUNDSIBLE_URL    (opcional)     por defecto http://127.0.0.1:5005
+#   OBS_SERVICES      (opcional)     "nombre:puerto" a vigilar (o "tailscale")
 # =============================================================================
 set -euo pipefail
 
-OUT_DIR="${OBS_OUT_DIR:-/var/www/observatorio}"
+REST="${OBS_SUPABASE_REST:-http://127.0.0.1:54321/rest/v1}"
+KEY="${OBS_SERVICE_KEY:?falta OBS_SERVICE_KEY}"
 SOUNDSIBLE_URL="${SOUNDSIBLE_URL:-http://127.0.0.1:5005}"
-SOUNDSIBLE_TOKEN="${SOUNDSIBLE_TOKEN:-}"           # opcional si confías en LAN
-SERVICES=(${OBS_SERVICES:-postgres nginx soundsible tailscaled})
+# se comprueba si el puerto está en escucha (real), no el unit de systemd.
+# "tailscale" es especial (se comprueba con `tailscale status`).
+SERVICES=(${OBS_SERVICES:-soundsible:5005 supabase:54321 postgres:54322 tailscale})
 
-mkdir -p "$OUT_DIR"
+# --- now playing (sanitizado; 204/empty = nada sonando) ---------------------
+state="$(curl -fsS -m 2 "$SOUNDSIBLE_URL/api/playback/state" 2>/dev/null || true)"
+if [ -n "$state" ] && echo "$state" | jq -e . >/dev/null 2>&1; then
+  np="$(echo "$state" | jq -c '{
+    title:        (.track.title    // null),
+    artist:       (.track.artist   // null),
+    album:        (.track.album    // null),
+    position_sec: (.position_sec   // 0),
+    duration_sec: (.track.duration // 0),
+    is_playing:   (.is_playing     // false)
+  }')"
+else
+  np='{"is_playing":false}'
+fi
 
-# --- now playing (solo campos públicos) -------------------------------------
-auth=()
-[ -n "$SOUNDSIBLE_TOKEN" ] && auth=(-H "Authorization: Bearer $SOUNDSIBLE_TOKEN")
-state="$(curl -fsS --max-time 2 "${auth[@]}" "$SOUNDSIBLE_URL/api/playback/state" 2>/dev/null || echo '{}')"
-
-echo "$state" | jq -c '{
-  title:        (.track.title    // null),
-  artist:       (.track.artist   // null),
-  album:        (.track.album    // null),
-  position_sec: (.position_sec   // 0),
-  duration_sec: (.track.duration // 0),
-  is_playing:   (.is_playing     // false),
-  updated_at:   now
-}' > "$OUT_DIR/nowplaying.json.tmp" && mv "$OUT_DIR/nowplaying.json.tmp" "$OUT_DIR/nowplaying.json"
-
-# --- stats del sistema ------------------------------------------------------
+# --- system -----------------------------------------------------------------
 read -r load1 _ < /proc/loadavg
 uptime_sec="$(cut -d. -f1 /proc/uptime)"
 mem_total="$(awk '/MemTotal/{print $2}' /proc/meminfo)"
 mem_avail="$(awk '/MemAvailable/{print $2}' /proc/meminfo)"
 mem_pct=$(( (mem_total - mem_avail) * 100 / mem_total ))
+# puertos en escucha ahora mismo (real)
+listening="$(ss -ltnH 2>/dev/null | awk '{print $4}' | grep -oE '[0-9]+$' | sort -u)"
+services_json="$(for s in "${SERVICES[@]}"; do
+  name="${s%%:*}"; port="${s#*:}"
+  if [ "$name" = "tailscale" ]; then
+    tailscale status >/dev/null 2>&1 && up=true || up=false
+  elif [ "$port" != "$s" ] && printf '%s\n' "$listening" | grep -qx "$port"; then
+    up=true
+  else
+    up=false
+  fi
+  printf '{"name":"%s","up":%s}\n' "$name" "$up"
+done | jq -s -c '.')"
+sys="$(jq -nc --argjson u "$uptime_sec" --arg l "$load1" --argjson m "$mem_pct" --argjson svc "$services_json" \
+  '{uptime_sec:$u, load:($l|tonumber), mem_pct:$m, services:$svc}')"
 
-services_json="["
-first=1
-for s in "${SERVICES[@]}"; do
-  if systemctl is-active "$s" >/dev/null 2>&1; then up=true; else up=false; fi
-  [ $first -eq 0 ] && services_json+=","
-  services_json+="{\"name\":\"$s\",\"up\":$up}"
-  first=0
-done
-services_json+="]"
+# --- upsert (merge-duplicates sobre la PK `key`) ----------------------------
+payload="$(jq -nc --argjson np "$np" --argjson sys "$sys" \
+  '[{key:"nowplaying",value:$np,updated_at:(now|todate)},
+    {key:"system",    value:$sys,updated_at:(now|todate)}]')"
 
-printf '{"uptime_sec":%s,"load":%s,"mem_pct":%s,"services":%s}\n' \
-  "$uptime_sec" "$load1" "$mem_pct" "$services_json" \
-  > "$OUT_DIR/stats.json.tmp" && mv "$OUT_DIR/stats.json.tmp" "$OUT_DIR/stats.json"
+curl -fsS -m 10 -X POST "$REST/observatorio_state" \
+  -H "apikey: $KEY" -H "Authorization: Bearer $KEY" \
+  -H "Content-Type: application/json" \
+  -H "Prefer: resolution=merge-duplicates" \
+  -d "$payload" >/dev/null

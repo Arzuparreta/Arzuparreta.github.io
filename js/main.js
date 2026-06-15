@@ -82,10 +82,9 @@ setInterval(() => { refreshNow(); refreshSys(); }, 12 * 1000);
 // --- loop de 1s (cosas que viven cada segundo) ------------------------------
 setInterval(() => {
   updateClock();
-  feeds.transparencia.tick(1);
   feeds.nowplaying.tick(1);
   feeds.system.tick(1);
-  drawTrans(); drawNow(); drawSys();
+  drawNow(); drawSys();
 }, 1000);
 
 // --- boot -------------------------------------------------------------------

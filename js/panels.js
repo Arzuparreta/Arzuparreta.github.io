@@ -26,13 +26,13 @@ function fmtEur(n) {
   return nf.format(n) + "€";
 }
 
-// marca el panel como live (●) o simulado (○)
-function setSrc(panel, live) {
+// marca el panel como live (●) o no (○ con etiqueta honesta)
+function setSrc(panel, live, offLabel = "sim") {
   const tag = document.querySelector(`.panel--${panel} .panel-tag[data-src]`);
   if (!tag) return;
   tag.classList.toggle("live", !!live);
   tag.classList.toggle("sim", !live);
-  tag.textContent = live ? "live" : "sim";
+  tag.textContent = live ? "live" : offLabel;
 }
 
 // --- contador con count-up suave -------------------------------------------
@@ -85,22 +85,40 @@ export function renderTransparencia(d, live) {
   }
 }
 
-// --- Now playing ------------------------------------------------------------
+// --- Now playing (honesto: nada sonando / sin conexión, nunca inventado) -----
 export function renderNowPlaying(d, live) {
-  setSrc("nowplaying", live);
-  $("np-title").textContent = d.title;
-  $("np-artist").textContent = d.artist;
-  $("np-album").textContent = d.album;
-  const pct = d.duration ? Math.min(100, (d.position / d.duration) * 100) : 0;
+  setSrc("nowplaying", live, "offline");
+  const playing = live && d.isPlaying && d.title;
+  if (!live) {
+    $("np-title").textContent = "— sin conexión —";
+    $("np-artist").textContent = "el publisher no responde";
+    $("np-album").textContent = "";
+  } else if (!playing) {
+    $("np-title").textContent = "— nada sonando —";
+    $("np-artist").textContent = "Soundsible en silencio";
+    $("np-album").textContent = "";
+  } else {
+    $("np-title").textContent = d.title;
+    $("np-artist").textContent = d.artist || "";
+    $("np-album").textContent = d.album || "";
+  }
+  const pct = playing && d.duration ? Math.min(100, (d.position / d.duration) * 100) : 0;
   $("np-fill").style.width = pct + "%";
-  $("np-pos").textContent = fmtTime(d.position);
-  $("np-dur").textContent = fmtTime(d.duration);
-  $("np-eq").classList.toggle("paused", !d.isPlaying);
+  $("np-pos").textContent = fmtTime(playing ? d.position : 0);
+  $("np-dur").textContent = fmtTime(playing ? d.duration : 0);
+  $("np-eq").classList.toggle("paused", !playing);
 }
 
-// --- System -----------------------------------------------------------------
+// --- System (real; honesto si el publisher no responde) ----------------------
 export function renderSystem(d, live) {
-  setSrc("system", live);
+  setSrc("system", live, "offline");
+  if (!live) {
+    $("sys-uptime").textContent = "—";
+    $("sys-load").textContent = "—";
+    $("sys-mem").style.width = "0%";
+    $("sys-services").innerHTML = '<span class="dim">publisher sin conexión</span>';
+    return;
+  }
   $("sys-uptime").textContent = fmtUptime(d.uptimeSec);
   $("sys-load").textContent = d.load.toFixed(2);
   $("sys-mem").style.width = d.memPct.toFixed(0) + "%";

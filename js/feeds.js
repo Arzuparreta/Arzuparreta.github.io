@@ -1,10 +1,13 @@
 // =============================================================================
-// feeds.js — cada feed intenta el dato real (timeout corto) y, si falla,
-// cae a un estado simulado que deriva en el tiempo. El observatorio nunca
-// se ve roto; se vuelve real en cuanto el feed existe.
+// feeds.js — datos reales.
+//   github / transparencia → APIs públicas (GitHub, Supabase de Esp. Transp.)
+//   nowplaying / system    → tabla pública `observatorio_state` que alimenta
+//                            el publisher local (server/publish.sh) cada ~10s.
+// Si un feed real no responde: github/transparencia tienen baseline; nowplaying
+// y system muestran estado HONESTO (nada sonando / sin conexión), nunca inventan.
 // =============================================================================
 
-import { CONFIG, SIM, PLAYLIST } from "./data/curated.js";
+import { CONFIG, SIM } from "./data/curated.js";
 
 // --- helpers ----------------------------------------------------------------
 async function fetchJSON(url, { headers } = {}) {
@@ -32,8 +35,9 @@ function cacheSet(key, v) {
   try { localStorage.setItem(key, JSON.stringify({ t: Date.now(), v })); } catch {}
 }
 
-const jitter = (base, amp) => base + (Math.random() * 2 - 1) * amp;
-const clamp = (n, lo, hi) => Math.max(lo, Math.min(hi, n));
+const SUPA = CONFIG.supabaseUrl.replace(/\/$/, "") + "/rest/v1";
+const supaHeaders = { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${CONFIG.supabaseKey}` };
+const FRESH_MS = 90 * 1000; // un feed está "vivo" si el publisher actualizó hace <90s
 
 // ============================================================================
 // GITHUB — real vía api.github.com (público, CORS). Cacheado 10 min.
@@ -59,7 +63,6 @@ export const github = {
       for (const r of repos) if (r.language) langCount[r.language] = (langCount[r.language] || 0) + 1;
       const langs = Object.entries(langCount).sort((a, b) => b[1] - a[1]).slice(0, 4).map((x) => x[0]);
 
-      // sparkline: eventos por día (últimos 14 días)
       const days = 14;
       const buckets = new Array(days).fill(0);
       const today = new Date(); today.setHours(0, 0, 0, 0);
@@ -82,9 +85,7 @@ export const github = {
         stars,
         langs: langs.length ? langs : SIM.github.langs,
         spark,
-        latest: newest
-          ? { repo: newest.name, when: relTime(newest.pushed_at) }
-          : SIM.github.latest,
+        latest: newest ? { repo: newest.name, when: relTime(newest.pushed_at) } : SIM.github.latest,
       };
       this.live = true;
       cacheSet("obs:gh", this.data);
@@ -97,29 +98,25 @@ export const github = {
 
 // ============================================================================
 // TRANSPARENCIA — Supabase REST público + ticker de mayor contrato.
+// El número es real (cambia a diario); no lo inflamos artificialmente.
 // ============================================================================
 export const transparencia = {
   data: { ...SIM.transparencia },
   live: false,
-  _drift: 0,
 
   async refresh() {
-    const base = CONFIG.supabaseUrl.replace(/\/$/, "") + "/rest/v1";
-    const headers = { apikey: CONFIG.supabaseKey, Authorization: `Bearer ${CONFIG.supabaseKey}` };
+    const headers = supaHeaders;
     try {
       const rows = await fetchJSON(
-        `${base}/section_index_cache?select=section_key,record_count,latest_date`, { headers });
+        `${SUPA}/section_index_cache?select=section_key,record_count,latest_date`, { headers });
       const by = Object.fromEntries(rows.map((r) => [r.section_key, r]));
-      const serverC = by.contratos?.record_count ?? SIM.transparencia.contratos;
-      // monotónico: el server es la verdad diaria; el tick simula el intradía
-      const contratos = Math.max(serverC, this.data.contratos || 0);
+      const contratos = by.contratos?.record_count ?? SIM.transparencia.contratos;
 
-      // ticker: mayor contrato de los últimos 90 días (puede fallar → fallback)
       let top = SIM.transparencia.top;
       try {
         const from = new Date(Date.now() - 90 * 86400000).toISOString().slice(0, 10);
         const c = await fetchJSON(
-          `${base}/contracts?select=amount,contractor,title&date=gte.${from}` +
+          `${SUPA}/contracts?select=amount,contractor,title&date=gte.${from}` +
           `&order=amount.desc.nullslast&limit=1`, { headers });
         if (c && c[0]) top = { amount: c[0].amount, contractor: c[0].contractor || c[0].title, windowDays: 90 };
       } catch {}
@@ -131,108 +128,96 @@ export const transparencia = {
         latestDate: by.contratos?.latest_date || SIM.transparencia.latestDate,
         top,
       };
-      this._drift = 0;
       this.live = true;
     } catch {
-      this.live = false; // mantiene baseline y sigue derivando en tick()
-    }
-  },
-
-  tick(dt) {
-    // sube el contador despacio para que se sienta vivo (real o simulado)
-    this._drift += dt;
-    if (this._drift > 4 + Math.random() * 6) {
-      this._drift = 0;
-      this.data.contratos += 1 + Math.floor(Math.random() * 3);
+      this.live = false;
     }
   },
 };
 
 // ============================================================================
-// NOW PLAYING — JSON publicado por el server (sanitizado) o playlist curada.
+// NOW PLAYING — tabla observatorio_state (key=nowplaying), alimentada por el
+// publisher local que lee tu Soundsible. Si no suena nada → honesto.
 // ============================================================================
 export const nowplaying = {
-  data: null,
+  data: { isPlaying: false, title: null, artist: null, album: null, position: 0, duration: 0 },
   live: false,
-  _i: 0,
   _pos: 0,
+  _lastTitle: null,
+  _onChange: null,
 
-  _fromPlaylist(i, pos = 0) {
-    const t = PLAYLIST[i % PLAYLIST.length];
-    return { title: t.title, artist: t.artist, album: t.album,
-             position: pos, duration: t.dur, isPlaying: true };
-  },
-
-  init() {
-    this._i = Math.floor(Math.random() * PLAYLIST.length);
-    this._pos = Math.floor(Math.random() * 40);
-    this.data = this._fromPlaylist(this._i, this._pos);
-  },
+  init() {},
+  onChange(fn) { this._onChange = fn; },
 
   async refresh() {
-    if (!CONFIG.nowPlayingUrl) { this.live = false; return; }
     try {
-      const j = await fetchJSON(CONFIG.nowPlayingUrl);
+      const rows = await fetchJSON(
+        `${SUPA}/observatorio_state?select=value,updated_at&key=eq.nowplaying`, { headers: supaHeaders });
+      const row = rows?.[0];
+      const v = row?.value || {};
+      const fresh = row?.updated_at ? Date.now() - Date.parse(row.updated_at) < FRESH_MS : false;
+      const playing = !!v.is_playing && !!v.title;
       this.data = {
-        title: j.title || "—", artist: j.artist || "", album: j.album || "",
-        position: j.position_sec ?? 0, duration: j.duration_sec ?? 0,
-        isPlaying: j.is_playing !== false,
+        isPlaying: playing,
+        title: v.title || null,
+        artist: v.artist || null,
+        album: v.album || null,
+        position: v.position_sec || 0,
+        duration: v.duration_sec || 0,
       };
       this._pos = this.data.position;
-      this.live = true;
-    } catch { this.live = false; }
+      this.live = fresh;
+      if (playing && v.title !== this._lastTitle && this._onChange) this._onChange();
+      this._lastTitle = playing ? v.title : null;
+    } catch {
+      this.live = false;
+    }
   },
 
   tick(dt) {
-    if (this.live) return; // el server manda la posición
-    if (!this.data.isPlaying) return;
-    this._pos += dt;
-    if (this._pos >= this.data.duration) {
-      this._i = (this._i + 1) % PLAYLIST.length;
-      this._pos = 0;
-      this.data = this._fromPlaylist(this._i, 0);
-      if (this._onChange) this._onChange();
-    } else {
+    // avanza la posición localmente entre refrescos, solo si suena de verdad
+    if (this.live && this.data.isPlaying && this.data.duration) {
+      this._pos = Math.min(this.data.duration, this._pos + dt);
       this.data.position = this._pos;
     }
   },
-
-  toggle() { if (!this.live) this.data.isPlaying = !this.data.isPlaying; return this.data.isPlaying; },
-  next() {
-    if (this.live) return;
-    this._i = (this._i + 1) % PLAYLIST.length; this._pos = 0;
-    this.data = this._fromPlaylist(this._i, 0);
-    if (this._onChange) this._onChange();
-  },
-  onChange(fn) { this._onChange = fn; },
 };
 
 // ============================================================================
-// SYSTEM — JSON publicado por el server o simulación viva.
+// SYSTEM — tabla observatorio_state (key=system) del publisher local.
+// Valores reales; el uptime avanza suave entre refrescos.
 // ============================================================================
 export const system = {
-  data: JSON.parse(JSON.stringify(SIM.system)),
+  data: { uptimeSec: 0, load: 0, memPct: 0, services: [] },
   live: false,
+  _base: 0,
+  _baseAt: 0,
 
   async refresh() {
-    if (!CONFIG.statsUrl) { this.live = false; return; }
     try {
-      const j = await fetchJSON(CONFIG.statsUrl);
+      const rows = await fetchJSON(
+        `${SUPA}/observatorio_state?select=value,updated_at&key=eq.system`, { headers: supaHeaders });
+      const row = rows?.[0];
+      const v = row?.value || {};
+      const fresh = row?.updated_at ? Date.now() - Date.parse(row.updated_at) < FRESH_MS : false;
       this.data = {
-        uptimeSec: j.uptime_sec ?? this.data.uptimeSec,
-        load: j.load ?? this.data.load,
-        memPct: j.mem_pct ?? this.data.memPct,
-        services: Array.isArray(j.services) ? j.services : this.data.services,
+        uptimeSec: v.uptime_sec || 0,
+        load: v.load ?? 0,
+        memPct: v.mem_pct ?? 0,
+        services: Array.isArray(v.services) ? v.services : [],
       };
-      this.live = true;
-    } catch { this.live = false; }
+      this._base = this.data.uptimeSec;
+      this._baseAt = Date.now();
+      this.live = fresh;
+    } catch {
+      this.live = false;
+    }
   },
 
-  tick(dt) {
-    this.data.uptimeSec += dt;
-    if (this.live) return;
-    this.data.load = clamp(jitter(this.data.load, 0.015), 0.02, 0.9);
-    this.data.memPct = clamp(jitter(this.data.memPct, 0.4), 22, 71);
+  tick() {
+    if (this.live && this._baseAt) {
+      this.data.uptimeSec = this._base + Math.floor((Date.now() - this._baseAt) / 1000);
+    }
   },
 };
 
