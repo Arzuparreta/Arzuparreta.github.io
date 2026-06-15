@@ -110,9 +110,38 @@ export function initTerminal(ctx) {
     pause: { desc: null, run: () => commands.play.run() },
     next: { desc: null, run: () => commands.play.run() },
 
-    search: { desc: 'busca en mis índices: search escenas "frase"', run: (a) => {
+    search: { desc: 'busca en mis índices: search escenas "frase"', run: async (a) => {
       const target = (a[0] || "").toLowerCase();
       const query = a.slice(1).join(" ");
+
+      // escenas: consulta la API real y salta al clip en el segundo de la frase
+      if (target === "escenas") {
+        if (!query) return print('¿qué frase busco? ej: search escenas "el dinero"', "out-warn");
+        print(`buscando "<span class="out-accent">${esc(query)}</span>" en el archivo de cine…`, "out-dim");
+        try {
+          const r = await fetch(
+            `https://archivoescenas.xyz/api/feed?q=${encodeURIComponent(query)}&exact=false&limit=1`,
+            { cache: "no-store" });
+          if (!r.ok) throw new Error();
+          const it = (await r.json()).items?.[0];
+          if (!it) return print(`sin resultados para "${esc(query)}".`, "out-warn");
+          const start = Math.floor(it.playback_start_sec || 0);
+          const label = it.scene_label || it.film_title || it.title || "escena";
+          // deep-link al propio archivoescenas (se reproduce en su modal, no en YouTube)
+          const clip = it.youtube_id
+            ? `https://archivoescenas.xyz/?v=${it.youtube_id}${start > 0 ? `&t=${start}` : ""}&title=${encodeURIComponent(label)}`
+            : "https://archivoescenas.xyz";
+          print(`🎬 <span class="out-accent">${esc(label)}</span> — <a href="${esc(clip)}" target="_blank" rel="noopener">▶ ver el clip</a>`, "out");
+          if (it.highlight) {
+            print(`  …${esc(it.highlight.before || "")}<span class="out-accent">${esc(it.highlight.match || "")}</span>${esc(it.highlight.after || "")}…`, "out-dim");
+          }
+        } catch {
+          print("el archivo de cine no responde ahora mismo.", "out-warn");
+        }
+        return;
+      }
+
+      // resto de índices: abre la búsqueda del sitio
       const fn = SEARCH_TARGETS[target];
       if (!fn) return print('uso: <span class="out-accent">search transparencia "…"</span> o <span class="out-accent">search escenas "…"</span>', "out-warn");
       if (!query) return print(`¿qué busco en ${esc(target)}? ej: search ${esc(target)} "corrupción"`, "out-warn");

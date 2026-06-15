@@ -52,10 +52,10 @@ export const PROJECTS = [
     desc: "neutraliza el A/B testing de títulos de YouTube" },
 ];
 
-// Búsquedas reales (refuerzan: 'él construye buscadores')
+// Búsquedas reales (refuerzan: 'él construye buscadores').
+// `escenas` se resuelve aparte en la terminal contra la API (salta al clip).
 export const SEARCH_TARGETS = {
   transparencia: (q) => `https://spaintransparencia.info/buscar?q=${encodeURIComponent(q)}`,
-  escenas: (q) => `https://archivoescenas.xyz/?q=${encodeURIComponent(q)}`,
 };
 
 // --- Baselines de simulación ------------------------------------------------

@@ -238,11 +238,13 @@ export const escenas = {
       const it = r?.items?.[0];
       if (!it) { this.live = false; return; }
       const start = Math.floor(it.playback_start_sec || 0);
-      const yt = it.youtube_url ||
-        (it.youtube_id ? `https://www.youtube.com/watch?v=${it.youtube_id}` : "https://archivoescenas.xyz");
-      const clip = start > 0 ? `${yt}${yt.includes("?") ? "&" : "?"}t=${start}s` : yt;
+      const title = it.scene_label || it.film_title || it.title || "escena";
+      // deep-link al propio archivoescenas (se reproduce en su modal, no en YouTube)
+      const clip = it.youtube_id
+        ? `https://archivoescenas.xyz/?v=${it.youtube_id}${start > 0 ? `&t=${start}` : ""}&title=${encodeURIComponent(title)}`
+        : "https://archivoescenas.xyz";
       this.data = {
-        title: it.scene_label || it.film_title || it.title || "escena",
+        title,
         meta: [it.director, it.year].filter(Boolean).join(" · "),
         thumb: it.thumbnail_url ||
           (it.youtube_id ? `https://img.youtube.com/vi/${it.youtube_id}/hqdefault.jpg` : null),
