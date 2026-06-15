@@ -1,0 +1,14 @@
+[Unit]
+Description=Publica nowplaying/stats del observatorio (sanitizado)
+After=network-online.target soundsible.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+# Ajusta la ruta pública servida por nginx/caddy con CORS:
+Environment=OBS_OUT_DIR=/var/www/observatorio
+# Token opcional si Soundsible exige auth (vacío = confianza LAN):
+# Environment=SOUNDSIBLE_TOKEN=xxxxx
+ExecStart=/usr/local/bin/observatorio-publish.sh
+Nice=10
+IOSchedulingClass=idle

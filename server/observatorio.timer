@@ -1,0 +1,10 @@
+[Unit]
+Description=Dispara observatorio-publish cada 30s
+
+[Timer]
+OnBootSec=20
+OnUnitActiveSec=30
+AccuracySec=5s
+
+[Install]
+WantedBy=timers.target
