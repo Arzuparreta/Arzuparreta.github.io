@@ -24,8 +24,10 @@ export function initBackground() {
 
   function build() {
     dpr = Math.min(1.5, window.devicePixelRatio || 1);
-    W = canvas.clientWidth = window.innerWidth;
-    H = canvas.clientHeight = window.innerHeight;
+    // clientWidth/Height son de solo lectura (strict mode lanzaría TypeError).
+    // El canvas ya llena el viewport por CSS; solo dimensionamos el buffer.
+    W = window.innerWidth;
+    H = window.innerHeight;
     canvas.width = Math.floor(W * dpr);
     canvas.height = Math.floor(H * dpr);
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
