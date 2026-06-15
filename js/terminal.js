@@ -235,7 +235,6 @@ export function initTerminal(ctx) {
 
   function greet() {
     print(`bienvenido al <span class="out-accent">observatorio</span> de ${esc(IDENTITY.name)}.`, "out");
-    print('los paneles viven solos. tú puedes hurgar: <span class="out-accent">help</span>, <span class="out-accent">whoami</span>, <span class="out-accent">ls proyectos</span>, <span class="out-accent">play</span>.', "out-dim");
   }
 
   return { run, print, focus: () => input.focus(), greet, sync };
