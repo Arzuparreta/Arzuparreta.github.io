@@ -23,16 +23,41 @@ SOUNDSIBLE_URL="${SOUNDSIBLE_URL:-http://127.0.0.1:5005}"
 # "tailscale" es especial (se comprueba con `tailscale status`).
 SERVICES=(${OBS_SERVICES:-soundsible:5005 supabase:54321 postgres:54322 tailscale})
 
-# --- now playing (sanitizado; 204/empty = nada sonando) ---------------------
+# Storage para la carátula (Supabase Storage, bucket público)
+STORAGE="${OBS_STORAGE:-${REST%/rest/v1}/storage/v1}"
+PUBLIC_BASE="${OBS_PUBLIC_BASE:-https://desktop-ruben.taileed0d5.ts.net}"
+BUCKET="${OBS_BUCKET:-observatorio}"
+STATE_DIR="${OBS_STATE_DIR:-${TMPDIR:-/tmp}/observatorio}"; mkdir -p "$STATE_DIR"
+
+# --- now playing + carátula (sanitizado; 204/empty = nada sonando) ----------
 state="$(curl -fsS -m 2 "$SOUNDSIBLE_URL/api/playback/state" 2>/dev/null || true)"
-if [ -n "$state" ] && echo "$state" | jq -e . >/dev/null 2>&1; then
-  np="$(echo "$state" | jq -c '{
+cover_url=""
+if [ -n "$state" ] && echo "$state" | jq -e '(.is_playing == true) and ((.track.title // null) != null)' >/dev/null 2>&1; then
+  tid="$(echo "$state" | jq -r '.track_id // .track.id // empty')"
+  if [ -n "$tid" ]; then
+    key="cover/$(printf '%s' "$tid" | tr -c 'A-Za-z0-9._-' '_')"
+    # solo sube la carátula cuando cambia la pista (dedupe)
+    if [ "$tid" != "$(cat "$STATE_DIR/last_cover_id" 2>/dev/null || true)" ]; then
+      if curl -fsS -m 5 "$SOUNDSIBLE_URL/api/static/cover/$tid" -o "$STATE_DIR/cover.img" 2>/dev/null; then
+        ct="$(file --mime-type -b "$STATE_DIR/cover.img" 2>/dev/null || echo image/jpeg)"
+        if curl -fsS -m 10 -X PUT "$STORAGE/object/$BUCKET/$key" \
+             -H "Authorization: Bearer $KEY" -H "apikey: $KEY" \
+             -H "x-upsert: true" -H "Content-Type: $ct" \
+             --data-binary @"$STATE_DIR/cover.img" >/dev/null; then
+          printf '%s' "$tid" > "$STATE_DIR/last_cover_id"
+        fi
+      fi
+    fi
+    cover_url="$PUBLIC_BASE/storage/v1/object/public/$BUCKET/$key"
+  fi
+  np="$(echo "$state" | jq -c --arg cover "$cover_url" '{
     title:        (.track.title    // null),
     artist:       (.track.artist   // null),
     album:        (.track.album    // null),
     position_sec: (.position_sec   // 0),
     duration_sec: (.track.duration // 0),
-    is_playing:   (.is_playing     // false)
+    is_playing:   true,
+    cover_url:    (if $cover == "" then null else $cover end)
   }')"
 else
   np='{"is_playing":false}'

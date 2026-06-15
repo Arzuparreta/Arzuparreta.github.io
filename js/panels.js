@@ -106,6 +106,18 @@ export function renderNowPlaying(d, live) {
   $("np-fill").style.width = pct + "%";
   $("np-pos").textContent = fmtTime(playing ? d.position : 0);
   $("np-dur").textContent = fmtTime(playing ? d.duration : 0);
+
+  // carátula (cae a glifo si no hay o si la imagen falla)
+  const art = $("np-art"), img = $("np-cover");
+  img.onerror = () => art.classList.remove("has-cover");
+  if (playing && d.cover) {
+    if (img.getAttribute("src") !== d.cover) img.setAttribute("src", d.cover);
+    art.classList.add("has-cover");
+  } else {
+    art.classList.remove("has-cover");
+    img.removeAttribute("src");
+  }
+  art.classList.toggle("idle", !playing);
   $("np-eq").classList.toggle("paused", !playing);
 }
 

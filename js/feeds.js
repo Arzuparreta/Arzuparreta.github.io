@@ -140,7 +140,7 @@ export const transparencia = {
 // publisher local que lee tu Soundsible. Si no suena nada → honesto.
 // ============================================================================
 export const nowplaying = {
-  data: { isPlaying: false, title: null, artist: null, album: null, position: 0, duration: 0 },
+  data: { isPlaying: false, title: null, artist: null, album: null, position: 0, duration: 0, cover: null },
   live: false,
   _pos: 0,
   _lastTitle: null,
@@ -164,6 +164,7 @@ export const nowplaying = {
         album: v.album || null,
         position: v.position_sec || 0,
         duration: v.duration_sec || 0,
+        cover: v.cover_url || null,
       };
       this._pos = this.data.position;
       this.live = fresh;

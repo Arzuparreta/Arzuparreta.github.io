@@ -23,6 +23,19 @@ psql "$DB" -f observatorio_state.sql
 Tabla aislada, additiva, solo-lectura pública. Tu app de transparencia no la toca.
 Reversible: `drop table public.observatorio_state;`.
 
+### …y el bucket público para las carátulas (una vez)
+
+```bash
+KEY=$(grep -E '^SUPABASE_SERVICE_ROLE_KEY=' ../../espana-transparente/etl/.env | cut -d= -f2- | tr -d '"')
+curl -X POST http://127.0.0.1:54321/storage/v1/bucket \
+  -H "Authorization: Bearer $KEY" -H "apikey: $KEY" -H "Content-Type: application/json" \
+  -d '{"id":"observatorio","name":"observatorio","public":true,
+       "allowed_mime_types":["image/jpeg","image/png","image/webp"],"file_size_limit":5242880}'
+```
+
+El publisher sube la carátula de Soundsible (`/api/static/cover/<id>`, deduplicada por
+pista) y guarda su URL pública en la fila `nowplaying`. La web la muestra como `<img>`.
+
 ## 2. Instalar el publisher + timer de usuario (sin sudo)
 
 ```bash
