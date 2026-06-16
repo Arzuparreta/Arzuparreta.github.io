@@ -143,6 +143,7 @@ runBoot().then(() => {
   const app = $("app");
   app.classList.add("ready");
   app.setAttribute("aria-hidden", "false");
+  panels.initPanelLinks();
   term.greet();
   term.focus();
 });

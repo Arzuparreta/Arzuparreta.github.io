@@ -169,3 +169,32 @@ export function flashPanel(name) {
   void el.offsetWidth;
   el.classList.add("flash");
 }
+
+const PANEL_LINKS = {
+  github: "https://github.com/Arzuparreta",
+  transparencia: "https://spaintransparencia.info/",
+  nowplaying: "https://arzuparreta.github.io/soundsible.github.io/",
+  escenas: "https://archivoescenas.xyz",
+};
+
+export function initPanelLinks() {
+  for (const [name, url] of Object.entries(PANEL_LINKS)) {
+    const panel = document.querySelector(`.panel--${name}`);
+    if (!panel) continue;
+
+    panel.classList.add("panel--link");
+    panel.setAttribute("tabindex", "0");
+
+    const open = () => window.open(url, "_blank", "noopener,noreferrer");
+
+    panel.addEventListener("click", (e) => {
+      if (e.target.closest("a")) return;
+      open();
+    });
+    panel.addEventListener("keydown", (e) => {
+      if (e.key !== "Enter" && e.key !== " ") return;
+      e.preventDefault();
+      open();
+    });
+  }
+}
