@@ -112,21 +112,11 @@ export const transparencia = {
       const by = Object.fromEntries(rows.map((r) => [r.section_key, r]));
       const contratos = by.contratos?.record_count ?? SIM.transparencia.contratos;
 
-      let top = SIM.transparencia.top;
-      try {
-        const from = new Date(Date.now() - 90 * 86400000).toISOString().slice(0, 10);
-        const c = await fetchJSON(
-          `${SUPA}/contracts?select=amount,contractor,title&date=gte.${from}` +
-          `&order=amount.desc.nullslast&limit=1`, { headers });
-        if (c && c[0]) top = { amount: c[0].amount, contractor: c[0].contractor || c[0].title, windowDays: 90 };
-      } catch {}
-
       this.data = {
         contratos,
         subvenciones: by.subvenciones?.record_count ?? SIM.transparencia.subvenciones,
         diputados: by.diputados?.record_count ?? SIM.transparencia.diputados,
         latestDate: by.contratos?.latest_date || SIM.transparencia.latestDate,
-        top,
       };
       this.live = true;
     } catch {

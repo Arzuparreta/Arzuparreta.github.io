@@ -65,7 +65,6 @@ export const SIM = {
     subvenciones: 1245803,
     diputados: 350,
     latestDate: "hoy",
-    top: { amount: 451200, contractor: "Accenture España S.L.", windowDays: 30 },
   },
   github: {
     repos: 15, followers: 5, stars: 18,

@@ -261,15 +261,6 @@ b { font-weight: 700; color: var(--fg); }
 .counter-label { font-size: calc(12px * var(--type-scale)); color: var(--dim); margin-top: 2px; }
 .counter-label .up { color: var(--accent); }
 .tr-sub { font-size: calc(12px * var(--type-scale)); margin-top: 8px; }
-.tr-ticker {
-  margin-top: auto;
-  font-size: calc(11.5px * var(--type-scale));
-  color: var(--dim);
-  border-top: 1px dashed var(--dimmer);
-  padding-top: 8px;
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-}
-.tr-ticker b { color: var(--fg); }
 
 /* ---- now playing --------------------------------------------------------- */
 .np-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }

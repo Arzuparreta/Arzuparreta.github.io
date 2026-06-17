@@ -17,13 +17,6 @@ function fmtUptime(sec) {
   const m = Math.floor((sec % 3600) / 60);
   return `${d}d ${h}h ${m}m`;
 }
-function fmtEur(n) {
-  if (n >= 1e9) return (n / 1e9).toFixed(2).replace(".", ",") + " mil M€";
-  if (n >= 1e6) return (n / 1e6).toFixed(1).replace(".", ",") + "M€";
-  if (n >= 1e3) return Math.round(n / 1e3) + "k€";
-  return nf.format(n) + "€";
-}
-
 // marca el panel como live (●) o no (○ con etiqueta honesta)
 function setSrc(panel, live, offLabel = "sim") {
   const tag = document.querySelector(`.panel--${panel} .panel-tag[data-src]`);
@@ -77,10 +70,6 @@ export function renderTransparencia(d, live) {
   setCounter(d.contratos);
   $("tr-sub").innerHTML =
     `${nf.format(d.subvenciones)} subvenciones · ${d.diputados} diputados · act. ${d.latestDate}`;
-  if (d.top) {
-    $("tr-ticker").innerHTML =
-      `mayor contrato (${d.top.windowDays}d): <b>${fmtEur(d.top.amount)}</b> → ${d.top.contractor}`;
-  }
 }
 
 // --- Now playing (honesto: nada sonando / sin conexión, nunca inventado) -----
