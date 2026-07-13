@@ -80,8 +80,12 @@ function render() {
 
 function filterAndSort() {
   const handle = CONFIG.githubUser.toLowerCase();
+  const pagesRepo = `${handle}.github.io`;
   let list = [...state.repos];
-  list = list.filter((r) => r.name?.toLowerCase?.() !== handle);
+  list = list.filter((r) => {
+    const name = r.name?.toLowerCase?.();
+    return name !== handle && name !== pagesRepo;
+  });
   if (!state.showForks) list = list.filter((r) => !r.fork);
   switch (state.sort) {
     case "stars":
