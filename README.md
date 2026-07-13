@@ -1,46 +1,44 @@
-# arzuparreta@observatorio
+# Rubén Peña — arzuparreta.github.io
 
-Web personal de **Rubén Peña** — no es un CV, es un panel de control vivo.
-Entras por el dato (transparencia pública, qué suena, código, sistemas) y, al
-mirarlo y teclear en la terminal, conoces a quien lo construye.
+Web personal pensada como un **GitHub para gente normal**: un atajo a mis proyectos, mi trabajo y lo que estoy escuchando ahora. Más útil que una página de GitHub para familiares, amigos o cualquiera que quiera ver qué estoy haciendo sin entender repos ni commits.
 
-**Estética:** terminal mono-minimal · fósforo verde sobre negro.
-**Stack:** HTML/CSS/JS vanilla, sin build, sin dependencias. Una sola pantalla.
+## Stack
 
-## Cómo se ve en vivo
+HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Despliegue automático con GitHub Pages al hacer push a `main`.
 
-Cada panel intenta el dato **real** y, si falla, cae a uno **simulado** creíble —
-nunca se ve roto, y se vuelve real en cuanto el feed existe (`● live` / `○ sim`):
+## Cómo funciona
 
-| Panel | Fuente | Real ya |
-|---|---|---|
-| github | `api.github.com` (público) | ✅ |
-| transparencia | Supabase REST de [spaintransparencia.info](https://spaintransparencia.info) | ✅ |
-| now playing | Soundsible (vía publisher local sanitizado) | tras `server/` |
-| system | stats del homelab (vía publisher) | tras `server/` |
-| escena del día | [archivoescenas.xyz](https://archivoescenas.xyz) | curado |
-
-## Terminal
-
-Es una terminal de verdad. Prueba: `help`, `whoami`, `ls proyectos`,
-`open escenas`, `play`, `search escenas "..."`, `theme`. Hay alguna sorpresa.
-
-## Desarrollo
-
-```bash
-python3 -m http.server 8000   # y abre http://localhost:8000
-```
-
-Sin build. Para activar now-playing/system reales, ver [`server/README.md`](server/README.md).
+- **Proyectos** se cargan en tiempo real desde la API pública de GitHub (`/users/Arzuparreta/repos`).
+- Cada proyecto muestra primero su **web en producción** usando el campo `homepage` de GitHub o GitHub Pages; el repositorio es el enlace secundario.
+- **Ahora** combina la música que suena en mi casa (vía `server/publish.sh` → Supabase) con mi actividad reciente de GitHub en una sola frase legible.
+- El sitio funciona en **español e inglés** (toggle en la esquina superior).
 
 ## Estructura
 
 ```
 index.html · styles.css
-js/  main.js · terminal.js · panels.js · feeds.js · background.js · data/curated.js
-server/  publish.sh · *.service/.timer  (opcional, no se sirve)
+js/
+  main.js      — orquestación e i18n
+  feeds.js     — GitHub API + nowplaying vía Supabase
+  now.js       — frase de estado "Ahora"
+  projects.js  — grid de proyectos
+  i18n.js      — ES/EN
+  data/
+    curated.js      — identidad, config, enlaces
+    enrichments.js  — descripciones humanas opcionales por repo
+server/  publish.sh · *.service/.timer  (alimenta nowplaying/system; no se sirve)
+```
+
+## Desarrollo
+
+```bash
+python3 -m http.server 8000
 ```
 
 ## Despliegue
 
-GitHub Pages desde la raíz de `main` (es un user-site). Sin Actions ni build.
+GitHub Pages desde la raíz de `main`. Sin Actions ni build.
+
+## Nota para ti
+
+Si un proyecto no muestra el botón **Visitar**, ve a su configuración en GitHub y añade una URL en el campo **Website** (o activa GitHub Pages). El sitio la detecta automáticamente.
