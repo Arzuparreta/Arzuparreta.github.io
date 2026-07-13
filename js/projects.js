@@ -80,11 +80,11 @@ function render() {
 
 function filterAndSort() {
   const handle = CONFIG.githubUser.toLowerCase();
-  const pagesRepo = `${handle}.github.io`;
   let list = [...state.repos];
   list = list.filter((r) => {
     const name = r.name?.toLowerCase?.();
-    return name !== handle && name !== pagesRepo;
+    // Exclude the profile repo and any GitHub Pages repos (<name>.github.io).
+    return name !== handle && !name?.endsWith(".github.io");
   });
   if (!state.showForks) list = list.filter((r) => !r.fork);
   switch (state.sort) {
