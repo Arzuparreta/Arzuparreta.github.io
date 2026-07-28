@@ -104,8 +104,10 @@ function filterAndSort() {
 function card(r) {
   const liveUrl = resolveLiveUrl(r);
   const repoUrl = projectUrl(r);
+  // Manda la descripción real del repo en GitHub; las escritas a mano solo
+  // rellenan los huecos de los repos que no tienen ninguna.
   const enr = enrich(r);
-  const desc = (enr?.[state.lang] || r.description || "").trim() || t("no_desc", {}, state.lang);
+  const desc = (r.description || enr?.[state.lang] || "").trim() || t("no_desc", {}, state.lang);
   const archived = !!r.archived;
 
   const article = document.createElement("article");

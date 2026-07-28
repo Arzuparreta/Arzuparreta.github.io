@@ -1,6 +1,8 @@
-// js/data/enrichments.js — descripciones humanas opcionales por repo.
-// La lista de proyectos sigue siendo 100% dinámica desde GitHub; esto solo
-// substituye la descripción críptica de GitHub cuando la clave coincide.
+// js/data/enrichments.js — red de seguridad: descripciones escritas a mano para
+// repos que no tienen ninguna en GitHub.
+// La descripción del repo en GitHub siempre tiene prioridad (ver projects.js);
+// esto solo entra cuando el campo "Description" del repo está vacío. Lo suyo es
+// escribirla en GitHub y que aquí no haga falta nada.
 
 const ENRICHMENTS = {
   "espana-transparente": {

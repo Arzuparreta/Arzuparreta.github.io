@@ -1,6 +1,7 @@
 // js/feeds.js — fetchers para datos reales.
 //   nowplaying  → Supabase observatorio_state (alimentada por server/publish.sh).
-//   github      → API pública de GitHub (repos + actividad), cacheado 10 min.
+//   github      → repos desde js/data/repos.json (snapshot que GitHub Actions
+//                 regenera cada 2 días) + actividad en vivo desde la API.
 // Si algo falla, se devuelve un estado honesto; nunca se inventa.
 
 import { CONFIG } from "./data/curated.js";
@@ -30,11 +31,11 @@ function cacheSet(key, v) {
   } catch {}
 }
 
-async function fetchJSON(url, { headers = {} } = {}) {
+async function fetchJSON(url, { headers = {}, cache = "no-store" } = {}) {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), CONFIG.fetchTimeoutMs);
   try {
-    const res = await fetch(url, { headers, signal: ctrl.signal, cache: "no-store" });
+    const res = await fetch(url, { headers, signal: ctrl.signal, cache });
     if (!res.ok) throw new Error(`HTTP ${res.status}`);
     return await res.json();
   } finally {
@@ -75,25 +76,43 @@ export async function fetchNowplaying() {
   }
 }
 
+// Snapshot estático servido desde este mismo origen. Lo regenera
+// .github/workflows/sync-repos.yml cada 2 días, así que la lista de proyectos y
+// sus descripciones vienen de GitHub sin pedirle nada a la API en cada visita.
+const REPOS_URL = new URL("./data/repos.json", import.meta.url).href;
+let reposPromise = null;
+
+function fetchRepos() {
+  reposPromise ??= fetchJSON(REPOS_URL, { cache: "default" })
+    .then((data) => (Array.isArray(data?.repos) ? data.repos : []))
+    .catch(() => {
+      reposPromise = null; // que un fallo puntual no queme el snapshot para toda la sesión
+      return [];
+    });
+  return reposPromise;
+}
+
 export async function fetchGitHub() {
   const cached = cacheGet("arzuparreta:github");
-  if (cached) return { ...cached, live: true, cached: true };
+  if (cached) return { ...cached, cached: true };
 
-  try {
-    const user = CONFIG.githubUser;
-    const [repos, events] = await Promise.all([
-      fetchJSON(`https://api.github.com/users/${user}/repos?per_page=100&sort=pushed`),
-      fetchJSON(`https://api.github.com/users/${user}/events/public?per_page=100`).catch(() => []),
-    ]);
-    const result = {
-      repos: Array.isArray(repos) ? repos : [],
-      events: Array.isArray(events) ? events : [],
-      live: true,
-      cached: false,
-    };
-    cacheSet("arzuparreta:github", result);
-    return result;
-  } catch (err) {
-    return { repos: [], events: [], live: false, cached: false, error: err.message || "error" };
-  }
+  // La actividad sí va en vivo: alimenta la frase "Ahora", que pierde sentido si
+  // llega con dos días de retraso.
+  const user = CONFIG.githubUser;
+  const [repos, activity] = await Promise.all([
+    fetchRepos(),
+    fetchJSON(`https://api.github.com/users/${user}/events/public?per_page=100`)
+      .then((events) => ({ events: Array.isArray(events) ? events : [], live: true }))
+      .catch((err) => ({ events: [], live: false, error: err.message || "error" })),
+  ]);
+
+  const result = {
+    repos,
+    events: activity.events,
+    live: activity.live,
+    cached: false,
+    ...(activity.error ? { error: activity.error } : {}),
+  };
+  if (repos.length) cacheSet("arzuparreta:github", result);
+  return result;
 }

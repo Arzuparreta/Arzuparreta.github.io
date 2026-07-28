@@ -1,0 +1,230 @@
+{
+  "generated_at": "2026-07-28T17:05:05.890Z",
+  "user": "Arzuparreta",
+  "repos": [
+    {
+      "name": "agentic-fight",
+      "full_name": "Arzuparreta/agentic-fight",
+      "description": "⚔️  Two players coach their AI agents to fight in 2D arena. Hack and slash with economy per round system, best of five.",
+      "html_url": "https://github.com/Arzuparreta/agentic-fight",
+      "homepage": "",
+      "has_pages": false,
+      "fork": false,
+      "archived": true,
+      "language": "TypeScript",
+      "stargazers_count": 0,
+      "pushed_at": "2026-05-02T12:34:11Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "Arzuparreta",
+      "full_name": "Arzuparreta/Arzuparreta",
+      "description": null,
+      "html_url": "https://github.com/Arzuparreta/Arzuparreta",
+      "homepage": null,
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": null,
+      "stargazers_count": 0,
+      "pushed_at": "2026-07-03T19:29:59Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "Arzuparreta.github.io",
+      "full_name": "Arzuparreta/Arzuparreta.github.io",
+      "description": null,
+      "html_url": "https://github.com/Arzuparreta/Arzuparreta.github.io",
+      "homepage": "https://arzuparreta.github.io/",
+      "has_pages": true,
+      "fork": false,
+      "archived": false,
+      "language": "JavaScript",
+      "stargazers_count": 0,
+      "pushed_at": "2026-07-13T16:01:09Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "docker-reader",
+      "full_name": "Arzuparreta/docker-reader",
+      "description": "Book (pdf) library manager + reader. Deploy it with docker.",
+      "html_url": "https://github.com/Arzuparreta/docker-reader",
+      "homepage": "",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "JavaScript",
+      "stargazers_count": 1,
+      "pushed_at": "2026-06-09T12:03:06Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "escenas-stdb",
+      "full_name": "Arzuparreta/escenas-stdb",
+      "description": "archivo de frases y escenas de películas clásicas usando stdbKit",
+      "html_url": "https://github.com/Arzuparreta/escenas-stdb",
+      "homepage": "https://archivoescenas.xyz",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "TypeScript",
+      "stargazers_count": 1,
+      "pushed_at": "2026-07-10T21:10:11Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "espana-transparente",
+      "full_name": "Arzuparreta/espana-transparente",
+      "description": "Todos los datos públicos del gobierno de España, recopilados y cruzados en tiempo real. 🕵️‍♂️🇪🇸🏛️",
+      "html_url": "https://github.com/Arzuparreta/espana-transparente",
+      "homepage": "https://spaintransparencia.info",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "TypeScript",
+      "stargazers_count": 3,
+      "pushed_at": "2026-07-21T23:40:56Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "fish-echo-alias",
+      "full_name": "Arzuparreta/fish-echo-alias",
+      "description": "echo the value of a fish alias as a string",
+      "html_url": "https://github.com/Arzuparreta/fish-echo-alias",
+      "homepage": "",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "Shell",
+      "stargazers_count": 1,
+      "pushed_at": "2026-04-18T01:22:10Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "pptalk",
+      "full_name": "Arzuparreta/pptalk",
+      "description": "Talk and stream to your friends, like you do on discord, but P2P, or alternatively with an encrypted relay pipe. No servers, no telemetry, completely private.",
+      "html_url": "https://github.com/Arzuparreta/pptalk",
+      "homepage": "",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "Rust",
+      "stargazers_count": 0,
+      "pushed_at": "2026-07-28T16:15:43Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "remove-multi-titles-yt",
+      "full_name": "Arzuparreta/remove-multi-titles-yt",
+      "description": "Stop youtube from A/B testing titles and thumbnails on you.",
+      "html_url": "https://github.com/Arzuparreta/remove-multi-titles-yt",
+      "homepage": "https://arzuparreta.github.io/remove-multi-titles-yt.github.io/",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "JavaScript",
+      "stargazers_count": 1,
+      "pushed_at": "2026-07-18T11:02:12Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "remove-multi-titles-yt.github.io",
+      "full_name": "Arzuparreta/remove-multi-titles-yt.github.io",
+      "description": null,
+      "html_url": "https://github.com/Arzuparreta/remove-multi-titles-yt.github.io",
+      "homepage": "https://arzuparreta.github.io/remove-multi-titles-yt.github.io/",
+      "has_pages": true,
+      "fork": false,
+      "archived": false,
+      "language": "HTML",
+      "stargazers_count": 0,
+      "pushed_at": "2026-04-26T21:48:03Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "soundsible",
+      "full_name": "Arzuparreta/soundsible",
+      "description": "🎧 Soundsible is a self-hosted music streaming service that offers everything that a paid service does.",
+      "html_url": "https://github.com/Arzuparreta/soundsible",
+      "homepage": "https://arzuparreta.github.io/soundsible.github.io/",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "Python",
+      "stargazers_count": 2,
+      "pushed_at": "2026-07-28T16:14:03Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "soundsible.github.io",
+      "full_name": "Arzuparreta/soundsible.github.io",
+      "description": "Soundsible landing site",
+      "html_url": "https://github.com/Arzuparreta/soundsible.github.io",
+      "homepage": "https://arzuparreta.github.io/soundsible.github.io/",
+      "has_pages": true,
+      "fork": false,
+      "archived": false,
+      "language": "Astro",
+      "stargazers_count": 0,
+      "pushed_at": "2026-07-28T16:53:02Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "stdbKit",
+      "full_name": "Arzuparreta/stdbKit",
+      "description": "Toolkit to index youtube video subtitles linked to timestamps and expose search by word/quote. In real time.",
+      "html_url": "https://github.com/Arzuparreta/stdbKit",
+      "homepage": "",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "Python",
+      "stargazers_count": 1,
+      "pushed_at": "2026-06-13T19:06:25Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    },
+    {
+      "name": "tradingviu",
+      "full_name": "Arzuparreta/tradingviu",
+      "description": "TradingView but free and for you.",
+      "html_url": "https://github.com/Arzuparreta/tradingviu",
+      "homepage": "",
+      "has_pages": false,
+      "fork": false,
+      "archived": false,
+      "language": "TypeScript",
+      "stargazers_count": 0,
+      "pushed_at": "2026-07-05T06:56:44Z",
+      "owner": {
+        "login": "Arzuparreta"
+      }
+    }
+  ]
+}

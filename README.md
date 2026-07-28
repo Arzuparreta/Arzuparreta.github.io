@@ -8,7 +8,7 @@ HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Despliegue automát
 
 ## Cómo funciona
 
-- **Proyectos** se cargan en tiempo real desde la API pública de GitHub (`/users/Arzuparreta/repos`).
+- **Proyectos** salen de `js/data/repos.json`, un snapshot de la API de GitHub que un workflow regenera **cada 2 días**. La tarjeta usa el campo **Description** del repo tal cual: para cambiar un texto de la web, se edita la descripción en GitHub.
 - Cada proyecto muestra primero su **web en producción** usando el campo `homepage` de GitHub o GitHub Pages; el repositorio es el enlace secundario.
 - **Ahora** combina la música que suena en mi casa (vía `server/publish.sh` → Supabase) con mi actividad reciente de GitHub en una sola frase legible.
 - El sitio funciona en **español e inglés** (toggle en la esquina superior).
@@ -25,7 +25,10 @@ js/
   i18n.js      — ES/EN
   data/
     curated.js      — identidad, config, enlaces
-    enrichments.js  — descripciones humanas opcionales por repo
+    repos.json      — snapshot de GitHub (generado, no editar a mano)
+    enrichments.js  — descripción de reserva si un repo no tiene ninguna en GitHub
+scripts/ sync-repos.mjs  — regenera repos.json
+.github/workflows/sync-repos.yml  — lo ejecuta cada 2 días
 server/  publish.sh · *.service/.timer  (alimenta nowplaying/system; no se sirve)
 ```
 
@@ -37,8 +40,12 @@ python3 -m http.server 8000
 
 ## Despliegue
 
-GitHub Pages desde la raíz de `main`. Sin Actions ni build.
+GitHub Pages desde la raíz de `main`. Sin build.
 
-## Nota para ti
+La única Action es `sync-repos`: cada 2 días regenera `js/data/repos.json` y hace commit si algo cambió. Corre en los runners de GitHub, nunca en local. Para forzarla: pestaña **Actions → sync repos → Run workflow**, o `node scripts/sync-repos.mjs` y commit a mano.
 
-Si un proyecto no muestra el botón **Visitar**, ve a su configuración en GitHub y añade una URL en el campo **Website** (o activa GitHub Pages). El sitio la detecta automáticamente.
+## Notas para ti
+
+- La descripción de cada tarjeta es la **Description** del repo en GitHub. Cámbiala ahí y la web se pone al día en la siguiente sincronización (máximo 2 días).
+- Si un proyecto no muestra el botón **Visitar**, ve a su configuración en GitHub y añade una URL en el campo **Website** (o activa GitHub Pages). El sitio la detecta automáticamente.
+- GitHub desactiva los workflows programados si el repo pasa 60 días sin actividad. Si ves que las descripciones se congelan, entra en Actions y reactívalo.
