@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-01T07:24:32.420Z",
+  "generated_at": "2026-08-03T08:23:20.976Z",
   "user": "Arzuparreta",
   "repos": [
     {
@@ -45,7 +45,7 @@
       "archived": false,
       "language": "JavaScript",
       "stargazers_count": 0,
-      "pushed_at": "2026-07-31T07:46:31Z",
+      "pushed_at": "2026-08-01T07:24:33Z",
       "owner": {
         "login": "Arzuparreta"
       }
@@ -172,8 +172,8 @@
       "fork": false,
       "archived": false,
       "language": "Python",
-      "stargazers_count": 2,
-      "pushed_at": "2026-07-31T22:12:15Z",
+      "stargazers_count": 4,
+      "pushed_at": "2026-08-02T22:15:43Z",
       "owner": {
         "login": "Arzuparreta"
       }
@@ -187,9 +187,9 @@
       "has_pages": true,
       "fork": false,
       "archived": false,
-      "language": "Astro",
+      "language": "TypeScript",
       "stargazers_count": 0,
-      "pushed_at": "2026-07-30T14:02:52Z",
+      "pushed_at": "2026-08-02T11:31:15Z",
       "owner": {
         "login": "Arzuparreta"
       }
