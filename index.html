@@ -36,9 +36,26 @@
       <div id="now-line" class="now-line" aria-live="polite">
         <span id="now-text" data-i18n="loading">conectando…</span>
       </div>
-      <figure id="now-playing" class="now-playing hidden">
-        <img id="now-cover" alt="" loading="lazy">
-      </figure>
+      <div id="music-section" class="music-section hidden">
+        <img id="music-cover" class="music-cover" alt="" loading="lazy">
+        <span id="music-text" class="music-text"></span>
+      </div>
+      <div id="live-session" class="live-session">
+        <details class="live-details">
+          <summary class="live-summary">
+            <span class="live-dot-small" aria-hidden="true"></span>
+            <span data-i18n="live_session">Sesión en vivo</span>
+          </summary>
+          <div class="live-embed-wrap">
+            <iframe src="https://arzuparreta.github.io/soundsible.github.io/live/"
+                    class="live-embed"
+                    allow="autoplay"
+                    loading="lazy"
+                    title="SoundSible Live">
+            </iframe>
+          </div>
+        </details>
+      </div>
     </section>
 
     <section class="work" aria-labelledby="work-title">

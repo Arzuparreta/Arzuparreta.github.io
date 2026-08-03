@@ -32,6 +32,7 @@ const STRINGS = {
     no_desc: "Sin descripción.",
     footer_by: "hecho por mí",
     lang_label: "ES / EN",
+    live_session: "Sesión en vivo",
     no_projects: "No hay proyectos por aquí todavía.",
   },
   en: {
@@ -63,6 +64,7 @@ const STRINGS = {
     no_desc: "No description.",
     footer_by: "made by me",
     lang_label: "EN / ES",
+    live_session: "Live session",
     no_projects: "No projects here yet.",
   },
 };
