@@ -1,7 +1,6 @@
 # Rubén Peña — arzuparreta.github.io
 
-Web personal pensada como un **GitHub para gente normal**: un atajo a mis proyectos, mi trabajo y lo que estoy escuchando ahora. Más útil que una página de GitHub para familiares, amigos o cualquiera que quiera ver qué estoy haciendo sin entender repos ni commits.
-
+Web personal 
 ## Stack
 
 HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Despliegue automático con GitHub Pages al hacer push a `main`.
