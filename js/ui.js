@@ -79,4 +79,39 @@
 
   // Sin elección manual, el sitio sigue al sistema aunque cambie en caliente.
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", labelTheme);
+
+  // ── Favicon circular ──────────────────────────────────────────────────
+
+  // El <link> del HTML ya pinta el avatar cuadrado sin depender de esto;
+  // aquí sólo se recorta en círculo y se sustituye.
+  //
+  // Hace falta la URL directa de avatars.githubusercontent.com: el 302 de
+  // github.com no lleva cabeceras CORS, así que por esa vía la imagen
+  // contamina el canvas y toDataURL falla. El número es el id de la cuenta,
+  // que es estable aunque cambie el nombre de usuario.
+  (function roundFavicon() {
+    var link = document.querySelector('link[rel="icon"]');
+    if (!link || !document.createElement("canvas").getContext) return;
+
+    var img = new Image();
+    img.crossOrigin = "anonymous";
+
+    img.onload = function () {
+      try {
+        var size = 128;
+        var canvas = document.createElement("canvas");
+        canvas.width = canvas.height = size;
+
+        var ctx = canvas.getContext("2d");
+        ctx.beginPath();
+        ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+        ctx.clip();
+        ctx.drawImage(img, 0, 0, size, size);
+
+        link.href = canvas.toDataURL("image/png");
+      } catch (e) { /* se queda el cuadrado */ }
+    };
+
+    img.src = "https://avatars.githubusercontent.com/u/125204298?s=128";
+  })();
 })();
