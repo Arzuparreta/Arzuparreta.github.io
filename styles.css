@@ -154,7 +154,7 @@ a { color: inherit; text-decoration: none; }
 
 .project {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr;
   align-items: baseline;
   column-gap: 1rem;
   row-gap: .25rem;
@@ -172,21 +172,9 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: -.022em;
 }
 
-.project-tag {
-  grid-column: 2;
-  grid-row: 1;
-  justify-self: end;
-  color: var(--muted);
-  font-size: .6875rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: .16em;
-  white-space: nowrap;
-}
-
-/* La flecha va en su propia columna, la última, detrás de la etiqueta y
-   separada de ella. Sólo existe donde hay hover, y allí reserva su ancho
-   siempre: aparecer no mueve nada. En táctil no se declara la columna. */
+/* La flecha va en su propia columna, la última. Sólo existe donde hay hover,
+   y allí reserva su ancho siempre: aparecer no mueve nada. En táctil no se
+   declara la columna. */
 .project-arrow { display: none; }
 
 .project-desc {
@@ -199,11 +187,11 @@ a { color: inherit; text-decoration: none; }
 }
 
 @media (hover: hover) {
-  .project { grid-template-columns: 1fr auto auto; }
+  .project { grid-template-columns: 1fr auto; }
 
   .project-arrow {
     display: block;
-    grid-column: 3;
+    grid-column: 2;
     grid-row: 1;
     justify-self: end;
     width: 1.125rem;
@@ -221,7 +209,6 @@ a { color: inherit; text-decoration: none; }
     background: var(--hover);
     padding-inline: .75rem;
   }
-  .project:hover .project-tag { color: var(--fg); }
   .project:hover .project-arrow {
     opacity: 1;
     transform: translateX(0);

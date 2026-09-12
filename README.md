@@ -24,17 +24,19 @@ server/           · publish.sh · *.service/.timer  (no se sirve; alimenta otro
 
 ## Añadir o cambiar un proyecto
 
-Copia un bloque `<a class="project">` en `index.html` y ajusta cuatro cosas:
+Copia un bloque `<a class="project">` en `index.html` y ajusta tres cosas:
 
 ```html
 <a class="project" href="URL">
   <span class="project-name">Nombre</span>
   <span class="project-desc" data-en="One line in English">Una línea en español</span>
-  <span class="project-tag" data-en="code">código</span>
+  <span class="project-arrow" aria-hidden="true">→</span>
 </a>
 ```
 
-`href` apunta a la web del proyecto si existe (`web`) y, si no, a su repo (`código`). El orden de la lista es el orden del HTML: lo que tiene web va primero.
+`href` apunta a la web del proyecto si existe y, si no, a su repo. El orden de la lista es el orden del HTML: lo que tiene web va primero.
+
+La descripción dice en una línea qué hace el proyecto, en concreto y sin metáforas. Las dos versiones tienen que decir lo mismo: el inglés no es una traducción literal del español, sino la misma frase escrita como la escribiría un nativo.
 
 ## Desarrollo
 
