@@ -4,15 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Rubén Peña</title>
-  <meta name="description" content="Rubén Peña — un atajo a mis proyectos, mi trabajo y lo que estoy escuchando.">
+  <meta name="description" content="Rubén Peña — construyo cosas en internet. Atajo a todos mis proyectos.">
   <meta name="author" content="Rubén Peña">
-  <meta name="color-scheme" content="light">
-  <meta name="theme-color" content="#F7F3EC">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#FAFAF8" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#17181B" media="(prefers-color-scheme: dark)">
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Rubén Peña">
-  <meta property="og:description" content="Rubén Peña — construyo cosas en internet.">
+  <meta property="og:description" content="Construyo cosas en internet. Atajo a todos mis proyectos.">
   <meta property="og:locale" content="es_ES">
+  <meta property="og:image" content="https://github.com/Arzuparreta.png?size=320">
+
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,69 +25,82 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="top-bar">
-    <span class="top-name">Rubén Peña</span>
-    <div class="top-right">
-      <button id="lang-toggle" class="lang-btn" type="button" aria-label="Cambiar idioma">ES / EN</button>
-      <span class="live-dot" aria-hidden="true" title="conectado"></span>
-    </div>
-  </header>
+  <button id="lang-toggle" class="lang-toggle" type="button" hidden>EN</button>
 
-  <main class="container">
-    <section class="hero" aria-labelledby="now-heading">
-      <h1 class="display-name">Rubén Peña</h1>
-      <p id="role" class="role">Construyo cosas en internet</p>
-      <div id="now-line" class="now-line" aria-live="polite">
-        <span id="now-text" data-i18n="loading">conectando…</span>
-      </div>
-      <div id="music-section" class="music-section hidden">
-        <img id="music-cover" class="music-cover" alt="" loading="lazy">
-        <span id="music-text" class="music-text"></span>
-      </div>
-      <div id="live-session" class="live-session">
-        <details class="live-details">
-          <summary class="live-summary">
-            <span class="live-dot-small" aria-hidden="true"></span>
-            <span data-i18n="live_session">Sesión en vivo</span>
-          </summary>
-          <div class="live-embed-wrap">
-            <iframe src="https://arzuparreta.github.io/soundsible.github.io/live/"
-                    class="live-embed"
-                    allow="autoplay"
-                    loading="lazy"
-                    title="SoundSible Live">
-            </iframe>
-          </div>
-        </details>
-      </div>
-    </section>
+  <main class="page">
+    <header class="intro">
+      <img class="avatar"
+           src="https://github.com/Arzuparreta.png?size=320"
+           width="96" height="96"
+           alt="Rubén Peña"
+           fetchpriority="high">
+      <h1 class="name">Rubén Peña</h1>
+      <p class="role" data-en="I build things on the internet">Construyo cosas en internet</p>
+    </header>
 
-    <section class="work" aria-labelledby="work-title">
-      <div class="work-header">
-        <h2 id="work-title" class="section-title" data-i18n="work">Lo que hago</h2>
-        <div class="sort" id="work-sort" role="group" aria-label="Ordenar proyectos">
-          <button data-sort="recent" class="active" data-i18n="sort_recent">Recientes</button>
-          <button data-sort="stars" data-i18n="sort_stars">Más estrellas</button>
-          <button data-sort="live" data-i18n="sort_live">Con web en vivo</button>
-        </div>
-      </div>
-      <div id="work-grid" class="work-grid" role="list"></div>
-    </section>
+    <nav class="projects" aria-label="Proyectos" data-en-aria="Projects">
+      <a class="project" href="https://arzuparreta.github.io/soundsible.github.io/">
+        <span class="project-name">SoundSible</span>
+        <span class="project-desc" data-en="Self-hosted music streaming, with everything the big services charge for">Streaming de música autoalojado, con todo lo que los grandes cobran</span>
+        <span class="project-tag" data-en="web">web</span>
+      </a>
 
-    <section class="connect" aria-labelledby="connect-title">
-      <h2 id="connect-title" class="section-title" data-i18n="connect">Conecta</h2>
-      <nav class="connect-grid" id="connect-grid" aria-label="Enlaces"></nav>
-    </section>
+      <a class="project" href="https://spaintransparencia.info">
+        <span class="project-name">España Transparente</span>
+        <span class="project-desc" data-en="Spain&#39;s public data, gathered and cross-referenced">Los datos públicos del gobierno de España, recopilados y cruzados</span>
+        <span class="project-tag" data-en="web">web</span>
+      </a>
+
+      <a class="project" href="https://archivoescenas.xyz">
+        <span class="project-name">Archivo Escenas</span>
+        <span class="project-desc" data-en="Searchable archive of lines and scenes from classic cinema">Archivo buscable de frases y escenas de cine clásico</span>
+        <span class="project-tag" data-en="web">web</span>
+      </a>
+
+      <a class="project" href="https://arzuparreta.github.io/remove-multi-titles-yt.github.io/">
+        <span class="project-name">Remove Multi Titles YT</span>
+        <span class="project-desc" data-en="Stops YouTube from A/B testing titles and thumbnails on you">Evita que YouTube haga tests A/B de títulos y miniaturas contigo</span>
+        <span class="project-tag" data-en="web">web</span>
+      </a>
+
+      <a class="project" href="https://github.com/Arzuparreta/tradingviu">
+        <span class="project-name">tradingviu</span>
+        <span class="project-desc" data-en="TradingView, but free and yours">TradingView, pero gratis y tuyo</span>
+        <span class="project-tag" data-en="code">código</span>
+      </a>
+
+      <a class="project" href="https://github.com/Arzuparreta/pptalk">
+        <span class="project-name">pptalk</span>
+        <span class="project-desc" data-en="Talk and stream with friends, peer to peer">Habla y comparte pantalla con tus amigos, de igual a igual</span>
+        <span class="project-tag" data-en="code">código</span>
+      </a>
+
+      <a class="project" href="https://github.com/Arzuparreta/stdbKit">
+        <span class="project-name">stdbKit</span>
+        <span class="project-desc" data-en="Indexes YouTube subtitles against timestamps and serves them">Indexa subtítulos de YouTube ligados a timestamps y los expone</span>
+        <span class="project-tag" data-en="code">código</span>
+      </a>
+
+      <a class="project" href="https://github.com/Arzuparreta/docker-reader">
+        <span class="project-name">docker-reader</span>
+        <span class="project-desc" data-en="PDF library and reader you deploy with Docker">Biblioteca y lector de PDFs que despliegas con Docker</span>
+        <span class="project-tag" data-en="code">código</span>
+      </a>
+
+      <a class="project" href="https://github.com/Arzuparreta/agentic-fight">
+        <span class="project-name">agentic-fight</span>
+        <span class="project-desc" data-en="Two players coach their AI agents to fight in a 2D arena">Dos jugadores entrenan a sus agentes de IA para pelear en una arena 2D</span>
+        <span class="project-tag" data-en="code">código</span>
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <a href="https://github.com/Arzuparreta">GitHub</a>
+      <a href="https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-432953378/">LinkedIn</a>
+      <a href="https://youtube.com/@Arzuparreta">YouTube</a>
+    </footer>
   </main>
 
-  <footer class="footer">
-    <p>
-      <span data-i18n="footer_by">hecho por mí</span>
-      <span class="sep">·</span>
-      <span id="footer-time" aria-label="Hora local">--:--</span>
-    </p>
-  </footer>
-
-  <script type="module" src="js/main.js"></script>
+  <script src="js/lang.js" defer></script>
 </body>
 </html>

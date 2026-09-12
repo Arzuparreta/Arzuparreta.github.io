@@ -1,35 +1,41 @@
 # Rubén Peña — arzuparreta.github.io
 
-Web personal 
+Hub personal: mi foto, mi nombre y enlaces grandes a todos mis proyectos. Nada más. Pensado para que cualquiera —familia, amigos, alguien que llega desde LinkedIn— encuentre en dos segundos la web del proyecto que busca, sin entender repos ni commits.
+
 ## Stack
 
-HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Despliegue automático con GitHub Pages al hacer push a `main`.
+HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Sin peticiones de red en runtime salvo la fuente y la foto de perfil. Despliegue automático con GitHub Pages al hacer push a `main`.
 
 ## Cómo funciona
 
-- **Proyectos** salen de `js/data/repos.json`, un snapshot de la API de GitHub que un workflow regenera **cada 2 días**. La tarjeta usa el campo **Description** del repo tal cual: para cambiar un texto de la web, se edita la descripción en GitHub.
-- Cada proyecto muestra primero su **web en producción** usando el campo `homepage` de GitHub o GitHub Pages; el repositorio es el enlace secundario.
-- **Ahora** combina la música que suena en mi casa (vía `server/publish.sh` → Supabase) con mi actividad reciente de GitHub en una sola frase legible.
-- El sitio funciona en **español e inglés** (toggle en la esquina superior).
+- **Los proyectos son HTML estático.** La lista vive tal cual en `index.html`; se edita a mano. La página pinta completa sin JavaScript.
+- **La foto** se sirve desde `https://github.com/Arzuparreta.png` — cambia sola al cambiarla en GitHub.
+- **ES / EN**: el español está en el HTML, el inglés en los atributos `data-en` (texto) y `data-en-aria` (aria-label). `js/lang.js` intercambia unos por otros y recuerda la elección en `localStorage`.
+- **Claro y oscuro** siguen al sistema del visitante (`prefers-color-scheme`). Los colores son seis variables al principio de `styles.css`.
 
 ## Estructura
 
 ```
-index.html · styles.css
-js/
-  main.js      — orquestación e i18n
-  feeds.js     — GitHub API + nowplaying vía Supabase
-  now.js       — frase de estado "Ahora"
-  projects.js  — grid de proyectos
-  i18n.js      — ES/EN
-  data/
-    curated.js      — identidad, config, enlaces
-    repos.json      — snapshot de GitHub (generado, no editar a mano)
-    enrichments.js  — descripción de reserva si un repo no tiene ninguna en GitHub
-scripts/ sync-repos.mjs  — regenera repos.json
-.github/workflows/sync-repos.yml  — lo ejecuta cada 2 días
-server/  publish.sh · *.service/.timer  (alimenta nowplaying/system; no se sirve)
+index.html        · toda la página: identidad, proyectos, pie
+styles.css        · tokens de color arriba, luego cada sección
+js/lang.js        · el único JS: toggle ES/EN
+assets/favicon.svg
+server/           · publish.sh · *.service/.timer  (no se sirve; alimenta otro pipeline)
 ```
+
+## Añadir o cambiar un proyecto
+
+Copia un bloque `<a class="project">` en `index.html` y ajusta cuatro cosas:
+
+```html
+<a class="project" href="URL">
+  <span class="project-name">Nombre</span>
+  <span class="project-desc" data-en="One line in English">Una línea en español</span>
+  <span class="project-tag" data-en="code">código</span>
+</a>
+```
+
+`href` apunta a la web del proyecto si existe (`web`) y, si no, a su repo (`código`). El orden de la lista es el orden del HTML: lo que tiene web va primero.
 
 ## Desarrollo
 
@@ -39,12 +45,4 @@ python3 -m http.server 8000
 
 ## Despliegue
 
-GitHub Pages desde la raíz de `main`. Sin build.
-
-La única Action es `sync-repos`: cada 2 días regenera `js/data/repos.json` y hace commit si algo cambió. Corre en los runners de GitHub, nunca en local. Para forzarla: pestaña **Actions → sync repos → Run workflow**, o `node scripts/sync-repos.mjs` y commit a mano.
-
-## Notas para ti
-
-- La descripción de cada tarjeta es la **Description** del repo en GitHub. Cámbiala ahí y la web se pone al día en la siguiente sincronización (máximo 2 días).
-- Si un proyecto no muestra el botón **Visitar**, ve a su configuración en GitHub y añade una URL en el campo **Website** (o activa GitHub Pages). El sitio la detecta automáticamente.
-- GitHub desactiva los workflows programados si el repo pasa 60 días sin actividad. Si ves que las descripciones se congelan, entra en Actions y reactívalo.
+GitHub Pages desde la raíz de `main`. Sin build, sin Actions.
