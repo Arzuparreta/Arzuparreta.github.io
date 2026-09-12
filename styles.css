@@ -1,5 +1,9 @@
 /* ── Tokens ───────────────────────────────────────────────────────────── */
 
+/* El claro se define en :root pelado; el oscuro se repite dos veces, una
+   para el sistema y otra para la elección manual, así el botón gana en
+   ambos sentidos. Ningún color vive solo dentro de un @media. */
+
 :root {
   --bg:      #FAFAF8;   /* blanco roto duro */
   --fg:      #0D0D0D;   /* casi negro, contraste alto */
@@ -7,21 +11,28 @@
   --line:    #E4E4DF;
   --hover:   #F1F1EC;
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-text: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
 
   --max-width: 40rem;
   --gutter: 1.5rem;
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
+  :root:not([data-theme="light"]) {
     --bg:    #17181B;   /* gris carbón, no negro */
     --fg:    #E9E9E6;   /* blanco apagado, no chilla */
     --muted: #8B8D93;
     --line:  #2A2C31;
     --hover: #1F2125;
   }
+}
+
+:root[data-theme="dark"] {
+  --bg:    #17181B;
+  --fg:    #E9E9E6;
+  --muted: #8B8D93;
+  --line:  #2A2C31;
+  --hover: #1F2125;
 }
 
 /* ── Base ─────────────────────────────────────────────────────────────── */
@@ -34,7 +45,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: var(--font-text);
+  font-family: var(--font);
   font-size: 1rem;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
@@ -55,29 +66,55 @@ a { color: inherit; text-decoration: none; }
   padding-block: clamp(3.5rem, 12vw, 7rem) 3rem;
 }
 
-/* ── Idioma ───────────────────────────────────────────────────────────── */
+/* ── Controles: tema e idioma ─────────────────────────────────────────── */
 
-.lang-toggle {
+.controls {
   position: fixed;
-  top: 1rem;
-  right: 1rem;
+  top: .75rem;
+  right: .75rem;
   z-index: 2;
-  min-width: 2.75rem;
-  min-height: 2.25rem;
+  display: flex;
+  align-items: center;
+  gap: .25rem;
+}
+
+.ctrl {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.5rem;
+  min-height: 2.5rem;
   padding: 0 .5rem;
   border: 0;
   border-radius: 999px;
   background: transparent;
   color: var(--muted);
-  font-family: var(--font-text);
+  font-family: var(--font);
   font-size: .75rem;
   font-weight: 600;
-  letter-spacing: .12em;
+  letter-spacing: .1em;
   cursor: pointer;
   transition: color .15s ease, background-color .15s ease;
 }
 
-.lang-toggle:hover { color: var(--fg); background: var(--hover); }
+.ctrl:hover { color: var(--fg); background: var(--hover); }
+
+.ctrl-icon { padding: 0; }
+
+.icon { width: 1.0625rem; height: 1.0625rem; display: block; }
+
+/* Se enseña el icono del tema al que lleva el botón, no el actual. */
+.icon-sun { display: none; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .icon-moon { display: none; }
+  :root:not([data-theme="light"]) .icon-sun  { display: block; }
+}
+
+:root[data-theme="dark"] .icon-moon { display: none; }
+:root[data-theme="dark"] .icon-sun  { display: block; }
+:root[data-theme="light"] .icon-moon { display: block; }
+:root[data-theme="light"] .icon-sun  { display: none; }
 
 /* ── Identidad ────────────────────────────────────────────────────────── */
 
@@ -95,15 +132,14 @@ a { color: inherit; text-decoration: none; }
 
 .name {
   margin: 0;
-  font-family: var(--font-display);
   font-weight: 700;
-  font-size: clamp(2.75rem, 11vw, 4.25rem);
-  line-height: 1;
-  letter-spacing: -.03em;
+  font-size: clamp(2.5rem, 10vw, 3.75rem);
+  line-height: 1.05;
+  letter-spacing: -.04em;
 }
 
 .role {
-  margin: .85rem 0 0;
+  margin: .75rem 0 0;
   color: var(--muted);
   font-size: 1.0625rem;
   line-height: 1.4;
@@ -120,7 +156,8 @@ a { color: inherit; text-decoration: none; }
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: baseline;
-  gap: .25rem 1rem;
+  column-gap: 1rem;
+  row-gap: .25rem;
   padding: 1.375rem .25rem;
   border-bottom: 1px solid var(--line);
   transition: background-color .15s ease, padding-inline .15s ease;
@@ -128,11 +165,11 @@ a { color: inherit; text-decoration: none; }
 
 .project-name {
   grid-column: 1;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(1.5rem, 5.5vw, 1.875rem);
-  line-height: 1.15;
-  letter-spacing: -.015em;
+  grid-row: 1;
+  font-weight: 600;
+  font-size: clamp(1.375rem, 5vw, 1.625rem);
+  line-height: 1.2;
+  letter-spacing: -.022em;
 }
 
 .project-tag {
@@ -143,32 +180,40 @@ a { color: inherit; text-decoration: none; }
   font-size: .6875rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: .18em;
+  letter-spacing: .16em;
   white-space: nowrap;
 }
 
+/* La flecha va en su propia columna, la última, detrás de la etiqueta y
+   separada de ella. Sólo existe donde hay hover, y allí reserva su ancho
+   siempre: aparecer no mueve nada. En táctil no se declara la columna. */
+.project-arrow { display: none; }
+
 .project-desc {
   grid-column: 1 / -1;
+  grid-row: 2;
   max-width: 46ch;
   color: var(--muted);
   font-size: .9375rem;
   line-height: 1.45;
 }
 
-/* La flecha solo existe donde hay hover: en táctil no aportaría nada y
-   robaría ancho. Ocupa su columna siempre, así el hover no descuadra la fila. */
 @media (hover: hover) {
-  .project { grid-template-columns: 1fr auto 1.25rem; }
+  .project { grid-template-columns: 1fr auto auto; }
 
-  .project::after {
-    content: "→";
+  .project-arrow {
+    display: block;
     grid-column: 3;
     grid-row: 1;
     justify-self: end;
+    width: 1.125rem;
+    margin-left: .5rem;
     color: var(--muted);
     font-size: .9375rem;
+    line-height: 1;
+    text-align: right;
     opacity: 0;
-    transform: translateX(-.35em);
+    transform: translateX(-.35rem);
     transition: opacity .15s ease, transform .15s ease, color .15s ease;
   }
 
@@ -176,12 +221,12 @@ a { color: inherit; text-decoration: none; }
     background: var(--hover);
     padding-inline: .75rem;
   }
-  .project:hover::after {
+  .project:hover .project-tag { color: var(--fg); }
+  .project:hover .project-arrow {
     opacity: 1;
     transform: translateX(0);
     color: var(--fg);
   }
-  .project:hover .project-tag { color: var(--fg); }
 }
 
 .project:focus-visible {
@@ -199,7 +244,6 @@ a { color: inherit; text-decoration: none; }
   padding-inline: .25rem;
   font-size: .8125rem;
   font-weight: 500;
-  letter-spacing: .04em;
 }
 
 .footer a {
