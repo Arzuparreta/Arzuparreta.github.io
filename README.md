@@ -9,7 +9,7 @@ HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Sin peticiones de r
 ## Cómo funciona
 
 - **Los proyectos son HTML estático.** La lista vive tal cual en `index.html`; se edita a mano. La página pinta completa sin JavaScript.
-- **La foto** se sirve desde `https://github.com/Arzuparreta.png` — cambia sola al cambiarla en GitHub.
+- **La foto y el favicon** se sirven desde `https://github.com/Arzuparreta.png` — cambian solos al cambiar el avatar en GitHub (unos minutos, el destino lleva `max-age=300`).
 - **ES / EN**: el español está en el HTML, el inglés en los atributos `data-en` (texto) y `data-en-aria` (aria-label). `js/ui.js` intercambia unos por otros y recuerda la elección en `localStorage`.
 - **Claro y oscuro** siguen al sistema del visitante, y el botón de la esquina permite forzar uno u otro (se guarda en `localStorage` y se aplica en un script inline del `<head>` para que no haya destello al cargar). Los colores son cinco variables al principio de `styles.css`.
 
@@ -19,7 +19,6 @@ HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Sin peticiones de r
 index.html        · toda la página: identidad, proyectos, pie
 styles.css        · tokens de color arriba, luego cada sección
 js/ui.js          · el único JS: botones de tema e idioma
-assets/favicon.svg
 server/           · publish.sh · *.service/.timer  (no se sirve; alimenta otro pipeline)
 ```
 
