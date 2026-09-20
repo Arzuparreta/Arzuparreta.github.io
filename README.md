@@ -19,7 +19,6 @@ HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Sin peticiones de r
 index.html        · toda la página: identidad, proyectos, pie
 styles.css        · tokens de color arriba, luego cada sección
 js/ui.js          · el único JS: botones de tema e idioma
-server/           · publish.sh · *.service/.timer  (no se sirve; alimenta otro pipeline)
 ```
 
 ## Añadir o cambiar un proyecto
