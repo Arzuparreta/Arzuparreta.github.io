@@ -1,0 +1,10 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.soundsible.android",
+      "sha256_cert_fingerprints": ["41:C5:73:24:F7:FC:9A:B7:E6:2B:0A:4A:E1:CA:53:5B:F2:BA:1E:B8:6C:22:C3:4B:D2:DE:58:5C:A3:FF:C1:10"]
+    }
+  }
+]
