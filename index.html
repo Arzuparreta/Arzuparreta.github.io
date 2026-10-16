@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Rubén Peña</title>
-  <meta name="description" content="Rubén Peña — construyo cosas en internet. Atajo a todos mis proyectos.">
+  <meta name="description" content="Rubén Peña — ingeniero en coordinación de chatbots. Atajo a todos mis proyectos.">
   <meta name="author" content="Rubén Peña">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#FAFAF8" media="(prefers-color-scheme: light)">
@@ -12,7 +12,7 @@
 
   <meta property="og:type" content="website">
   <meta property="og:title" content="Rubén Peña">
-  <meta property="og:description" content="Construyo cosas en internet. Atajo a todos mis proyectos.">
+  <meta property="og:description" content="ingeniero en coordinación de chatbots. Atajo a todos mis proyectos.">
   <meta property="og:locale" content="es_ES">
   <meta property="og:image" content="https://github.com/Arzuparreta.png?size=320">
 
@@ -61,7 +61,7 @@
            alt="Rubén Peña"
            fetchpriority="high">
       <h1 class="name">Rubén Peña</h1>
-      <p class="role" data-en="I build things on the internet">Construyo cosas en internet</p>
+      <p class="role" data-en="chatbot coordination engineer">ingeniero en coordinación de chatbots</p>
       <a class="github-link"
          href="https://github.com/Arzuparreta"
          aria-label="Ver mi perfil en GitHub"
@@ -77,38 +77,90 @@
     </header>
 
     <nav class="projects" aria-label="Proyectos" data-en-aria="Projects">
-      <a class="project" href="https://arzuparreta.github.io/soundsible.github.io/">
-        <span class="project-name">Soundsible</span>
-        <span class="project-desc" data-en="A music server you host yourself: searches YouTube, downloads tracks already tagged, and plays them.">Servidor de música que alojas tú: busca en YouTube, descarga las canciones ya etiquetadas y las reproduce.</span>
-        <span class="project-arrow" aria-hidden="true">→</span>
-      </a>
+      <div class="project-item">
+        <a class="project project-featured" href="https://arzuparreta.github.io/soundsible.github.io/">
+          <span class="project-name"><img class="project-icon" src="assets/projects/soundsible-icon.png" width="40" height="40" alt="">Soundsible</span>
+          <span class="project-desc" data-en="A music server you host yourself: searches YouTube, downloads tracks already tagged, and plays them.">Servidor de música que alojas tú: busca en YouTube, descarga las canciones ya etiquetadas y las reproduce.</span>
+          <span class="project-arrow" aria-hidden="true">→</span>
+        </a>
+        <button class="screenshot-trigger" type="button" data-project="Soundsible" data-web="https://arzuparreta.github.io/soundsible.github.io/" aria-label="Ampliar captura de Soundsible" data-en-aria="Enlarge Soundsible screenshot">
+          <img class="project-screenshot" src="assets/projects/soundsible.webp" width="1920" height="1080" alt="Biblioteca de música de Soundsible" decoding="async">
+          <span class="screenshot-hint" data-en="Enlarge ↗">Ampliar ↗</span>
+        </button>
+        <a class="project-repo" href="https://github.com/Arzuparreta/soundsible">Github</a>
+      </div>
 
-      <a class="project" href="https://spaintransparencia.info">
-        <span class="project-name">España Transparente</span>
-        <span class="project-desc" data-en="Spanish MPs, votes, contracts and subsidies in one searchable site, each figure linked to its official source.">Diputados, votaciones, contratos y subvenciones en un mismo buscador, con la fuente oficial de cada dato.</span>
-        <span class="project-arrow" aria-hidden="true">→</span>
-      </a>
+      <div class="project-item">
+        <a class="project project-featured" href="https://github.com/Arzuparreta/fly-browser">
+          <span class="project-name"><img class="project-icon" src="assets/projects/fly-icon.png" width="40" height="40" alt="">Fly Browser</span>
+          <span class="project-desc" data-en="A minimal Linux browser with full keyboard control, isolated workspaces and built-in ad blocking.">Navegador minimalista para Linux con control completo por teclado, espacios de trabajo aislados y bloqueo de anuncios integrado.</span>
+          <span class="project-arrow" aria-hidden="true">→</span>
+        </a>
+        <button class="screenshot-trigger" type="button" data-project="Fly Browser" data-web="https://arzuparreta.github.io/fly-browser/" aria-label="Ampliar captura de Fly Browser" data-en-aria="Enlarge Fly Browser screenshot">
+          <img class="project-screenshot" src="assets/projects/fly.webp" width="1440" height="900" alt="Página de nueva pestaña de Fly Browser" decoding="async">
+          <span class="screenshot-hint" data-en="Enlarge ↗">Ampliar ↗</span>
+        </button>
+        <a class="project-repo" href="https://github.com/Arzuparreta/fly-browser">Github</a>
+      </div>
 
-      <a class="project" href="https://arzuparreta.github.io/remove-multi-titles-yt.github.io/">
-        <span class="project-name">Remove Multi Titles YT</span>
-        <span class="project-desc" data-en="Browser extension that keeps the first title and thumbnail you saw for each YouTube video.">Extensión de navegador que mantiene el primer título y la miniatura que viste de cada vídeo de YouTube.</span>
-        <span class="project-arrow" aria-hidden="true">→</span>
-      </a>
+      <details class="more-projects">
+        <summary class="more-toggle">
+          <span class="more-closed" data-en="More projects">Más proyectos</span>
+          <span class="more-open" data-en="Hide projects">Ocultar proyectos</span>
+          <svg class="more-symbol" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </summary>
+        <div class="more-list">
+          <div class="project-item">
+            <a class="project" href="https://spaintransparencia.info">
+              <span class="project-name">España Transparente</span>
+              <span class="project-desc" data-en="Spanish MPs, votes, contracts and subsidies in one searchable site, each figure linked to its official source.">Diputados, votaciones, contratos y subvenciones en un mismo buscador, con la fuente oficial de cada dato.</span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="project-repo" href="https://github.com/Arzuparreta/espana-transparente">Github</a>
+          </div>
 
-      <a class="project" href="https://github.com/Arzuparreta/fly-browser">
-        <span class="project-name">Fly Browser</span>
-        <span class="project-desc" data-en="A minimal Linux browser with full keyboard control, isolated workspaces and built-in ad blocking.">Navegador minimalista para Linux con control completo por teclado, espacios de trabajo aislados y bloqueo de anuncios integrado.</span>
-        <span class="project-arrow" aria-hidden="true">→</span>
-      </a>
+          <div class="project-item">
+            <a class="project" href="https://arzuparreta.github.io/remove-multi-titles-yt.github.io/">
+              <span class="project-name">Remove Multi Titles YT</span>
+              <span class="project-desc" data-en="Browser extension that keeps the first title and thumbnail you saw for each YouTube video.">Extensión de navegador que mantiene el primer título y la miniatura que viste de cada vídeo de YouTube.</span>
+              <span class="project-arrow" aria-hidden="true">→</span>
+            </a>
+            <a class="project-repo" href="https://github.com/Arzuparreta/remove-multi-titles-yt">Github</a>
+          </div>
+
+        </div>
+      </details>
     </nav>
 
     <footer class="footer">
-      <a href="https://github.com/Arzuparreta">GitHub</a>
-      <a href="https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-432953378/">LinkedIn</a>
-      <a href="https://youtube.com/@Arzuparreta">YouTube</a>
+      <a href="https://www.linkedin.com/in/rub%C3%A9n-pe%C3%B1a-432953378/">
+        <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+          <path d="M20.45 2H3.55C2.69 2 2 2.68 2 3.52v16.96c0 .84.69 1.52 1.55 1.52h16.9c.86 0 1.55-.68 1.55-1.52V3.52c0-.84-.69-1.52-1.55-1.52ZM7.93 18.75H4.98V9.2h2.95v9.55ZM6.45 7.9a1.71 1.71 0 1 1 0-3.42 1.71 1.71 0 0 1 0 3.42Zm12.3 10.85H15.8V14.1c0-1.11-.02-2.54-1.55-2.54-1.55 0-1.79 1.21-1.79 2.46v4.73H9.51V9.2h2.83v1.3h.04c.39-.74 1.36-1.52 2.79-1.52 2.99 0 3.58 1.97 3.58 4.53v5.24Z"/>
+        </svg>
+        <span>LinkedIn</span>
+      </a>
+      <a href="https://youtube.com/@Arzuparreta">
+        <svg class="footer-icon" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+          <path d="M23 7s-.22-1.57-.9-2.26c-.86-.91-1.82-.92-2.26-.97C16.68 3.54 12 3.54 12 3.54s-4.68 0-7.84.23c-.44.05-1.4.06-2.26.97C1.22 5.43 1 7 1 7S.77 8.85.77 10.69v1.73C.77 14.27 1 16.1 1 16.1s.22 1.57.9 2.26c.86.91 1.99.88 2.49.97 1.8.18 7.61.23 7.61.23s4.68-.01 7.84-.24c.44-.05 1.4-.06 2.26-.97.68-.69.9-2.26.9-2.26s.23-1.84.23-3.68v-1.73C23.23 8.85 23 7 23 7ZM9.7 14.52V8.13l6.05 3.2-6.05 3.19Z"/>
+        </svg>
+        <span>YouTube</span>
+      </a>
     </footer>
   </main>
 
+  <dialog class="image-viewer" id="image-viewer" aria-labelledby="viewer-title">
+    <div class="viewer-shell">
+      <header class="viewer-header">
+        <h2 id="viewer-title"></h2>
+        <button class="viewer-close" type="button" aria-label="Cerrar" data-en-aria="Close">×</button>
+      </header>
+      <div class="viewer-image-area"><button class="viewer-zoom" type="button" aria-pressed="false" aria-label="Alternar zoom de la captura" data-en-aria="Toggle screenshot zoom"><img class="viewer-image" alt=""></button></div>
+      <footer class="viewer-footer">
+        <a class="viewer-web" data-en="Visit website ↗">Visitar web ↗</a>
+        <a class="viewer-code" data-en="Source code ↗">Código fuente ↗</a>
+      </footer>
+    </div>
+  </dialog>
   <script src="js/ui.js" defer></script>
 </body>
 </html>

@@ -4,10 +4,11 @@ Hub personal: mi foto, mi nombre y enlaces grandes a todos mis proyectos. Nada m
 
 ## Stack
 
-HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Sin peticiones de red en runtime salvo la fuente y la foto de perfil. Despliegue automático con GitHub Pages al hacer push a `main`.
+HTML, CSS y JavaScript vanilla. Sin build. Sin dependencias. Iconos y capturas servidos localmente; las únicas peticiones externas son la fuente y la foto de perfil. Despliegue automático con GitHub Pages al hacer push a `main`.
 
 ## Cómo funciona
 
+- **Soundsible y Fly Browser aparecen al abrir.** Cada uno incluye icono y captura en `assets/projects/`. El resto está dentro de un `<details>` nativo: «Más proyectos» los muestra y «Ocultar proyectos» los oculta, también sin JavaScript.
 - **Los proyectos son HTML estático.** La lista vive tal cual en `index.html`; se edita a mano. La página pinta completa sin JavaScript.
 - **La foto y el favicon** se sirven desde `https://github.com/Arzuparreta.png` — cambian solos al cambiar el avatar en GitHub (unos minutos, el destino lleva `max-age=300`).
 - **ES / EN**: el español está en el HTML, el inglés en los atributos `data-en` (texto) y `data-en-aria` (aria-label). `js/ui.js` intercambia unos por otros y recuerda la elección en `localStorage`.
@@ -23,7 +24,8 @@ js/ui.js          · el único JS: botones de tema e idioma
 
 ## Añadir o cambiar un proyecto
 
-Copia un bloque `<a class="project">` en `index.html` y ajusta tres cosas:
+Copia un contenedor `.project-item` completo en `index.html`, incluyendo su enlace
+independiente «Github». El enlace principal tiene esta estructura:
 
 ```html
 <a class="project" href="URL">
@@ -33,9 +35,17 @@ Copia un bloque `<a class="project">` en `index.html` y ajusta tres cosas:
 </a>
 ```
 
-`href` apunta a la web del proyecto si existe y, si no, a su repo. El orden de la lista es el orden del HTML: lo que tiene web va primero.
+`href` apunta a la web del proyecto si existe y, si no, a su repo. El orden de la lista es el del HTML: Soundsible y Fly Browser primero; los demás dentro de «Más».
 
 La descripción dice en una línea qué hace el proyecto, en concreto y sin metáforas. Las dos versiones tienen que decir lo mismo: el inglés no es una traducción literal del español, sino la misma frase escrita como la escribiría un nativo.
+
+## Organización y actualización de capturas
+
+La guía para agentes está en [AGENTS.md](AGENTS.md).
+[docs/projects.md](docs/projects.md) define los dos grupos y el procedimiento para
+peticiones como «actualiza las fotos de los proyectos principales».
+La [tabla de recursos](assets/projects/README.md) registra repositorios, rutas y commits
+de los iconos y capturas actuales.
 
 ## Desarrollo
 

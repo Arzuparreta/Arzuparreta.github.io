@@ -114,4 +114,31 @@
 
     img.src = "https://avatars.githubusercontent.com/u/125204298?s=128";
   })();
+  // El dialog nativo contiene el foco y permite cerrar con Escape.
+  var viewer = document.getElementById("image-viewer");
+  var opener;
+  document.querySelectorAll(".screenshot-trigger").forEach(function (button) {
+    button.addEventListener("click", function () {
+      opener = button;
+      var image = button.querySelector("img");
+      var enlarged = viewer.querySelector(".viewer-image");
+      enlarged.src = image.src;
+      enlarged.alt = image.alt;
+      document.getElementById("viewer-title").textContent = button.dataset.project;
+      viewer.querySelector(".viewer-web").href = button.dataset.web;
+      viewer.querySelector(".viewer-code").href = button.closest(".project-item").querySelector(".project-repo").href;
+      viewer.querySelector(".viewer-image-area").classList.remove("is-zoomed");
+      viewer.querySelector(".viewer-zoom").setAttribute("aria-pressed", "false");
+      viewer.showModal();
+    });
+  });
+  viewer.querySelector(".viewer-zoom").addEventListener("click", function () {
+    var zoomed = viewer.querySelector(".viewer-image-area").classList.toggle("is-zoomed");
+    this.setAttribute("aria-pressed", String(zoomed));
+  });
+  viewer.querySelector(".viewer-close").addEventListener("click", function () { viewer.close(); });
+  viewer.addEventListener("click", function (event) {
+    if (event.target === viewer) viewer.close();
+  });
+  viewer.addEventListener("close", function () { if (opener) opener.focus(); });
 })();
