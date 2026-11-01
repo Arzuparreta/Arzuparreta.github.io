@@ -53,7 +53,9 @@ personal. Hacer la actualización completa para ambos, conservando orden, enlace
    Mantener el formato real del archivo; si cambia, actualizar extensión y `src`.
    Revisar también el icono oficial y renovarlo si ha cambiado.
 7. Medir las dimensiones reales y actualizar `width` y `height` del `<img>` en
-   `index.html`. Conservar la proporción completa, sin recortar la interfaz.
+   `index.html`. Cambiar también el parámetro `?ref=<commit-corto>` del `src` al
+   commit de origen para que quienes ya visitaron la landing reciban la nueva imagen.
+   Conservar la proporción completa, sin recortar la interfaz.
    Ajustar el texto alternativo si cambia la vista representada.
 8. Actualizar la tabla de procedencia: ruta original, commit completo de origen,
    fecha de revisión y dimensiones. Así se podrá saber si una futura copia es nueva.
