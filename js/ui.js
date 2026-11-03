@@ -1,4 +1,4 @@
-// Los dos controles de la esquina: tema e idioma.
+// Controles de la barra: tema e idioma.
 // El español vive en el HTML; el inglés en data-en / data-en-aria.
 (function () {
   "use strict";
@@ -79,6 +79,26 @@
 
   // Sin elección manual, el sitio sigue al sistema aunque cambie en caliente.
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", labelTheme);
+
+  // ── Barra que se recoge con el scroll ──────────────────────────────────
+
+  // Sólo cambia la barra fija. El documento conserva su altura para que no
+  // salte la posición ni oscile al alcanzar el umbral de compactación.
+  var headbarFrame = 0;
+  var headbarProgress = -1;
+  function updateHeadbar() {
+    var progress = Math.min(1, Math.max(0, window.scrollY) / 112);
+    if (progress !== headbarProgress) {
+      root.style.setProperty("--headbar-progress", progress);
+      headbarProgress = progress;
+    }
+    headbarFrame = 0;
+  }
+  window.addEventListener("scroll", function () {
+    if (!headbarFrame) headbarFrame = requestAnimationFrame(updateHeadbar);
+  }, { passive: true });
+  window.addEventListener("pageshow", updateHeadbar);
+  updateHeadbar();
 
   // ── Favicon circular ──────────────────────────────────────────────────
 
