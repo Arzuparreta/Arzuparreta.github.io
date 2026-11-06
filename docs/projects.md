@@ -5,8 +5,8 @@
 `index.html` es la fuente de verdad. No hay generación de contenido ni manifiesto externo.
 El `<nav class="projects">` contiene dos grupos sin encabezados visibles:
 
-1. Soundsible y Fly Browser, en ese orden, visibles desde el inicio.
-2. España Transparente y Remove Multi Titles YT dentro de `<details class="more-projects">`,
+1. Soundsible, Fly Browser y Desktop Theming, en ese orden, visibles desde el inicio.
+2. Excalidraws, España Transparente y Remove Multi Titles YT dentro de `<details class="more-projects">`,
    cerrado inicialmente. El `<summary>` muestra «Más proyectos» / «Ocultar proyectos» (More projects / Hide projects en inglés).
    Es un control de texto centrado con un chevrón y espacio superior, separado visualmente de Fly; sin píldora ni borde.
 
@@ -14,6 +14,9 @@ Cada proyecto tiene un contenedor `.project-item`, un enlace `.project` a su web
 (o al repositorio si no tiene web) y un enlace hermano `.project-repo` con el texto
 «Github», situado a la derecha del nombre en la cabecera. No anidar enlaces. Los principales añaden `.project-featured`, un
 `.project-icon` decorativo y una `.project-screenshot` con texto alternativo.
+
+Desktop Theming utiliza su icono oficial. A fecha de 2026-11-06, su rama
+principal no contiene capturas oficiales; queda pendiente añadir una cuando exista.
 
 Las capturas están en botones `.screenshot-trigger`, hermanos del enlace principal.
 Abren el `<dialog>` nativo `#image-viewer`: imagen completa ajustada a pantalla,
