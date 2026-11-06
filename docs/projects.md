@@ -15,8 +15,8 @@ Cada proyecto tiene un contenedor `.project-item`, un enlace `.project` a su web
 «Github», situado a la derecha del nombre en la cabecera. No anidar enlaces. Los principales añaden `.project-featured`, un
 `.project-icon` decorativo y una `.project-screenshot` con texto alternativo.
 
-Desktop Theming utiliza su icono oficial. A fecha de 2026-11-06, su rama
-principal no contiene capturas oficiales; queda pendiente añadir una cuando exista.
+Desktop Theming utiliza su icono oficial y la captura de Appearance del README,
+con el fondo de pantalla y la paleta de colores generada.
 
 Las capturas están en botones `.screenshot-trigger`, hermanos del enlace principal.
 Abren el `<dialog>` nativo `#image-viewer`: imagen completa ajustada a pantalla,
